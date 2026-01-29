@@ -2,7 +2,6 @@ package com.algaworks.algashop.ordering.domain.entity;
 
 import com.algaworks.algashop.ordering.domain.databuilder.OrderTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.entity.enums.OrderStatus;
-import com.algaworks.algashop.ordering.domain.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.exception.OrderInvalidShippingDeliveryDateException;
 import com.algaworks.algashop.ordering.domain.exception.OrderStatusCannotBeChangedException;
 import com.algaworks.algashop.ordering.domain.valueobject.*;
@@ -115,7 +114,7 @@ class OrderTest {
     }
 
     @Test
-    public void givenDraftOrder_whenChangeBillingInfo_shouldAllowChange() {
+    public void givenDraftOrder_whenChangeBilling_shouldAllowChange() {
         Address address = Address.builder()
                 .street("Bourbon Street")
                 .number("10023")
@@ -131,11 +130,11 @@ class OrderTest {
 
         draft.changeBilling(billingInfo);
 
-        Assertions.assertThat(draft.billingInfo()).isEqualTo(billingInfo);
+        Assertions.assertThat(draft.billing()).isEqualTo(billingInfo);
     }
 
     @Test
-    public void givenDraftOrder_whenChangeShippingInfo_shouldAllowChange() {
+    public void givenDraftOrder_whenChangeShipping_shouldAllowChange() {
         Address address = Address.builder()
                 .street("Bourbon Street")
                 .number("10023")
@@ -151,11 +150,11 @@ class OrderTest {
 
         draft.changeShipping(shippingInfo, new Money("233"), LocalDate.of(2026, 02, 01));
 
-        Assertions.assertThat(draft.shippingInfo()).isEqualTo(shippingInfo);
+        Assertions.assertThat(draft.shipping()).isEqualTo(shippingInfo);
     }
 
     @Test
-    public void givenDraftOrder_whenChangeShippingInfoWithInvalidDeliveryDate_shouldNotAllowChange() {
+    public void givenDraftOrder_whenChangeShippingWithInvalidDeliveryDate_shouldNotAllowChange() {
         Address address = Address.builder()
                 .street("Bourbon Street")
                 .number("10023")

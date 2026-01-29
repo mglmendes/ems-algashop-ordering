@@ -107,15 +107,9 @@ public class Order {
     }
 
     public void place() {
-        Objects.requireNonNull(this.shippingInfo());
-        Objects.requireNonNull(this.billingInfo());
-        Objects.requireNonNull(this.shippingCost());
-        Objects.requireNonNull(this.paymentMethod());
-        Objects.requireNonNull(this.expectedDeliveryDate());
-        Objects.requireNonNull(this.items());
-
+        verifyIfCanChangeToPlace();
         if (CollectionUtils.isEmpty(this.items())) {
-            throw new OrderCannotBePlacedException(this.id());
+            throw OrderCannotBePlacedException.noItems(this.id());
         }
         this.setPlacedAt(OffsetDateTime.now());
         this.changeStatus(OrderStatus.PLACED);
@@ -195,11 +189,11 @@ public class Order {
         return readyAt;
     }
 
-    public BillingInfo billingInfo() {
+    public BillingInfo billing() {
         return billingInfo;
     }
 
-    public ShippingInfo shippingInfo() {
+    public ShippingInfo shipping() {
         return shippingInfo;
     }
 
@@ -251,6 +245,33 @@ public class Order {
             throw new OrderStatusCannotBeChangedException(this.id(), this.status(), newStatus);
         }
         this.setStatus(newStatus);
+    }
+
+
+    private void verifyIfCanChangeToPlace() {
+        if (this.shipping() == null) {
+            throw OrderCannotBePlacedException.noShippingInfo(this.id());
+        }
+
+        if (this.billing() == null) {
+            throw OrderCannotBePlacedException.noBillingInfo(this.id());
+        }
+
+        if (this.shippingCost() == null) {
+            throw OrderCannotBePlacedException.invalidShippingCost(this.id());
+        }
+
+        if (this.expectedDeliveryDate() == null) {
+            throw OrderCannotBePlacedException.invalidExpectDeliveryDate(this.id());
+        }
+
+        if (this.paymentMethod() == null) {
+            throw OrderCannotBePlacedException.noPaymentMethod(this.id());
+        }
+
+        if (CollectionUtils.isEmpty(this.items())) {
+            throw OrderCannotBePlacedException.noItems(this.id());
+        }
     }
 
     private void setId(OrderId id) {
