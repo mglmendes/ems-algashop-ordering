@@ -13,6 +13,7 @@ public class ErrorMessages {
     public static final String ERROR_CUSTOMER_ARCHIVED = "Customer is archived. Cannot be changed.";
 
     public static final String ERROR_ORDER_STATUS_CANNOT_BE_CHANGED = "Cannot change order %s status from %s to %s";
+    public static final String ERROR_ORDER_DOES_NOT_CONTAIN_ODER_ITEM = "Order %s does not contain  item %s";
 
     // Order Cannot Be Placed Error Messages
     public static final String ERROR_ORDER_DELIVERY_DATE_CANNOT_BE_IN_THE_PAST =

@@ -83,6 +83,12 @@ public class OrderItem {
         this.setTotalAmount(this.price.multiply(this.quantity));
     }
 
+    void changeQuantity(Quantity quantity) {
+        Objects.requireNonNull(quantity);
+        this.setQuantity(quantity);
+        this.recalculateTotals();
+    }
+
     private void setId(OrderItemId id) {
         Objects.requireNonNull(id);
         this.id = id;

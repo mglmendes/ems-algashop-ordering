@@ -11,6 +11,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Set;
 
 import static com.algaworks.algashop.ordering.domain.entity.enums.PaymentMethod.CREDIT_CARD;
@@ -176,5 +177,18 @@ class OrderTest {
                                 shippingInfo,
                                 new Money("233"),
                                 LocalDate.of(2025, 02, 01)));
+    }
+
+    @Test
+    public void givenDraftOrder_whenChangeItem_shouldRecalculate() {
+        Order order = Order.draft(new CustomerId());
+        order.addItem(new ProductId(), new ProductName("4GB RAM"), new Money("400.0"), new Quantity(1));
+
+        OrderItem orderItem = order.items().iterator().next();
+        order.changeItemQuantity(orderItem.id(), new Quantity(5));
+
+        Assertions.assertWith(order,
+                (o) -> Assertions.assertThat(o.totalAmount()).isEqualTo(new Money("2000")),
+                (o) -> Assertions.assertThat(o.totalItems()).isEqualTo(new Quantity(5)));
     }
 }
