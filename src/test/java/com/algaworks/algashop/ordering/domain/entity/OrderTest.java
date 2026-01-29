@@ -160,6 +160,8 @@ class OrderTest {
 
         Order draft = Order.draft(new CustomerId());
 
+
+
         Assertions.assertThatExceptionOfType(OrderInvalidShippingDeliveryDateException.class)
                 .isThrownBy(() ->
                         draft.changeShipping(
