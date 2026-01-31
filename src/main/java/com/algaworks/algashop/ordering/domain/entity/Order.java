@@ -125,14 +125,15 @@ public class Order {
         this.setBilling(billing);
     }
 
-    public void changeShipping(Shipping shipping) {
-        Objects.requireNonNull(shipping);
+    public void changeShipping(Shipping newShipping) {
+        Objects.requireNonNull(newShipping);
 
-        if (shipping.expectedDate().isBefore(LocalDate.now())) {
+        if (newShipping.expectedDate().isBefore(LocalDate.now())) {
             throw new OrderInvalidShippingDeliveryDateException(this.id());
         }
 
-        this.setShipping(shipping);
+        this.setShipping(newShipping);
+        this.recalculateTotals();
     }
 
     public void changeItemQuantity(OrderItemId orderItemId, Quantity quantity) {
