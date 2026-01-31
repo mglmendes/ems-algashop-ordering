@@ -108,16 +108,8 @@ class OrderTest {
 
     @Test
     public void givenDraftOrder_whenChangeBilling_shouldAllowChange() {
-        Address address = Address.builder()
-                .street("Bourbon Street")
-                .number("10023")
-                .neighborhood("Neighboor")
-                .city("MOnteFort")
-                .state("State")
-                .zipCode(new ZipCode("12356")).build();
 
-        Billing billing = Billing.builder().address(address).document(new Document("555-12-6654"))
-                .phone(new Phone("555-12-6654")).fullName(new FullName("Cleiton", "Rasta")).build();
+        Billing billing = OrderTestDataBuilder.aBilling();
 
         Order draft = Order.draft(new CustomerId());
 
