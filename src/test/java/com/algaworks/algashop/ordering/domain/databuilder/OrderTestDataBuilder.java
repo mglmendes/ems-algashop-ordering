@@ -5,7 +5,6 @@ import com.algaworks.algashop.ordering.domain.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.valueobject.*;
 import com.algaworks.algashop.ordering.domain.valueobject.id.CustomerId;
-import com.algaworks.algashop.ordering.domain.valueobject.id.ProductId;
 
 import java.time.LocalDate;
 
@@ -13,10 +12,8 @@ public class OrderTestDataBuilder {
 
     private CustomerId customerId = new CustomerId();
     private PaymentMethod paymentMethod = PaymentMethod.GATEWAY_BALANCE;
-    private Money shippingCost = new Money("10.0");
-    private LocalDate expectedDeliveryDate = LocalDate.now().plusWeeks(1);
-    private ShippingInfo shippingInfo = aShippingInfo();
-    private BillingInfo billingInfo = aBillingInfo();
+    private Shipping shipping = aShipping();
+    private Billing billing = aBillingInfo();
     private boolean withItems = true;
     private OrderStatus status = OrderStatus.DRAFT;
 
@@ -30,8 +27,8 @@ public class OrderTestDataBuilder {
 
     public Order build() {
         Order order = Order.draft(customerId);
-        order.changeShipping(shippingInfo, shippingCost, expectedDeliveryDate);
-        order.changeBilling(billingInfo);
+        order.changeShipping(shipping);
+        order.changeBilling(billing);
         order.changePaymentMethod(paymentMethod);
 
         if (withItems) {
@@ -65,23 +62,13 @@ public class OrderTestDataBuilder {
         return this;
     }
 
-    public OrderTestDataBuilder shippingCost(Money shippingCost) {
-        this.shippingCost = shippingCost;
+    public OrderTestDataBuilder shippingInfo(Shipping shipping) {
+        this.shipping = shipping;
         return this;
     }
 
-    public OrderTestDataBuilder expectedDeliveryDate(LocalDate expectedDeliveryDate) {
-        this.expectedDeliveryDate = expectedDeliveryDate;
-        return this;
-    }
-
-    public OrderTestDataBuilder shippingInfo(ShippingInfo shippingInfo) {
-        this.shippingInfo = shippingInfo;
-        return this;
-    }
-
-    public OrderTestDataBuilder billingInfo(BillingInfo billingInfo) {
-        this.billingInfo = billingInfo;
+    public OrderTestDataBuilder billingInfo(Billing billing) {
+        this.billing = billing;
         return this;
     }
 
@@ -95,14 +82,32 @@ public class OrderTestDataBuilder {
         return this;
     }
 
-    public static ShippingInfo aShippingInfo() {
-        return ShippingInfo.builder().address(anAddress()).document(new Document("555-12-6654"))
-                .phone(new Phone("555-12-6654")).fullName(new FullName("Cleiton", "Rasta")).build();
+    public static Shipping aShipping() {
+        return Shipping.builder()
+                .address(anAddress())
+                .recipient(Recipient.builder()
+                        .document(new Document("555-12-6654"))
+                        .phone(new Phone("555-12-6654"))
+                        .fullName(new FullName("Cleiton", "Rasta"))
+                        .build())
+                .cost(new Money("10"))
+                .expectedDate(LocalDate.now().plusWeeks(1))
+                .build();
+    }
+
+    public static Address anAddressAlt() {
+        return Address.builder()
+                .street("Sanson Street")
+                .number("876")
+                .neighborhood("Sansome")
+                .city("San Francisco")
+                .state("California")
+                .zipCode(new ZipCode("12356")).build();
     }
 
 
-    public static BillingInfo aBillingInfo() {
-        return BillingInfo.builder().address(anAddress()).document(new Document("555-12-6654"))
+    public static Billing aBillingInfo() {
+        return Billing.builder().address(anAddress()).document(new Document("555-12-6654"))
                 .phone(new Phone("555-12-6654")).fullName(new FullName("Cleiton", "Rasta")).build();
     }
 
@@ -111,7 +116,7 @@ public class OrderTestDataBuilder {
                 .street("Bourbon Street")
                 .number("10023")
                 .neighborhood("Neighbor")
-                .city("MOnteFort")
+                .city("MonteFort")
                 .state("State")
                 .zipCode(new ZipCode("12356")).build();
     }

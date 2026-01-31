@@ -8,12 +8,10 @@ import com.algaworks.algashop.ordering.domain.exception.OrderStatusCannotBeChang
 import com.algaworks.algashop.ordering.domain.exception.ProductOutOfStockException;
 import com.algaworks.algashop.ordering.domain.valueobject.*;
 import com.algaworks.algashop.ordering.domain.valueobject.id.CustomerId;
-import com.algaworks.algashop.ordering.domain.valueobject.id.ProductId;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.Set;
 
 import static com.algaworks.algashop.ordering.domain.entity.enums.PaymentMethod.CREDIT_CARD;
@@ -118,14 +116,14 @@ class OrderTest {
                 .state("State")
                 .zipCode(new ZipCode("12356")).build();
 
-        BillingInfo billingInfo = BillingInfo.builder().address(address).document(new Document("555-12-6654"))
+        Billing billing = Billing.builder().address(address).document(new Document("555-12-6654"))
                 .phone(new Phone("555-12-6654")).fullName(new FullName("Cleiton", "Rasta")).build();
 
         Order draft = Order.draft(new CustomerId());
 
-        draft.changeBilling(billingInfo);
+        draft.changeBilling(billing);
 
-        Assertions.assertThat(draft.billing()).isEqualTo(billingInfo);
+        Assertions.assertThat(draft.billing()).isEqualTo(billing);
     }
 
     @Test
@@ -138,14 +136,13 @@ class OrderTest {
                 .state("State")
                 .zipCode(new ZipCode("12356")).build();
 
-        ShippingInfo shippingInfo = ShippingInfo.builder().address(address).document(new Document("555-12-6654"))
-                .phone(new Phone("555-12-6654")).fullName(new FullName("Cleiton", "Rasta")).build();
+        Shipping shipping = OrderTestDataBuilder.aShipping();
 
         Order draft = Order.draft(new CustomerId());
 
-        draft.changeShipping(shippingInfo, new Money("233"), LocalDate.of(2026, 02, 01));
+        draft.changeShipping(shipping);
 
-        Assertions.assertThat(draft.shipping()).isEqualTo(shippingInfo);
+        Assertions.assertThat(draft.shipping()).isEqualTo(shipping);
     }
 
     @Test
@@ -158,8 +155,9 @@ class OrderTest {
                 .state("State")
                 .zipCode(new ZipCode("12356")).build();
 
-        ShippingInfo shippingInfo = ShippingInfo.builder().address(address).document(new Document("555-12-6654"))
-                .phone(new Phone("555-12-6654")).fullName(new FullName("Cleiton", "Rasta")).build();
+        Shipping shipping = OrderTestDataBuilder.aShipping().toBuilder()
+                .expectedDate(LocalDate.now().minusWeeks(1))
+                .build();
 
         Order draft = Order.draft(new CustomerId());
 
@@ -168,9 +166,7 @@ class OrderTest {
         Assertions.assertThatExceptionOfType(OrderInvalidShippingDeliveryDateException.class)
                 .isThrownBy(() ->
                         draft.changeShipping(
-                                shippingInfo,
-                                new Money("233"),
-                                LocalDate.of(2025, 02, 01)));
+                                shipping));
     }
 
     @Test
