@@ -19,8 +19,28 @@ import static com.algaworks.algashop.ordering.domain.entity.enums.PaymentMethod.
 class OrderTest {
 
     @Test
-    public void shouldGenerate() {
-        Order draft = Order.draft(new CustomerId());
+    public void shouldGenerateDraftOrder() {
+        CustomerId customerId = new CustomerId();
+        Order order = Order.draft(customerId);
+
+        Assertions.assertWith(order,
+                o -> Assertions.assertWith(o.id()).isNotNull(),
+                o -> Assertions.assertThat(o.customerId()).isEqualTo(customerId),
+                o -> Assertions.assertThat(o.totalAmount()).isEqualTo(Money.ZERO),
+                o -> Assertions.assertThat(o.totalItems()).isEqualTo(Quantity.ZERO),
+                o -> Assertions.assertThat(o.items()).isEmpty(),
+                o -> Assertions.assertThat(o.isDraft()).isTrue()
+                );
+
+        Assertions.assertWith(order,
+                o -> Assertions.assertWith(o.placedAt()).isNull(),
+                o -> Assertions.assertWith(o.paidAt()).isNull(),
+                o -> Assertions.assertWith(o.canceledAt()).isNull(),
+                o -> Assertions.assertWith(o.readyAt()).isNull(),
+                o -> Assertions.assertWith(o.billing()).isNull(),
+                o -> Assertions.assertWith(o.shipping()).isNull(),
+                o -> Assertions.assertWith(o.paymentMethod()).isNull()
+        );
     }
 
     @Test
