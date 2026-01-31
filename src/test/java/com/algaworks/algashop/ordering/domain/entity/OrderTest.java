@@ -5,6 +5,7 @@ import com.algaworks.algashop.ordering.domain.databuilder.ProductTestDataBuilder
 import com.algaworks.algashop.ordering.domain.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.exception.OrderInvalidShippingDeliveryDateException;
 import com.algaworks.algashop.ordering.domain.exception.OrderStatusCannotBeChangedException;
+import com.algaworks.algashop.ordering.domain.exception.ProductOutOfStockException;
 import com.algaworks.algashop.ordering.domain.valueobject.*;
 import com.algaworks.algashop.ordering.domain.valueobject.id.CustomerId;
 import com.algaworks.algashop.ordering.domain.valueobject.id.ProductId;
@@ -183,5 +184,14 @@ class OrderTest {
         Assertions.assertWith(order,
                 (o) -> Assertions.assertThat(o.totalAmount()).isEqualTo(new Money("2000")),
                 (o) -> Assertions.assertThat(o.totalItems()).isEqualTo(new Quantity(5)));
+    }
+
+    @Test
+    public void givenProductOutOfStock_whenAddItem_shouldThrowException() {
+        Order order = Order.draft(new CustomerId());
+
+        Assertions.assertThatExceptionOfType(ProductOutOfStockException.class).isThrownBy(
+                () -> order.addItem(ProductTestDataBuilder.aProductUnavailable().build(), new Quantity(1))
+        );
     }
 }
