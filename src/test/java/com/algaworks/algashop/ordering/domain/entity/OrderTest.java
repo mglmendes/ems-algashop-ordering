@@ -1,6 +1,7 @@
 package com.algaworks.algashop.ordering.domain.entity;
 
 import com.algaworks.algashop.ordering.domain.databuilder.OrderTestDataBuilder;
+import com.algaworks.algashop.ordering.domain.databuilder.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.exception.OrderInvalidShippingDeliveryDateException;
 import com.algaworks.algashop.ordering.domain.exception.OrderStatusCannotBeChangedException;
@@ -26,11 +27,9 @@ class OrderTest {
     @Test
     public void shouldAddNewOrderItem() {
         Order order = Order.draft(new CustomerId());
-        ProductId productId = new ProductId();
+        Product product = ProductTestDataBuilder.aProductAltMousePad().build();
         order.addItem(
-                productId,
-                new ProductName("Mouse Pad"),
-                new Money("100"),
+                product,
                 new Quantity(1));
 
         Assertions.assertThat(order.items()).isNotEmpty();
@@ -41,7 +40,7 @@ class OrderTest {
         Assertions.assertWith(orderItem,
                 (i) -> Assertions.assertThat(i.id()).isNotNull(),
                 (i) -> Assertions.assertThat(i.productName()).isNotNull(),
-                (i) -> Assertions.assertThat(i.productId()).isEqualTo(productId),
+                (i) -> Assertions.assertThat(i.productId()).isEqualTo(product.id()),
                 (i) -> Assertions.assertThat(i.price()).isEqualTo(new Money("100")),
                 (i) -> Assertions.assertThat(i.quantity()).isEqualTo(new Quantity(1))
         );
@@ -51,9 +50,7 @@ class OrderTest {
     public void shouldGenerateExceptionWhenTryToChangeItemsSet() {
         Order order = Order.draft(new CustomerId());
         order.addItem(
-                new ProductId(),
-                new ProductName("Mouse Pad"),
-                new Money("100"),
+                ProductTestDataBuilder.aProductAltMousePad().build(),
                 new Quantity(1));
         Set<OrderItem> items = order.items();
 
@@ -66,18 +63,14 @@ class OrderTest {
     public void shouldCalculateTotals() {
         Order order = Order.draft(new CustomerId());
         order.addItem(
-                new ProductId(),
-                new ProductName("Mouse Pad"),
-                new Money("100"),
+                ProductTestDataBuilder.aProductAltMousePad().build(),
                 new Quantity(2));
 
         Assertions.assertThat(order.totalAmount()).isEqualTo(new Money("200"));
         Assertions.assertThat(order.totalItems()).isEqualTo(new Quantity(2));
 
         order.addItem(
-                new ProductId(),
-                new ProductName("RAM Memory"),
-                new Money("400"),
+                ProductTestDataBuilder.aProductAltRamMemory().build(),
                 new Quantity(2));
 
         Assertions.assertThat(order.totalAmount()).isEqualTo(new Money("1000"));
@@ -182,7 +175,7 @@ class OrderTest {
     @Test
     public void givenDraftOrder_whenChangeItem_shouldRecalculate() {
         Order order = Order.draft(new CustomerId());
-        order.addItem(new ProductId(), new ProductName("4GB RAM"), new Money("400.0"), new Quantity(1));
+        order.addItem(ProductTestDataBuilder.aProductAltRamMemory().build(), new Quantity(1));
 
         OrderItem orderItem = order.items().iterator().next();
         order.changeItemQuantity(orderItem.id(), new Quantity(5));
