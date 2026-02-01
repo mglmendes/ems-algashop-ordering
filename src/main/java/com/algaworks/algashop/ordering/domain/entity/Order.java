@@ -2,10 +2,7 @@ package com.algaworks.algashop.ordering.domain.entity;
 
 import com.algaworks.algashop.ordering.domain.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.entity.enums.PaymentMethod;
-import com.algaworks.algashop.ordering.domain.exception.OrderCannotBePlacedException;
-import com.algaworks.algashop.ordering.domain.exception.OrderDoesNotContainOrderItemException;
-import com.algaworks.algashop.ordering.domain.exception.OrderInvalidShippingDeliveryDateException;
-import com.algaworks.algashop.ordering.domain.exception.OrderStatusCannotBeChangedException;
+import com.algaworks.algashop.ordering.domain.exception.*;
 import com.algaworks.algashop.ordering.domain.valueobject.*;
 import com.algaworks.algashop.ordering.domain.valueobject.id.CustomerId;
 import com.algaworks.algashop.ordering.domain.valueobject.id.OrderId;
@@ -81,6 +78,7 @@ public class Order {
     }
 
     public void addItem(Product product, Quantity quantity) {
+        verifyIfChangeable();
         Objects.requireNonNull(product);
         Objects.requireNonNull(quantity);
 
@@ -116,16 +114,19 @@ public class Order {
     }
 
     public void changePaymentMethod(PaymentMethod paymentMethod) {
+        verifyIfChangeable();
         Objects.requireNonNull(paymentMethod);
         this.setPaymentMethod(paymentMethod);
     }
 
     public void changeBilling(Billing billing) {
+        verifyIfChangeable();
         Objects.requireNonNull(billing);
         this.setBilling(billing);
     }
 
     public void changeShipping(Shipping newShipping) {
+        verifyIfChangeable();
         Objects.requireNonNull(newShipping);
 
         if (newShipping.expectedDate().isBefore(LocalDate.now())) {
@@ -137,6 +138,7 @@ public class Order {
     }
 
     public void changeItemQuantity(OrderItemId orderItemId, Quantity quantity) {
+        verifyIfChangeable();
         Objects.requireNonNull(orderItemId);
         Objects.requireNonNull(quantity);
 
@@ -237,6 +239,12 @@ public class Order {
             throw new OrderStatusCannotBeChangedException(this.id(), this.status(), newStatus);
         }
         this.setStatus(newStatus);
+    }
+
+    private void verifyIfChangeable() {
+        if (!isDraft()) {
+            throw new OrderCannotBeEditedException(this.id(), this.status());
+        }
     }
 
     private void verifyIfCanChangeToPlace() {

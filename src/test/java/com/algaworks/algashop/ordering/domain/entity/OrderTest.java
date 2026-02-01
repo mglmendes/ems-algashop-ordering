@@ -3,6 +3,7 @@ package com.algaworks.algashop.ordering.domain.entity;
 import com.algaworks.algashop.ordering.domain.databuilder.OrderTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.databuilder.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.entity.enums.OrderStatus;
+import com.algaworks.algashop.ordering.domain.exception.OrderCannotBeEditedException;
 import com.algaworks.algashop.ordering.domain.exception.OrderInvalidShippingDeliveryDateException;
 import com.algaworks.algashop.ordering.domain.exception.OrderStatusCannotBeChangedException;
 import com.algaworks.algashop.ordering.domain.exception.ProductOutOfStockException;
@@ -200,6 +201,15 @@ class OrderTest {
 
         Assertions.assertThatExceptionOfType(ProductOutOfStockException.class).isThrownBy(
                 () -> order.addItem(ProductTestDataBuilder.aProductUnavailable().build(), new Quantity(1))
+        );
+    }
+
+    @Test
+    public void giverPlacedOrder_whenTryingToAddItem_shouldThrowException() {
+        Order order = OrderTestDataBuilder.anOrder().build();
+        order.place();
+        Assertions.assertThatExceptionOfType(OrderCannotBeEditedException.class).isThrownBy(
+                () -> order.addItem(ProductTestDataBuilder.aProductAltRamMemory().build(), new Quantity(1))
         );
     }
 }
