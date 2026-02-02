@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.domain.repository;
+package com.algaworks.algashop.ordering.domain.model.repository;
 
 import com.algaworks.algashop.ordering.domain.model.entity.AggregateRoot;
 
