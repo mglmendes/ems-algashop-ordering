@@ -213,4 +213,21 @@ class OrderTest {
                 () -> order.addItem(ProductTestDataBuilder.aProductAltRamMemory().build(), new Quantity(1))
         );
     }
+
+    @Test
+    public void givenPaidOrder_whenReady_shouldMarkAsReady() {
+        Order order = OrderTestDataBuilder.anOrder().build();
+        order.place();
+        order.markAsPaid();
+        order.markAsReady();
+        Assertions.assertThat(order.status()).isEqualTo(OrderStatus.READY);
+    }
+
+    @Test
+    public void givenPlacedOrder_whenReady_shouldThrowException() {
+        Order order = OrderTestDataBuilder.anOrder().build();
+        order.place();
+        Assertions.assertThatExceptionOfType(OrderStatusCannotBeChangedException.class)
+                .isThrownBy(order::markAsReady);
+    }
 }

@@ -120,6 +120,11 @@ public class Order {
         this.changeStatus(OrderStatus.PAID);
     }
 
+    public void markAsReady() {
+        this.setReadyAt(OffsetDateTime.now());
+        this.changeStatus(OrderStatus.READY);
+    }
+
     public void changePaymentMethod(PaymentMethod paymentMethod) {
         verifyIfChangeable();
         Objects.requireNonNull(paymentMethod);
