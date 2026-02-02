@@ -230,4 +230,19 @@ class OrderTest {
         Assertions.assertThatExceptionOfType(OrderStatusCannotBeChangedException.class)
                 .isThrownBy(order::markAsReady);
     }
+
+    @Test
+    public void givenDraftOrder_whenCancel_shouldCancelTheOrder() {
+        Order order = OrderTestDataBuilder.anOrder().build();
+        order.cancel();
+        Assertions.assertThat(order.isCanceled()).isTrue();
+    }
+
+    @Test
+    public void givenCanceledOrder_whenCancel_shouldCancelTheOrder() {
+        Order order = OrderTestDataBuilder.anOrder().build();
+        order.cancel();
+        Assertions.assertThatExceptionOfType(OrderStatusCannotBeChangedException.class)
+                .isThrownBy(order::cancel);
+    }
 }
