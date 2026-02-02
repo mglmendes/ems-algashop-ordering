@@ -9,6 +9,7 @@ import com.algaworks.algashop.ordering.domain.exception.OrderStatusCannotBeChang
 import com.algaworks.algashop.ordering.domain.exception.ProductOutOfStockException;
 import com.algaworks.algashop.ordering.domain.valueobject.*;
 import com.algaworks.algashop.ordering.domain.valueobject.id.CustomerId;
+import com.algaworks.algashop.ordering.domain.valueobject.id.OrderItemId;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

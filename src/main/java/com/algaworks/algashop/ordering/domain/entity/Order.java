@@ -99,6 +99,13 @@ public class Order {
         this.recalculateTotals();
     }
 
+    public void removeItem(OrderItemId orderItemId){
+        verifyIfChangeable();
+        Objects.requireNonNull(orderItemId);
+        this.items.remove(findOrderItem(orderItemId));
+        recalculateTotals();
+    }
+
     public void place() {
         verifyIfCanChangeToPlace();
         if (CollectionUtils.isEmpty(this.items())) {
@@ -216,7 +223,7 @@ public class Order {
                 .map(i -> i.totalAmount().value())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        Integer totalItemsQuantity = this.items.stream()
+        Integer totalItemsQuantity = this.items().stream()
                 .map(i -> i.quantity().value())
                 .reduce(0, Integer::sum);
 
