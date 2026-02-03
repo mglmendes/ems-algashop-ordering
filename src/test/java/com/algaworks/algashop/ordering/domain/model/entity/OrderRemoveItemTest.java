@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.domain.model.entity;
 
-import com.algaworks.algashop.ordering.domain.model.databuilder.OrderTestDataBuilder;
+import com.algaworks.algashop.ordering.databuilder.OrderTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.exception.OrderCannotBeEditedException;
 import com.algaworks.algashop.ordering.domain.model.exception.OrderDoesNotContainOrderItemException;
 import com.algaworks.algashop.ordering.domain.model.valueobject.id.OrderItemId;

@@ -1,7 +1,7 @@
 package com.algaworks.algashop.ordering.domain.model.entity;
 
-import com.algaworks.algashop.ordering.domain.model.databuilder.OrderTestDataBuilder;
-import com.algaworks.algashop.ordering.domain.model.databuilder.ProductTestDataBuilder;
+import com.algaworks.algashop.ordering.databuilder.OrderTestDataBuilder;
+import com.algaworks.algashop.ordering.databuilder.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.model.exception.OrderCannotBeEditedException;
 import com.algaworks.algashop.ordering.domain.model.exception.OrderInvalidShippingDeliveryDateException;

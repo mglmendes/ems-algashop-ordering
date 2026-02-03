@@ -1,7 +1,7 @@
 package com.algaworks.algashop.ordering.domain.model.entity;
 
-import com.algaworks.algashop.ordering.domain.model.databuilder.ProductTestDataBuilder;
-import com.algaworks.algashop.ordering.domain.model.databuilder.ShoppingCartItemTestDataBuilder;
+import com.algaworks.algashop.ordering.databuilder.ProductTestDataBuilder;
+import com.algaworks.algashop.ordering.databuilder.ShoppingCartItemTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.valueobject.Money;
 import com.algaworks.algashop.ordering.domain.model.valueobject.Product;
 import com.algaworks.algashop.ordering.domain.model.valueobject.ProductName;

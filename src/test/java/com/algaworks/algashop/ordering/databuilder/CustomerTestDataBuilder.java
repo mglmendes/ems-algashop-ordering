@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.domain.model.databuilder;
+package com.algaworks.algashop.ordering.databuilder;
 
 import com.algaworks.algashop.ordering.domain.model.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.valueobject.*;

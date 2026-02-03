@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.domain.model.entity;
 
-import com.algaworks.algashop.ordering.domain.model.databuilder.CustomerTestDataBuilder;
+import com.algaworks.algashop.ordering.databuilder.CustomerTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.exception.CustomerArchivedException;
 import com.algaworks.algashop.ordering.domain.model.valueobject.*;
 import org.assertj.core.api.Assertions;
