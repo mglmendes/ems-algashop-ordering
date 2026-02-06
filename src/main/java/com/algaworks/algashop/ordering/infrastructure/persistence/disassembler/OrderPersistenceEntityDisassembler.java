@@ -1,11 +1,15 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.disassembler;
 
 import com.algaworks.algashop.ordering.domain.model.entity.Order;
+import com.algaworks.algashop.ordering.domain.model.entity.OrderItem;
 import com.algaworks.algashop.ordering.domain.model.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.model.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.model.valueobject.*;
 import com.algaworks.algashop.ordering.domain.model.valueobject.id.CustomerId;
 import com.algaworks.algashop.ordering.domain.model.valueobject.id.OrderId;
+import com.algaworks.algashop.ordering.domain.model.valueobject.id.OrderItemId;
+import com.algaworks.algashop.ordering.domain.model.valueobject.id.ProductId;
+import com.algaworks.algashop.ordering.infrastructure.persistence.entity.OrderItemPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import com.algaworks.algashop.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
@@ -14,6 +18,8 @@ import com.algaworks.algashop.ordering.infrastructure.persistence.embeddable.Shi
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderPersistenceEntityDisassembler {
@@ -33,7 +39,23 @@ public class OrderPersistenceEntityDisassembler {
                 .readyAt(persistenceEntity.getReadyAt())
                 .shipping(toShippingValueObject(persistenceEntity.getShipping()))
                 .billing(toBillingValueObject(persistenceEntity.getBilling()))
-                .items(new HashSet<>())
+                .items(toDomainEntity(persistenceEntity.getItems()))
+                .build();
+    }
+
+    private Set<OrderItem> toDomainEntity(Set<OrderItemPersistenceEntity> items) {
+        return items.stream().map(this::toDomainEntity).collect(Collectors.toSet());
+    }
+
+    private OrderItem toDomainEntity(OrderItemPersistenceEntity persistenceEntity) {
+        return OrderItem.existing()
+                .id(new OrderItemId(persistenceEntity.getId()))
+                .orderId(new OrderId(persistenceEntity.getOrderId()))
+                .productId(new ProductId(persistenceEntity.getProductId()))
+                .productName(new ProductName(persistenceEntity.getProductName()))
+                .price(new Money(persistenceEntity.getPrice()))
+                .quantity(new Quantity(persistenceEntity.getQuantity()))
+                .totalAmount(new Money(persistenceEntity.getTotalAmount()))
                 .build();
     }
 
