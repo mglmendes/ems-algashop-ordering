@@ -4,6 +4,7 @@ import com.algaworks.algashop.ordering.databuilder.OrderTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
+import com.algaworks.algashop.ordering.infrastructure.persistence.config.HibernateConfiguration;
 import com.algaworks.algashop.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
 import com.algaworks.algashop.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
 import com.algaworks.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
@@ -19,7 +20,8 @@ import org.springframework.context.annotation.Import;
         OrdersPersistenceProvider.class,
         OrderPersistenceEntityAssembler.class,
         OrderPersistenceEntityDisassembler.class,
-        SpringDataAuditingConfig.class})
+        SpringDataAuditingConfig.class,
+        HibernateConfiguration.class})
 class OrdersPersistenceProviderIT {
 
     private OrdersPersistenceProvider persistenceProvider;

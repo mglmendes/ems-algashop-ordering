@@ -4,6 +4,7 @@ import com.algaworks.algashop.ordering.databuilder.OrderPersistenceEntityTestDat
 import com.algaworks.algashop.ordering.databuilder.OrderTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.utility.IdGenerator;
+import com.algaworks.algashop.ordering.infrastructure.persistence.config.HibernateConfiguration;
 import com.algaworks.algashop.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
 import com.algaworks.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import org.assertj.core.api.Assertions;
@@ -18,7 +19,7 @@ import java.math.BigDecimal;
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
-@Import(SpringDataAuditingConfig.class)
+@Import({SpringDataAuditingConfig.class, HibernateConfiguration.class})
 class OrderPersistenceEntityRepositoryIT {
 
     private final OrderPersistenceEntityRepository orderRepository;
@@ -30,11 +31,14 @@ class OrderPersistenceEntityRepositoryIT {
 
     @Test
     public void shouldPersist() {
-        long orderId = IdGenerator.generateTSID().toLong();
         OrderPersistenceEntity entity = OrderPersistenceEntityTestDataBuilder.existingOrder().build();
         orderRepository.saveAndFlush(entity);
 
-        Assertions.assertThat(orderRepository.existsById(orderId)).isTrue();
+        Assertions.assertThat(orderRepository.existsById(entity.getId())).isTrue();
+
+        OrderPersistenceEntity savedEntity = orderRepository.findById(entity.getId()).orElseThrow();
+        Assertions.assertThat(savedEntity.getItems()).isNotEmpty();
+
     }
 
     @Test

@@ -5,6 +5,7 @@ import com.algaworks.algashop.ordering.domain.model.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.model.valueobject.id.OrderId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
+import com.algaworks.algashop.ordering.infrastructure.persistence.config.HibernateConfiguration;
 import com.algaworks.algashop.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
 import com.algaworks.algashop.ordering.infrastructure.persistence.providers.OrdersPersistenceProvider;
 import org.assertj.core.api.Assertions;
@@ -17,7 +18,11 @@ import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import java.util.Optional;
 
 @DataJpaTest
-@Import({OrdersPersistenceProvider.class, OrderPersistenceEntityAssembler.class, OrderPersistenceEntityDisassembler.class})
+@Import({
+        OrdersPersistenceProvider.class,
+        OrderPersistenceEntityAssembler.class,
+        OrderPersistenceEntityDisassembler.class,
+        HibernateConfiguration.class})
 class OrdersIT {
 
     private final Orders orders;

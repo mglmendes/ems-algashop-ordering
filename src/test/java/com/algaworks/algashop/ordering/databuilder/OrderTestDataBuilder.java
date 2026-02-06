@@ -108,7 +108,7 @@ public class OrderTestDataBuilder {
 
     public static Billing aBilling() {
         return Billing.builder().address(anAddress()).document(new Document("555-12-6654"))
-                .email(new Email("jhon.due@gmail.com"))
+                .email(new Email("jhon.due@email.com"))
                 .phone(new Phone("555-12-6654")).fullName(new FullName("Cleiton", "Rasta")).build();
     }
 
