@@ -51,4 +51,19 @@ class OrdersIT {
                 s -> Assertions.assertThat(s.paymentMethod()).isEqualTo(originalOrder.paymentMethod())
         );
     }
+
+    @Test
+    public void shouldUpdateExistingOrder() {
+        Order order = OrderTestDataBuilder.anOrder().build();
+        order.place();
+        orders.add(order);
+
+        orders.ofId(order.id()).orElseThrow();
+        order.markAsPaid();
+        orders.add(order);
+
+        order = orders.ofId(order.id()).orElseThrow();
+
+        Assertions.assertThat(order.isPaid()).isTrue();
+    }
 }
