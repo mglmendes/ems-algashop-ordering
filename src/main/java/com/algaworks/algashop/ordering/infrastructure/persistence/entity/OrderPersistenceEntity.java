@@ -1,5 +1,7 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.entity;
 
+import com.algaworks.algashop.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
+import com.algaworks.algashop.ordering.infrastructure.persistence.embeddable.ShippingEmbeddable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
@@ -49,5 +51,21 @@ public class OrderPersistenceEntity{
     @Version
     private Long version;
 
-    
+    @Embedded
+//    @AttributeOverrides({ // abordagem manual
+//            @AttributeOverride(name = "firstName", column = @Column(name = "billing_first_name")),
+//            @AttributeOverride(name = "lastName", column = @Column(name = "billing_last_name")),
+//            @AttributeOverride(name = "document", column = @Column(name = "billing_document")),
+//            @AttributeOverride(name = "phone", column = @Column(name = "billing_phone")),
+//            @AttributeOverride(name = "address.street", column = @Column(name = "billing_address_street")),
+//            @AttributeOverride(name = "address.number", column = @Column(name = "billing_address_number")),
+//            @AttributeOverride(name = "address.complement", column = @Column(name = "billing_address_complement")),
+//            @AttributeOverride(name = "address.neighborhood", column = @Column(name = "billing_address_neighborhood")),
+//            @AttributeOverride(name = "address.city", column = @Column(name = "billing_address_city")),
+//            @AttributeOverride(name = "address.state", column = @Column(name = "billing_address_state")),
+//            @AttributeOverride(name = "address.zipCode", column = @Column(name = "billing_address_zipCode"))
+//    })
+    private BillingEmbeddable billing;
+    @Embedded
+    private ShippingEmbeddable shipping;
 }
