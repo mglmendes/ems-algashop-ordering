@@ -35,11 +35,6 @@ public class OrdersPersistenceProvider implements Orders {
     }
 
     @Override
-    public boolean exists(OrderId orderId) {
-        return false;
-    }
-
-    @Override
     public void add(Order aggregateRoot) {
         long orderId = aggregateRoot.id().value().toLong();
         
@@ -51,6 +46,16 @@ public class OrdersPersistenceProvider implements Orders {
                     insert(aggregateRoot);
                 }
         );
+    }
+
+    @Override
+    public long count() {
+        return persistenceRepository.count();
+    }
+
+    @Override
+    public boolean exists(OrderId orderId) {
+        return persistenceRepository.existsById(orderId.value().toLong());
     }
 
     private void update(Order aggregateRoot, OrderPersistenceEntity persistenceEntity) {
@@ -72,10 +77,5 @@ public class OrdersPersistenceProvider implements Orders {
         version.setAccessible(true);
         ReflectionUtils.setField(version, aggregateRoot, persistenceEntity.getVersion());
         version.setAccessible(false);
-    }
-
-    @Override
-    public int count() {
-        return 0;
     }
 }
