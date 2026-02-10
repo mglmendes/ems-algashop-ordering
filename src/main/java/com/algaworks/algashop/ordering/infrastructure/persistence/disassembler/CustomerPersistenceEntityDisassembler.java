@@ -1,0 +1,42 @@
+package com.algaworks.algashop.ordering.infrastructure.persistence.disassembler;
+
+import com.algaworks.algashop.ordering.domain.model.entity.Customer;
+import com.algaworks.algashop.ordering.domain.model.valueobject.*;
+import com.algaworks.algashop.ordering.domain.model.valueobject.id.CustomerId;
+import com.algaworks.algashop.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
+import com.algaworks.algashop.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
+import org.springframework.stereotype.Component;
+
+@Component
+public class CustomerPersistenceEntityDisassembler {
+
+    public Customer toDomainEntity(CustomerPersistenceEntity customerPersistenceEntity) {
+        return Customer.existing()
+                .id(new CustomerId(customerPersistenceEntity.getId()))
+                .version(customerPersistenceEntity.getVersion())
+                .fullName(new FullName(customerPersistenceEntity.getFirstName(), customerPersistenceEntity.getLastName()))
+                .birthDate(customerPersistenceEntity.getBirthDate() != null ? new BirthDate(customerPersistenceEntity.getBirthDate()) : null)
+                .email(new Email(customerPersistenceEntity.getEmail()))
+                .phone(new Phone(customerPersistenceEntity.getPhone()))
+                .document(new Document(customerPersistenceEntity.getDocument()))
+                .promotionNotificationsAllowed(customerPersistenceEntity.getPromotionNotificationsAllowed())
+                .archived(customerPersistenceEntity.getArchived())
+                .registeredAt(customerPersistenceEntity.getRegisteredAt())
+                .archivedAt(customerPersistenceEntity.getArchivedAt())
+                .loyaltyPoints(new LoyaltyPoints(customerPersistenceEntity.getLoyaltyPoints()))
+                .address(toAddressValueObject(customerPersistenceEntity.getAddress()))
+                .build();
+    }
+
+    private Address toAddressValueObject(AddressEmbeddable address) {
+        return Address.builder()
+                .street(address.getStreet())
+                .number(address.getNumber())
+                .complement(address.getComplement())
+                .neighborhood(address.getNeighborhood())
+                .city(address.getCity())
+                .state(address.getState())
+                .zipCode(new ZipCode(address.getZipCode()))
+                .build();
+    }
+}
