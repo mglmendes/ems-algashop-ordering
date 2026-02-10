@@ -4,6 +4,7 @@ import com.algaworks.algashop.ordering.databuilder.CustomerTestDataBuilder;
 import com.algaworks.algashop.ordering.databuilder.OrderTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.entity.enums.OrderStatus;
+import com.algaworks.algashop.ordering.domain.model.valueobject.Money;
 import com.algaworks.algashop.ordering.domain.model.valueobject.id.CustomerId;
 import com.algaworks.algashop.ordering.domain.model.valueobject.id.OrderId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
@@ -164,5 +165,35 @@ class OrdersIT {
 
         Assertions.assertThat(emptyOrders).isEmpty();
 
+    }
+
+    @Test
+    public void shouldReturnSalesMetricsByCustomer() {
+        Order order1 = OrderTestDataBuilder.anOrder().status(OrderStatus.PAID).build();
+        Order order2 = OrderTestDataBuilder.anOrder().status(OrderStatus.PAID).build();
+        orders.add(order1);
+        orders.add(order2);
+
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.CANCELED).build());
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.PLACED).build());
+
+        Money expectedTotalAmount = order1.totalAmount().add(order2.totalAmount());
+
+        Assertions.assertThat(orders.totalSoldForCustomer(DEFAULT_CUSTOMER_ID)).isEqualTo(expectedTotalAmount);
+    }
+
+    @Test
+    public void shouldReturnQuantitySalesByCustomer() {
+        Order order1 = OrderTestDataBuilder.anOrder().status(OrderStatus.PAID).build();
+        Order order2 = OrderTestDataBuilder.anOrder().status(OrderStatus.PAID).build();
+        orders.add(order1);
+        orders.add(order2);
+
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.CANCELED).build());
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.PLACED).build());
+
+        long expectedQuantity = 2L;
+        Assertions.assertThat(orders.salesQuantityByCustomerInYear(DEFAULT_CUSTOMER_ID, Year.now()))
+                .isEqualTo(expectedQuantity);
     }
 }
