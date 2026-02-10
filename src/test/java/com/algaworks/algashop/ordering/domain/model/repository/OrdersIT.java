@@ -196,4 +196,6 @@ class OrdersIT {
         Assertions.assertThat(orders.salesQuantityByCustomerInYear(DEFAULT_CUSTOMER_ID, Year.now()))
                 .isEqualTo(expectedQuantity);
     }
+
+
 }
