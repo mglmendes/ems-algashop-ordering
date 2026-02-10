@@ -1,25 +1,43 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.assembler;
 
+import com.algaworks.algashop.ordering.databuilder.CustomerPersistenceEntityTestDataBuilder;
 import com.algaworks.algashop.ordering.databuilder.OrderPersistenceEntityTestDataBuilder;
 import com.algaworks.algashop.ordering.databuilder.OrderTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.entity.Order;
-import com.algaworks.algashop.ordering.infrastructure.persistence.entity.OrderItemPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
+import com.algaworks.algashop.ordering.infrastructure.persistence.repository.CustomerPersistenceEntityRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+@ExtendWith(MockitoExtension.class)
 class OrderPersistenceEntityAssemblerTest {
 
-    private final OrderPersistenceEntityAssembler assembler = new OrderPersistenceEntityAssembler();
+    @InjectMocks
+    private OrderPersistenceEntityAssembler assembler;
+
+    @Mock
+    private CustomerPersistenceEntityRepository customerPersistenceEntityRepository;
+
+    @BeforeEach
+    public void setUp() {
+        Mockito.when(customerPersistenceEntityRepository.getReferenceById(Mockito.any(UUID.class))).then(
+                a -> {
+                    UUID customerId = a.getArgument(0, UUID.class);
+                    return CustomerPersistenceEntityTestDataBuilder.aCustomer().id(customerId).build();
+                }
+        );
+    }
 
     @Test
     public void shouldConvertToDomain() {

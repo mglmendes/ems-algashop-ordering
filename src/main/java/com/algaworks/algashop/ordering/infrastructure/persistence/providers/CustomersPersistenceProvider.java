@@ -26,7 +26,7 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class CustomerPersistenceProvider implements Customers {
+public class CustomersPersistenceProvider implements Customers {
 
     private final CustomerPersistenceEntityRepository persistenceRepository;
     private final CustomerPersistenceEntityAssembler assembler;

@@ -12,6 +12,8 @@ public class CustomerTestDataBuilder {
     private CustomerTestDataBuilder() {
     }
 
+    public static final CustomerId DEFAULT_CUSTOMER_ID = new CustomerId();
+
     public static Customer.BrandNewCustomerBuild brandNewCustomer() {
         return Customer.brandNew()
                 .fullName(new FullName("John","Doe"))
@@ -33,7 +35,7 @@ public class CustomerTestDataBuilder {
 
     public static Customer.ExistingCustomerBuild existingCustomer() {
         return Customer.existing()
-                .id(new CustomerId())
+                .id(DEFAULT_CUSTOMER_ID)
                 .registeredAt(OffsetDateTime.now())
                 .promotionNotificationsAllowed(true)
                 .archived(false)

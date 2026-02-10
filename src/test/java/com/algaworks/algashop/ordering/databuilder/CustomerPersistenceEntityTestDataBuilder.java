@@ -7,6 +7,8 @@ import com.algaworks.algashop.ordering.infrastructure.persistence.entity.Custome
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
+import static com.algaworks.algashop.ordering.databuilder.CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID;
+
 public class CustomerPersistenceEntityTestDataBuilder {
 
     private CustomerPersistenceEntityTestDataBuilder() {
@@ -15,7 +17,7 @@ public class CustomerPersistenceEntityTestDataBuilder {
 
     public static CustomerPersistenceEntity.CustomerPersistenceEntityBuilder aCustomer() {
         return CustomerPersistenceEntity.builder()
-                .id(new CustomerId().value())
+                .id(DEFAULT_CUSTOMER_ID.value())
                 .registeredAt(OffsetDateTime.now())
                 .promotionNotificationsAllowed(true)
                 .archived(false)
