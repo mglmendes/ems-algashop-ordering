@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest
 @Import({
@@ -55,5 +57,20 @@ class OrdersPersistenceProviderIT {
         Assertions.assertThat(entity.getCreatedByUSerId()).isNotNull();
         Assertions.assertThat(entity.getLastModifiedAt()).isNotNull();
         Assertions.assertThat(entity.getLastModifiedByUserId()).isNotNull();
+    }
+
+    @Test
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public void shouldAddFindAndNotFailWhenNotTransaction() {
+        Order order = OrderTestDataBuilder.anOrder().build();
+
+        persistenceProvider.add(order);
+
+        Order order1 = persistenceProvider.ofId(order.id()).orElseThrow();
+
+        Assertions.assertThat(order1).isNotNull();
+        Assertions.assertThatNoException().isThrownBy(
+                () -> persistenceProvider.ofId(order.id()).orElseThrow()
+        );
     }
 }
