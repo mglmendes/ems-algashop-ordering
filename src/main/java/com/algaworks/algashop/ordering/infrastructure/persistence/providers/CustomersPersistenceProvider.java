@@ -3,6 +3,7 @@ package com.algaworks.algashop.ordering.infrastructure.persistence.providers;
 import com.algaworks.algashop.ordering.domain.model.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.repository.Customers;
+import com.algaworks.algashop.ordering.domain.model.valueobject.Email;
 import com.algaworks.algashop.ordering.domain.model.valueobject.id.CustomerId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
 import com.algaworks.algashop.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
@@ -42,6 +43,13 @@ public class CustomersPersistenceProvider implements Customers {
                 disassembler::toDomainEntity
         );
 
+    }
+
+    @Override
+    public Optional<Customer> ofEmail(Email email) {
+        return persistenceRepository.findByEmail(email.value()).map(
+                disassembler::toDomainEntity
+        );
     }
 
     @Override

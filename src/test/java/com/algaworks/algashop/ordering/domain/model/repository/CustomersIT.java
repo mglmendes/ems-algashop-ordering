@@ -2,12 +2,12 @@ package com.algaworks.algashop.ordering.domain.model.repository;
 
 import com.algaworks.algashop.ordering.databuilder.CustomerTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.entity.Customer;
+import com.algaworks.algashop.ordering.domain.model.valueobject.Email;
 import com.algaworks.algashop.ordering.domain.model.valueobject.FullName;
 import com.algaworks.algashop.ordering.domain.model.valueobject.id.CustomerId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
 import com.algaworks.algashop.ordering.infrastructure.persistence.config.HibernateConfiguration;
 import com.algaworks.algashop.ordering.infrastructure.persistence.disassembler.CustomerPersistenceEntityDisassembler;
-
 import com.algaworks.algashop.ordering.infrastructure.persistence.providers.CustomersPersistenceProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -111,6 +112,24 @@ class CustomersIT {
 
         Assertions.assertThat(customers.exists(customer.id())).isTrue();
         Assertions.assertThat(customers.exists(new CustomerId())).isFalse();
+    }
+
+    @Test
+    public void shouldFindByEmail() {
+        Customer customer = CustomerTestDataBuilder.brandNewCustomer().build();
+        customers.add(customer);
+
+        Optional<Customer> savedCustomer = customers.ofEmail(customer.email());
+
+        Assertions.assertThat(savedCustomer).isPresent();
+    }
+
+    @Test
+    public void shouldNotFindByEmail() {
+
+        Optional<Customer> customer = customers.ofEmail(new Email(UUID.randomUUID() + "@email.com"));
+
+        Assertions.assertThat(customer).isNotPresent();
     }
 
  }
