@@ -5,9 +5,11 @@ import com.algaworks.algashop.ordering.domain.model.valueobject.Quantity;
 import com.algaworks.algashop.ordering.domain.model.valueobject.id.CustomerId;
 import com.algaworks.algashop.ordering.domain.model.valueobject.id.ShoppingCartId;
 
+import static com.algaworks.algashop.ordering.databuilder.CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID;
+
 public class ShoppingCartTestDataBuilder {
 
-    public CustomerId customerId = new CustomerId();
+    public CustomerId customerId = DEFAULT_CUSTOMER_ID;
     public static final ShoppingCartId DEFAULT_SHOPPING_CART_ID = new ShoppingCartId();
     private boolean withItems = true;
 
