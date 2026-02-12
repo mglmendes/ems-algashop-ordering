@@ -2,9 +2,9 @@ package com.algaworks.algashop.ordering.domain.model.shoppingcart;
 
 import com.algaworks.algashop.ordering.domain.model.customer.CustomerPersistenceEntityTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.utility.IdGenerator;
-import com.algaworks.algashop.ordering.infrastructure.persistence.entity.ShoppingCartItemPersistenceEntity;
-import com.algaworks.algashop.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity;
-import com.algaworks.algashop.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity.ShoppingCartPersistenceEntityBuilder;
+import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.entity.ShoppingCartItemPersistenceEntity;
+import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.entity.ShoppingCartPersistenceEntity;
+import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.entity.ShoppingCartPersistenceEntity.ShoppingCartPersistenceEntityBuilder;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
