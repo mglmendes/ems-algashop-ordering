@@ -5,6 +5,7 @@ import java.util.Locale;
 public class ErrorMessages {
 
 
+
     private ErrorMessages() {
 
     }
@@ -15,6 +16,8 @@ public class ErrorMessages {
 
     public static final String VALIDATION_ERROR_EMAIL_IS_INVALID = "Email is invalid.";
     public static final String ERROR_CUSTOMER_ARCHIVED = "Customer is archived. Cannot be changed.";
+
+    public static final String ERROR_CUSTOMER_NOT_FOUND = "Customer with id %s not exists.";
 
     public static final String ERROR_ORDER_STATUS_CANNOT_BE_CHANGED = "Cannot change order %s status from %s to %s";
     public static final String ERROR_ORDER_DOES_NOT_CONTAIN_ODER_ITEM = "Order %s does not contain  item %s";
@@ -50,4 +53,5 @@ public class ErrorMessages {
     public static final String ERROR_CANNOT_ADD_LOYALTY_POINTS_TO_A_NON_READY_ORDER = "Cannot add Loyalty Points to order %s, non ready order";
 
     public static final String ERROR_SHOPPING_CART_CANT_PROCEED_TO_CHECKOUT = "Shopping cart has unavailable items. Cannot proceed to checkout";
+    public static final String ERROR_CUSTOMER_ALREADY_HAVE_SHOPPING_CART = "Customer with id %s already have shopping cart";
 }
