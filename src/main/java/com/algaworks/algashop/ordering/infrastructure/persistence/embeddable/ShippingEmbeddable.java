@@ -1,6 +1,5 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.embeddable;
 
-import com.algaworks.algashop.ordering.domain.model.valueobject.Recipient;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import lombok.AllArgsConstructor;

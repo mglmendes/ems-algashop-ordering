@@ -1,7 +1,7 @@
 package com.algaworks.algashop.ordering.infrastructure.rapidex.service;
 
-import com.algaworks.algashop.ordering.domain.model.service.ShippingCostService;
-import com.algaworks.algashop.ordering.domain.model.valueobject.Money;
+import com.algaworks.algashop.ordering.domain.model.order.shipping.ShippingCostService;
+import com.algaworks.algashop.ordering.domain.model.commons.Money;
 import com.algaworks.algashop.ordering.infrastructure.rapidex.client.RapiDexAPIClient;
 import com.algaworks.algashop.ordering.infrastructure.rapidex.dtos.DeliveryCostRequest;
 import com.algaworks.algashop.ordering.infrastructure.rapidex.dtos.DeliveryCostResponse;

@@ -1,8 +1,8 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.providers;
 
-import com.algaworks.algashop.ordering.domain.model.service.ShoppingCartProductAdjustmentService;
-import com.algaworks.algashop.ordering.domain.model.valueobject.Money;
-import com.algaworks.algashop.ordering.domain.model.valueobject.id.ProductId;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.service.ShoppingCartProductAdjustmentService;
+import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.repository.ShoppingCartPersistenceEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

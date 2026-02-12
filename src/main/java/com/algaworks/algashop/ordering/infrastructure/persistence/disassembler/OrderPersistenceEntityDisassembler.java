@@ -1,14 +1,14 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.disassembler;
 
-import com.algaworks.algashop.ordering.domain.model.entity.Order;
-import com.algaworks.algashop.ordering.domain.model.entity.OrderItem;
-import com.algaworks.algashop.ordering.domain.model.entity.enums.OrderStatus;
-import com.algaworks.algashop.ordering.domain.model.entity.enums.PaymentMethod;
-import com.algaworks.algashop.ordering.domain.model.valueobject.*;
-import com.algaworks.algashop.ordering.domain.model.valueobject.id.CustomerId;
-import com.algaworks.algashop.ordering.domain.model.valueobject.id.OrderId;
-import com.algaworks.algashop.ordering.domain.model.valueobject.id.OrderItemId;
-import com.algaworks.algashop.ordering.domain.model.valueobject.id.ProductId;
+import com.algaworks.algashop.ordering.domain.model.commons.*;
+import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
+import com.algaworks.algashop.ordering.domain.model.order.entity.OrderItem;
+import com.algaworks.algashop.ordering.domain.model.order.entity.enums.OrderStatus;
+import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
+import com.algaworks.algashop.ordering.domain.model.order.valueobjects.*;
+import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductName;
+import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
+import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.entity.OrderItemPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
@@ -17,7 +17,6 @@ import com.algaworks.algashop.ordering.infrastructure.persistence.embeddable.Rec
 import com.algaworks.algashop.ordering.infrastructure.persistence.embeddable.ShippingEmbeddable;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 

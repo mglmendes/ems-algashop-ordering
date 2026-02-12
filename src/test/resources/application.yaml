@@ -7,5 +7,5 @@ algashop:
     rapidex:
       url: "http://localhost:8780"
     shipping:
-      provider: RAPIDEX
+      provider: "FAKE"
 
