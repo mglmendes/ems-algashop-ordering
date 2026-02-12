@@ -4,6 +4,7 @@ import java.util.Locale;
 
 public class ErrorMessages {
 
+
     private ErrorMessages() {
 
     }
@@ -47,4 +48,6 @@ public class ErrorMessages {
     public static final String ERROR_ORDER_NOT_BELONGS_TO_CUSTOMER = "Order with id %s not belong to customer %s";
 
     public static final String ERROR_CANNOT_ADD_LOYALTY_POINTS_TO_A_NON_READY_ORDER = "Cannot add Loyalty Points to order %s, non ready order";
+
+    public static final String ERROR_SHOPPING_CART_CANT_PROCEED_TO_CHECKOUT = "Shopping cart has unavailable items. Cannot proceed to checkout";
 }
