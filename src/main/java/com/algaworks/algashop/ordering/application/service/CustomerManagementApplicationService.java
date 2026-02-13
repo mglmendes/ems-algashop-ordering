@@ -2,11 +2,14 @@ package com.algaworks.algashop.ordering.application.service;
 
 import com.algaworks.algashop.ordering.application.model.data.AddressData;
 import com.algaworks.algashop.ordering.application.model.input.CustomerInput;
+import com.algaworks.algashop.ordering.application.model.output.CustomerOutput;
 import com.algaworks.algashop.ordering.domain.model.commons.*;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
+import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.domain.model.customer.service.CustomerRegistrationService;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.BirthDate;
+import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,5 +48,37 @@ public class CustomerManagementApplicationService {
         );
         customers.add(customer);
         return customer.id().value();
+    }
+
+    @Transactional(readOnly = true)
+    public CustomerOutput findById(UUID customerId) {
+        Objects.requireNonNull(customerId);
+        Customer customer = customers.ofId(new CustomerId(customerId)).orElseThrow(
+                () -> new CustomerNotFoundException(customerId)
+        );
+
+        return CustomerOutput.builder()
+                .id(customer.id().value())
+                .firstName(customer.fullName().firstName())
+                .lastName(customer.fullName().lastName())
+                .email(customer.email().value())
+                .phone(customer.phone().value())
+                .document(customer.document().value())
+                .birthDate(customer.birthDate().value())
+                .promotionNotificationsAllowed(customer.promotionNotificationsAllowed())
+                .loyaltyPoints(customer.loyaltyPoints().value())
+                .registeredAt(customer.registeredAt())
+                .archivedAt(customer.archivedAt())
+                .archived(customer.archived())
+                .addressData(AddressData.builder()
+                        .street(customer.address().street())
+                        .complement(customer.address().complement())
+                        .number(customer.address().number())
+                        .neighborhood(customer.address().neighborhood())
+                        .city(customer.address().city())
+                        .state(customer.address().state())
+                        .zipCode(customer.address().city()).build())
+                .build();
+
     }
 }
