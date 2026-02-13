@@ -1,8 +1,8 @@
-package com.algaworks.algashop.ordering.application.service;
+package com.algaworks.algashop.ordering.application.management.customer.service;
 
-import com.algaworks.algashop.ordering.application.model.data.AddressData;
-import com.algaworks.algashop.ordering.application.model.input.CustomerInput;
-import com.algaworks.algashop.ordering.application.model.output.CustomerOutput;
+import com.algaworks.algashop.ordering.application.model.common.AddressData;
+import com.algaworks.algashop.ordering.application.management.customer.input.CustomerInput;
+import com.algaworks.algashop.ordering.application.management.customer.output.CustomerOutput;
 import com.algaworks.algashop.ordering.domain.model.commons.*;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
