@@ -2,6 +2,7 @@ package com.algaworks.algashop.ordering.application.model.customer.service;
 
 import com.algaworks.algashop.ordering.application.model.common.AddressData;
 import com.algaworks.algashop.ordering.application.model.customer.input.CustomerInput;
+import com.algaworks.algashop.ordering.application.model.customer.input.CustomerUpdateInput;
 import com.algaworks.algashop.ordering.application.model.customer.output.CustomerOutput;
 import com.algaworks.algashop.ordering.application.utility.Mapper;
 import com.algaworks.algashop.ordering.domain.model.commons.*;
@@ -39,15 +40,7 @@ public class CustomerManagementApplicationService {
                 new Phone(input.getPhone()),
                 new Document(input.getDocument()),
                 input.getPromotionNotificationsAllowed(),
-                Address.builder()
-                        .street(addressData.getStreet())
-                        .complement(addressData.getComplement())
-                        .number(addressData.getNumber())
-                        .neighborhood(addressData.getNeighborhood())
-                        .city(addressData.getCity())
-                        .state(addressData.getState())
-                        .zipCode(new ZipCode(addressData.getZipCode()))
-                        .build()
+                getAddressByAddressData(addressData)
         );
         customers.add(customer);
         return customer.id().value();
@@ -62,5 +55,40 @@ public class CustomerManagementApplicationService {
 
         return mapper.convert(customer, CustomerOutput.class);
 
+    }
+
+    @Transactional
+    public void update(UUID rawCustomerId, CustomerUpdateInput input) {
+        Objects.requireNonNull(input);
+        Objects.requireNonNull(rawCustomerId);
+
+        Customer customer = customers.ofId(new CustomerId(rawCustomerId)).orElseThrow(
+                () -> new CustomerNotFoundException(rawCustomerId)
+        );
+
+        customer.changeName(new FullName(input.getFirstName(), input.getLastName()));
+        customer.changePhone(new Phone(input.getPhone()));
+
+        if (Boolean.TRUE.equals(input.getPromotionNotificationsAllowed())) {
+            customer.enablePromotionNotifications();
+        } else {
+            customer.disablePromotionNotifications();
+        }
+
+        AddressData addressData = input.getAddress();
+        customer.changeAddress(getAddressByAddressData(addressData));
+        customers.add(customer);
+    }
+
+    private static Address getAddressByAddressData(AddressData addressData) {
+        return Address.builder()
+                .street(addressData.getStreet())
+                .complement(addressData.getComplement())
+                .number(addressData.getNumber())
+                .neighborhood(addressData.getNeighborhood())
+                .city(addressData.getCity())
+                .state(addressData.getState())
+                .zipCode(new ZipCode(addressData.getZipCode()))
+                .build();
     }
 }
