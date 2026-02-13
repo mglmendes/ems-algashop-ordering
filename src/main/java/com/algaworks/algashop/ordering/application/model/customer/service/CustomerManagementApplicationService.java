@@ -1,8 +1,9 @@
-package com.algaworks.algashop.ordering.application.management.customer.service;
+package com.algaworks.algashop.ordering.application.model.customer.service;
 
 import com.algaworks.algashop.ordering.application.model.common.AddressData;
-import com.algaworks.algashop.ordering.application.management.customer.input.CustomerInput;
-import com.algaworks.algashop.ordering.application.management.customer.output.CustomerOutput;
+import com.algaworks.algashop.ordering.application.model.customer.input.CustomerInput;
+import com.algaworks.algashop.ordering.application.model.customer.output.CustomerOutput;
+import com.algaworks.algashop.ordering.application.utility.Mapper;
 import com.algaworks.algashop.ordering.domain.model.commons.*;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
@@ -22,6 +23,8 @@ import java.util.UUID;
 public class CustomerManagementApplicationService {
 
     private final CustomerRegistrationService customerRegistration;
+
+    private final Mapper mapper;
 
     private final Customers customers;
 
@@ -57,28 +60,7 @@ public class CustomerManagementApplicationService {
                 () -> new CustomerNotFoundException(customerId)
         );
 
-        return CustomerOutput.builder()
-                .id(customer.id().value())
-                .firstName(customer.fullName().firstName())
-                .lastName(customer.fullName().lastName())
-                .email(customer.email().value())
-                .phone(customer.phone().value())
-                .document(customer.document().value())
-                .birthDate(customer.birthDate().value())
-                .promotionNotificationsAllowed(customer.promotionNotificationsAllowed())
-                .loyaltyPoints(customer.loyaltyPoints().value())
-                .registeredAt(customer.registeredAt())
-                .archivedAt(customer.archivedAt())
-                .archived(customer.archived())
-                .addressData(AddressData.builder()
-                        .street(customer.address().street())
-                        .complement(customer.address().complement())
-                        .number(customer.address().number())
-                        .neighborhood(customer.address().neighborhood())
-                        .city(customer.address().city())
-                        .state(customer.address().state())
-                        .zipCode(customer.address().city()).build())
-                .build();
+        return mapper.convert(customer, CustomerOutput.class);
 
     }
 }

@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.application.management.customer.input;
+package com.algaworks.algashop.ordering.application.model.customer.input;
 
 import com.algaworks.algashop.ordering.application.model.common.AddressData;
 import lombok.AllArgsConstructor;

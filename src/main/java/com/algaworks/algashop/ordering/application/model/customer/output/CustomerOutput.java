@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.application.management.customer.output;
+package com.algaworks.algashop.ordering.application.model.customer.output;
 
 import com.algaworks.algashop.ordering.application.model.common.AddressData;
 import lombok.AllArgsConstructor;
@@ -27,5 +27,5 @@ public class CustomerOutput {
     private OffsetDateTime registeredAt;
     private OffsetDateTime archivedAt;
     private Boolean archived;
-    private AddressData addressData;
+    private AddressData address;
 }

@@ -1,9 +1,9 @@
 package com.algaworks.algashop.ordering.application.service;
 
-import com.algaworks.algashop.ordering.application.management.customer.service.CustomerManagementApplicationService;
+import com.algaworks.algashop.ordering.application.model.customer.service.CustomerManagementApplicationService;
 import com.algaworks.algashop.ordering.application.model.common.AddressData;
-import com.algaworks.algashop.ordering.application.management.customer.input.CustomerInput;
-import com.algaworks.algashop.ordering.application.management.customer.output.CustomerOutput;
+import com.algaworks.algashop.ordering.application.model.customer.input.CustomerInput;
+import com.algaworks.algashop.ordering.application.model.customer.output.CustomerOutput;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
