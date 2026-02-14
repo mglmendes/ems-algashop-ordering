@@ -95,10 +95,6 @@ public class CustomerManagementApplicationService {
 
     @Transactional
     public void archive(UUID customerId) {
-        if (!customers.exists(new CustomerId(customerId))) {
-            throw new CustomerNotFoundException(customerId);
-        }
-
         Customer customer = customers.ofId(new CustomerId(customerId)).orElseThrow(
                 () -> new CustomerNotFoundException(customerId)
         );

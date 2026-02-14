@@ -32,13 +32,6 @@ public class CustomerLoyaltyPointsApplicationService {
     public void addLoyaltyPoints(UUID rawCustomerId, String rawOrderId) {
         CustomerId customerId = new CustomerId(rawCustomerId);
         OrderId orderId = new OrderId(rawOrderId);
-        if (!customers.exists(customerId)) {
-            throw new CustomerNotFoundException(rawCustomerId);
-        }
-
-        if (!orders.exists(new OrderId(rawOrderId))) {
-            throw new OrderNotFoundException(rawOrderId);
-        }
 
         Customer customer = customers.ofId(customerId).orElseThrow(
                 () -> new CustomerNotFoundException(rawCustomerId)
