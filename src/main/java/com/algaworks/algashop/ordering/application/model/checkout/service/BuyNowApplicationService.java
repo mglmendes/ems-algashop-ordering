@@ -81,7 +81,7 @@ public class BuyNowApplicationService {
 
     private Product findProduct(ProductId productId) {
         return productCatalogService.ofId(productId).orElseThrow(
-                () -> new ProductNotFoundException(productId)
+                () -> new ProductNotFoundException(productId.value())
         );
     }
 }

@@ -14,6 +14,7 @@ import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ public class CustomerLoyaltyPointsApplicationService {
 
     private final CustomerLoyaltyPointsService customerLoyaltyPointsService;
 
+    @Transactional
     public void addLoyaltyPoints(UUID rawCustomerId, String rawOrderId) {
         CustomerId customerId = new CustomerId(rawCustomerId);
         OrderId orderId = new OrderId(rawOrderId);

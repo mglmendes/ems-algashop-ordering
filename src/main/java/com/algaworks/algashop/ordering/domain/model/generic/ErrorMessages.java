@@ -17,6 +17,7 @@ public class ErrorMessages {
 
     public static final String ERROR_CUSTOMER_NOT_FOUND = "Customer with id %s not exists.";
     public static final String ERROR_ORDER_NOT_FOUND = "Order with id %s not exists.";
+    public static final String ERROR_SHOPPING_CART_NOT_FOUND = "Shopping cart with id %s not exists.";
 
     public static final String ERROR_ORDER_STATUS_CANNOT_BE_CHANGED = "Cannot change order %s status from %s to %s";
     public static final String ERROR_ORDER_DOES_NOT_CONTAIN_ODER_ITEM = "Order %s does not contain  item %s";

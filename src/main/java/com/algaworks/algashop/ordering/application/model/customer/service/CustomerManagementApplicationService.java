@@ -93,6 +93,7 @@ public class CustomerManagementApplicationService {
                 .build();
     }
 
+    @Transactional
     public void archive(UUID customerId) {
         if (!customers.exists(new CustomerId(customerId))) {
             throw new CustomerNotFoundException(customerId);
