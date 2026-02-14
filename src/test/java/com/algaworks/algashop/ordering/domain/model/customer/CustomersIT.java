@@ -65,7 +65,7 @@ class CustomersIT {
         Customer savedCustomer = customers.ofId(customer.id()).orElseThrow();
 
         Assertions.assertThat(savedCustomer.archivedAt()).isNotNull();
-        Assertions.assertThat(savedCustomer.archived()).isTrue();
+        Assertions.assertThat(savedCustomer.isArchived()).isTrue();
 
     }
 
@@ -88,7 +88,7 @@ class CustomersIT {
         Customer savedCustomer = customers.ofId(customer.id()).orElseThrow();
 
         Assertions.assertThat(savedCustomer.archivedAt()).isNotNull();
-        Assertions.assertThat(savedCustomer.archived()).isTrue();
+        Assertions.assertThat(savedCustomer.isArchived()).isTrue();
 
     }
 

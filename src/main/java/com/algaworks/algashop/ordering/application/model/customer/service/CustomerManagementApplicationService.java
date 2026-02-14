@@ -7,6 +7,7 @@ import com.algaworks.algashop.ordering.application.model.customer.output.Custome
 import com.algaworks.algashop.ordering.application.utility.Mapper;
 import com.algaworks.algashop.ordering.domain.model.commons.*;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
+import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerArchivedException;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.domain.model.customer.service.CustomerRegistrationService;
@@ -90,5 +91,22 @@ public class CustomerManagementApplicationService {
                 .state(addressData.getState())
                 .zipCode(new ZipCode(addressData.getZipCode()))
                 .build();
+    }
+
+    public void archive(UUID customerId) {
+        if (!customers.exists(new CustomerId(customerId))) {
+            throw new CustomerNotFoundException(customerId);
+        }
+
+        Customer customer = customers.ofId(new CustomerId(customerId)).orElseThrow(
+                () -> new CustomerNotFoundException(customerId)
+        );
+
+        if (customer.isArchived()) {
+            throw new CustomerArchivedException();
+        }
+
+        customer.archive();
+        customers.add(customer);
     }
 }

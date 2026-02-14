@@ -84,7 +84,7 @@ public class Customer implements AggregateRoot<CustomerId> {
         this.setPhone(new Phone("000-000-0000"));
         this.setDocument(new Document("000-00-0000"));
         this.setBirthDate(null);
-        this.setEmail(new Email(UUID.randomUUID() + "@email.com"));
+        this.setEmail(new Email(UUID.randomUUID() + "@anonymous.com"));
         this.setPromotionNotificationsAllowed(false);
         this.setAddress(this.address().toBuilder()
                         .number("Anonymized")
@@ -152,7 +152,7 @@ public class Customer implements AggregateRoot<CustomerId> {
         return promotionNotificationsAllowed;
     }
 
-    public Boolean archived() {
+    public Boolean isArchived() {
         return archived;
     }
 
@@ -230,7 +230,7 @@ public class Customer implements AggregateRoot<CustomerId> {
     }
 
     private void verifyIfChangeable() {
-        if (Boolean.TRUE.equals(this.archived())) {
+        if (Boolean.TRUE.equals(this.isArchived())) {
             throw new CustomerArchivedException();
         }
     }

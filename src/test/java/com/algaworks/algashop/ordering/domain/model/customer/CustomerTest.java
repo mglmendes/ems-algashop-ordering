@@ -56,7 +56,7 @@ class CustomerTest {
     }
 
     @Test
-    void given_archivedCustomer_whenTryToUpdate_shouldGenerateException() {
+    void given_isArchivedCustomer_whenTryToUpdate_shouldGenerateException() {
         Customer customer = CustomerTestDataBuilder.existingAnonymizedCustomer().build();
 
         Assertions.assertThatExceptionOfType(CustomerArchivedException.class)

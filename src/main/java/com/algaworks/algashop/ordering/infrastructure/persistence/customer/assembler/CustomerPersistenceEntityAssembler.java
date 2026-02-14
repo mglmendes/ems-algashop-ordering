@@ -23,7 +23,7 @@ public class CustomerPersistenceEntityAssembler {
         persistenceEntity.setPhone(customer.phone().value());
         persistenceEntity.setDocument(customer.document().value());
         persistenceEntity.setPromotionNotificationsAllowed(customer.promotionNotificationsAllowed());
-        persistenceEntity.setArchived(customer.archived());
+        persistenceEntity.setArchived(customer.isArchived());
         persistenceEntity.setRegisteredAt(customer.registeredAt());
         persistenceEntity.setArchivedAt(customer.archivedAt());
         persistenceEntity.setLoyaltyPoints(customer.loyaltyPoints().value());

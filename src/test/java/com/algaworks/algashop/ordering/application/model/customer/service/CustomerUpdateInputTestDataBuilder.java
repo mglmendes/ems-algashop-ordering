@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.application.service;
+package com.algaworks.algashop.ordering.application.model.customer.service;
 
 import com.algaworks.algashop.ordering.application.model.common.AddressData;
 import com.algaworks.algashop.ordering.application.model.customer.input.CustomerInput;

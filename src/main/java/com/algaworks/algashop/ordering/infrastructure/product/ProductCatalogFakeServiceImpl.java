@@ -5,9 +5,10 @@ import com.algaworks.algashop.ordering.domain.model.commons.Money;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductName;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductId;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-
+@Component
 public class ProductCatalogFakeServiceImpl implements ProductCatalogService {
     @Override
     public Optional<Product> ofId(ProductId productId) {
