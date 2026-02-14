@@ -2,7 +2,7 @@ package com.algaworks.algashop.ordering.domain.model.customer.service;
 
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
-import com.algaworks.algashop.ordering.domain.model.order.exceptions.CannotAddLoyaltyPointsToANonReadyOrder;
+import com.algaworks.algashop.ordering.domain.model.customer.exception.CannotAddLoyaltyPointsToANonReadyOrder;
 import com.algaworks.algashop.ordering.domain.model.order.exceptions.OrderNotBelongsToCustomerException;
 import com.algaworks.algashop.ordering.domain.model.utility.DomainService;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.LoyaltyPoints;

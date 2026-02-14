@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.domain.model.order.exceptions;
+package com.algaworks.algashop.ordering.domain.model.customer.exception;
 
 import com.algaworks.algashop.ordering.domain.model.generic.DomainException;
 import com.algaworks.algashop.ordering.domain.model.generic.ErrorMessages;

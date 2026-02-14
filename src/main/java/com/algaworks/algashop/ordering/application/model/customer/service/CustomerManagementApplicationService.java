@@ -103,7 +103,7 @@ public class CustomerManagementApplicationService {
         );
 
         if (customer.isArchived()) {
-            throw new CustomerArchivedException();
+            throw new CustomerArchivedException(customerId);
         }
 
         customer.archive();
