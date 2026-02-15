@@ -2,6 +2,7 @@ package com.algaworks.algashop.ordering.application.model.customer.service;
 
 import com.algaworks.algashop.ordering.application.model.customer.input.CustomerInput;
 import com.algaworks.algashop.ordering.application.model.customer.input.CustomerUpdateInput;
+import com.algaworks.algashop.ordering.application.model.customer.notifications.CustomerNotificationService;
 import com.algaworks.algashop.ordering.application.model.customer.output.CustomerOutput;
 import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerArchivedEvent;
 import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerRegisteredEvent;
@@ -31,6 +32,9 @@ class CustomerManagementApplicationServiceIT {
     @MockitoSpyBean
     private CustomerEventListener customerEventListener;
 
+    @MockitoSpyBean
+    private CustomerNotificationService customerNotificationService;
+
     @Test
     public void shouldRegisterCustomer() {
         UUID customerId = applicationService.create(CustomerInputTestDataBuilder.aCustomer().build());
@@ -55,6 +59,7 @@ class CustomerManagementApplicationServiceIT {
         Assertions.assertThat(customerOutput.getRegisteredAt()).isNotNull();
         Mockito.verify(customerEventListener).listen(Mockito.any(CustomerRegisteredEvent.class));
         Mockito.verify(customerEventListener, Mockito.never()).listen(Mockito.any(CustomerArchivedEvent.class));
+        Mockito.verify(customerNotificationService).notifyNewRegistration(Mockito.any(UUID.class));
     }
 
     @Test
