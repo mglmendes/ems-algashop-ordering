@@ -3,14 +3,19 @@ package com.algaworks.algashop.ordering.application.model.customer.service;
 import com.algaworks.algashop.ordering.application.model.customer.input.CustomerInput;
 import com.algaworks.algashop.ordering.application.model.customer.input.CustomerUpdateInput;
 import com.algaworks.algashop.ordering.application.model.customer.output.CustomerOutput;
+import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerArchivedEvent;
+import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerRegisteredEvent;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerArchivedException;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerEmailAlreadyInUseException;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
+import com.algaworks.algashop.ordering.infrastructure.listener.customer.CustomerEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -22,6 +27,9 @@ class CustomerManagementApplicationServiceIT {
 
     @Autowired
     private CustomerManagementApplicationService applicationService;
+
+    @MockitoSpyBean
+    private CustomerEventListener customerEventListener;
 
     @Test
     public void shouldRegisterCustomer() {
@@ -45,6 +53,8 @@ class CustomerManagementApplicationServiceIT {
                 LocalDate.of(2003, 8, 22)
         );
         Assertions.assertThat(customerOutput.getRegisteredAt()).isNotNull();
+        Mockito.verify(customerEventListener).listen(Mockito.any(CustomerRegisteredEvent.class));
+        Mockito.verify(customerEventListener, Mockito.never()).listen(Mockito.any(CustomerArchivedEvent.class));
     }
 
     @Test
