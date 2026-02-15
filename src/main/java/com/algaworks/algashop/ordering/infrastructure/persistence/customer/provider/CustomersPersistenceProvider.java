@@ -70,6 +70,7 @@ public class CustomersPersistenceProvider implements Customers {
                     insert(aggregateRoot);
                 }
         );
+        aggregateRoot.clearDomainEvents();
     }
 
     @Override
