@@ -2,6 +2,7 @@ package com.algaworks.algashop.ordering.domain.model.customer;
 
 import com.algaworks.algashop.ordering.domain.model.commons.*;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
+import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerRegisteredEvent;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerArchivedException;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.LoyaltyPoints;
 import org.assertj.core.api.Assertions;
@@ -90,5 +91,12 @@ class CustomerTest {
         Customer customer = CustomerTestDataBuilder.brandNewCustomer().build();
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(()-> customer.addLoyaltyPoints(new LoyaltyPoints(-10)));
+    }
+
+    @Test
+    void givenValidData_whenCreateBrandNewCustomer_shouldGenerateRegisteredEvent() {
+        Customer customer = CustomerTestDataBuilder.brandNewCustomer().build();
+        CustomerRegisteredEvent event = new CustomerRegisteredEvent(customer.id(), customer.registeredAt());
+        Assertions.assertThat(customer.domainEvents()).contains(event);
     }
 }

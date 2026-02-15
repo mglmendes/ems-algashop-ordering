@@ -1,5 +1,7 @@
 package com.algaworks.algashop.ordering.domain.model.generic;
 
-public interface AggregateRoot<ID> {
+import com.algaworks.algashop.ordering.domain.event.DomainEventSource;
+
+public interface AggregateRoot<ID>  extends DomainEventSource {
     ID id();
 }

@@ -1,5 +1,6 @@
 package com.algaworks.algashop.ordering.domain.model.shoppingcart.entity;
 
+import com.algaworks.algashop.ordering.domain.event.AbstractEventSourceEntity;
 import com.algaworks.algashop.ordering.domain.model.generic.AggregateRoot;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.valueobject.ShoppingCartId;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.valueobject.ShoppingCartItemId;
@@ -16,7 +17,9 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.*;
 
-public class ShoppingCart implements AggregateRoot<ShoppingCartId> {
+public class ShoppingCart
+        extends AbstractEventSourceEntity
+        implements AggregateRoot<ShoppingCartId> {
     private ShoppingCartId id;
     private CustomerId customerId;
     private Money totalAmount;
