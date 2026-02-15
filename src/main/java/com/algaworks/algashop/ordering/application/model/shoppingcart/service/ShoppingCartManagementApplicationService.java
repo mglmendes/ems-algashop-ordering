@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -31,6 +32,7 @@ public class ShoppingCartManagementApplicationService {
 
     @Transactional
     public UUID createNew(UUID rawCustomerId) {
+        Objects.requireNonNull(rawCustomerId);
         CustomerId customerId = new CustomerId(rawCustomerId);
         ShoppingCart shoppingCart = shoppingService.startShopping(customerId);
         shoppingCarts.add(shoppingCart);
@@ -39,6 +41,7 @@ public class ShoppingCartManagementApplicationService {
 
     @Transactional
     public void addItem(ShoppingCartItemInput input) {
+        Objects.requireNonNull(input);
         ShoppingCart shoppingCart = shoppingCarts.ofId(new ShoppingCartId(input.getShoppingCartId())).orElseThrow(
                 () -> new ShoppingCartNotFoundException(input.getShoppingCartId())
         );
@@ -53,7 +56,8 @@ public class ShoppingCartManagementApplicationService {
 
     @Transactional
     public void removeItem(UUID shoppingCartId, UUID shoppingCartItemId) {
-
+        Objects.requireNonNull(shoppingCartId);
+        Objects.requireNonNull(shoppingCartItemId);
         ShoppingCart shoppingCart = shoppingCarts.ofId(new ShoppingCartId(shoppingCartId)).orElseThrow(
                 () -> new ShoppingCartNotFoundException(shoppingCartId)
         );
@@ -64,6 +68,7 @@ public class ShoppingCartManagementApplicationService {
 
     @Transactional
     public void empty(UUID shoppingCartId) {
+        Objects.requireNonNull(shoppingCartId);
         ShoppingCart shoppingCart = shoppingCarts.ofId(new ShoppingCartId(shoppingCartId)).orElseThrow(
                 () -> new ShoppingCartNotFoundException(shoppingCartId)
         );
@@ -74,6 +79,7 @@ public class ShoppingCartManagementApplicationService {
 
     @Transactional
     public void delete(UUID shoppingCartId) {
+        Objects.requireNonNull(shoppingCartId);
         ShoppingCart shoppingCart = shoppingCarts.ofId(new ShoppingCartId(shoppingCartId)).orElseThrow(
                 () -> new ShoppingCartNotFoundException(shoppingCartId)
         );

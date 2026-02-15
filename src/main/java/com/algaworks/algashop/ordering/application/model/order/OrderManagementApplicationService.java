@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class OrderManagementApplicationService {
@@ -17,14 +19,15 @@ public class OrderManagementApplicationService {
 
     @Transactional
     public void cancel(String orderId) {
+        Objects.requireNonNull(orderId);
         Order order = findOrder(orderId);
-
         order.cancel();
         orders.add(order);
     }
 
     @Transactional
     public void markAsPaid(String orderId) {
+        Objects.requireNonNull(orderId);
         Order order = findOrder(orderId);
         order.markAsPaid();
         orders.add(order);
@@ -32,6 +35,7 @@ public class OrderManagementApplicationService {
 
     @Transactional
     public void markAsReady(String orderId) {
+        Objects.requireNonNull(orderId);
         Order order = findOrder(orderId);
         order.markAsReady();
         orders.add(order);

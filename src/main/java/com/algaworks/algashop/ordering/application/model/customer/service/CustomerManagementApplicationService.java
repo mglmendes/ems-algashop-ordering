@@ -95,6 +95,7 @@ public class CustomerManagementApplicationService {
 
     @Transactional
     public void archive(UUID customerId) {
+        Objects.requireNonNull(customerId);
         Customer customer = customers.ofId(new CustomerId(customerId)).orElseThrow(
                 () -> new CustomerNotFoundException(customerId)
         );
@@ -109,6 +110,8 @@ public class CustomerManagementApplicationService {
 
     @Transactional
     public void changeEmail(UUID rawCustomerId, String newEmail) {
+        Objects.requireNonNull(rawCustomerId);
+        Objects.requireNonNull(newEmail);
         Customer customer = customers.ofId(new CustomerId(rawCustomerId))
                 .orElseThrow(()-> new CustomerNotFoundException(rawCustomerId));
         customerRegistration.changeEmail(customer, new Email(newEmail));

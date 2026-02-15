@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -30,6 +31,8 @@ public class CustomerLoyaltyPointsApplicationService {
 
     @Transactional
     public void addLoyaltyPoints(UUID rawCustomerId, String rawOrderId) {
+        Objects.requireNonNull(rawCustomerId);
+        Objects.requireNonNull(rawOrderId);
         CustomerId customerId = new CustomerId(rawCustomerId);
         OrderId orderId = new OrderId(rawOrderId);
 
