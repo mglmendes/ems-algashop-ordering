@@ -2,6 +2,7 @@ package com.algaworks.algashop.ordering.domain.model.customer;
 
 import com.algaworks.algashop.ordering.domain.model.commons.*;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
+import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerArchivedEvent;
 import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerRegisteredEvent;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerArchivedException;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.LoyaltyPoints;
@@ -97,6 +98,14 @@ class CustomerTest {
     void givenValidData_whenCreateBrandNewCustomer_shouldGenerateRegisteredEvent() {
         Customer customer = CustomerTestDataBuilder.brandNewCustomer().build();
         CustomerRegisteredEvent event = new CustomerRegisteredEvent(customer.id(), customer.registeredAt());
+        Assertions.assertThat(customer.domainEvents()).contains(event);
+    }
+
+    @Test
+    void givenUnarchivedCustomer_whenArchive_shouldGenerateArchivedEvent() {
+        Customer customer = CustomerTestDataBuilder.existingCustomer().archived(false).archivedAt(null).build();
+        customer.archive();
+        var event = new CustomerArchivedEvent(customer.id(), customer.archivedAt());
         Assertions.assertThat(customer.domainEvents()).contains(event);
     }
 }

@@ -2,6 +2,7 @@ package com.algaworks.algashop.ordering.domain.model.customer.entity;
 
 import com.algaworks.algashop.ordering.domain.event.AbstractEventSourceEntity;
 import com.algaworks.algashop.ordering.domain.event.DomainEventSource;
+import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerArchivedEvent;
 import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerRegisteredEvent;
 import com.algaworks.algashop.ordering.domain.model.generic.AggregateRoot;
 import com.algaworks.algashop.ordering.domain.model.commons.*;
@@ -97,6 +98,8 @@ public class Customer
                         .number("Anonymized")
                         .complement(null)
                         .build());
+
+        this.publishDomainEvent(new CustomerArchivedEvent(this.id(), this.archivedAt()));
     }
 
     public void enablePromotionNotifications() {
