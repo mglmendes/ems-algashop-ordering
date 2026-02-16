@@ -7,6 +7,9 @@ import com.algaworks.algashop.ordering.application.model.checkout.input.Shipping
 import com.algaworks.algashop.ordering.domain.model.commons.Address;
 import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
 import com.algaworks.algashop.ordering.domain.model.commons.ZipCode;
+import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
+import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
+import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
@@ -37,6 +40,7 @@ public class BuyNowApplicationService {
     private final OriginAddressService originAddressService;
 
     private final Orders orders;
+    private final Customers customers;
 
     private final ShippingInputDisassembler shippingInputDisassembler;
     private final BillingInputDisassembler billingInputDisassembler;
@@ -49,15 +53,20 @@ public class BuyNowApplicationService {
         CustomerId customerId = new CustomerId(input.getCustomerId());
         Quantity quantity = new Quantity(input.getQuantity());
 
+        Customer customer = customers.ofId(customerId).orElseThrow(
+                () -> new CustomerNotFoundException(customerId.value())
+        );
         Product product = findProduct(new ProductId(input.getProductId()));
+
         var shippingCalculationResult = calculateShippingCost(input.getShipping());
 
         Shipping shipping = shippingInputDisassembler.toDomainModel(input.getShipping(), shippingCalculationResult);
         Billing billing = billingInputDisassembler.toDomainModel(input.getBilling());
 
+
         Order order = buyNowService.buyNow(
                 product,
-                customerId,
+                customer,
                 billing,
                 shipping,
                 quantity,
