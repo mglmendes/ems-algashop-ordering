@@ -10,11 +10,13 @@ import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.domain.model.order.service.BuyNowService;
+import com.algaworks.algashop.ordering.domain.model.order.specification.CustomerHaveFreeShippingSpecification;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Shipping;
 import com.algaworks.algashop.ordering.domain.model.product.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.product.exception.ProductOutOfStockException;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,11 +33,22 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 @ExtendWith(MockitoExtension.class)
 class BuyNowServiceTest {
 
-    @InjectMocks
     private BuyNowService buyNowService;
 
     @Mock
     private Orders orders;
+
+    @BeforeEach
+    void setUp() {
+        var specification = new CustomerHaveFreeShippingSpecification(
+                100,
+                2,
+                2000,
+                orders
+        );
+
+        buyNowService = new BuyNowService(specification);
+    }
 
     @Test
     void givenValidProductAndDetails_whenBuyNow_shouldReturnPlacedOrder() {
