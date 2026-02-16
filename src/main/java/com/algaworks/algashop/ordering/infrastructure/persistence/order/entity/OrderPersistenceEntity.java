@@ -22,7 +22,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @ToString(of = "id")
 @Table(name = "\"order\"")
 @EntityListeners(AuditingEntityListener.class)

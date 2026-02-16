@@ -14,16 +14,22 @@ import com.algaworks.algashop.ordering.domain.model.product.service.ProductCatal
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCart;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCartItem;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.event.ShoppingCartCreatedEvent;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.event.ShoppingCartEmptiedEvent;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.event.ShoppingCartItemAddedEvent;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.event.ShoppingCartItemRemovedEvent;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.exception.ShoppingCartDoesNotContainItemException;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.exception.ShoppingCartNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.repository.ShoppingCarts;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.valueobject.ShoppingCartId;
+import com.algaworks.algashop.ordering.infrastructure.listener.shoppingcart.ShoppingCartEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -45,6 +51,9 @@ class ShoppingCartManagementApplicationServiceIT {
     @MockitoBean
     private ProductCatalogService productCatalogService;
 
+    @MockitoSpyBean
+    private ShoppingCartEventListener shoppingCartEventListener;
+
     @Test
     void shouldCreateNewShoppingCartForExistingCustomer() {
         Customer customer = CustomerTestDataBuilder.brandNewCustomer().build();
@@ -57,6 +66,9 @@ class ShoppingCartManagementApplicationServiceIT {
         Assertions.assertThat(createdCart).isPresent();
         Assertions.assertThat(createdCart.get().customerId().value()).isEqualTo(customer.id().value());
         Assertions.assertThat(createdCart.get().isEmpty()).isTrue();
+
+        Mockito.verify(shoppingCartEventListener, Mockito.times(1))
+                .listen(Mockito.any(ShoppingCartCreatedEvent.class));
     }
 
     @Test
@@ -100,6 +112,9 @@ class ShoppingCartManagementApplicationServiceIT {
         Assertions.assertThat(updatedCart.items()).hasSize(1);
         Assertions.assertThat(updatedCart.items().iterator().next().productId()).isEqualTo(product.id());
         Assertions.assertThat(updatedCart.items().iterator().next().quantity().value()).isEqualTo(2);
+
+        Mockito.verify(shoppingCartEventListener, Mockito.times(1))
+                .listen(Mockito.any(ShoppingCartItemAddedEvent.class));
     }
 
     @Test
@@ -172,6 +187,8 @@ class ShoppingCartManagementApplicationServiceIT {
 
         ShoppingCart updatedCart = shoppingCarts.ofId(shoppingCart.id()).orElseThrow();
         Assertions.assertThat(updatedCart.items()).isEmpty();
+        Mockito.verify(shoppingCartEventListener, Mockito.times(1))
+                .listen(Mockito.any(ShoppingCartItemRemovedEvent.class));
     }
 
     @Test
@@ -208,6 +225,8 @@ class ShoppingCartManagementApplicationServiceIT {
 
         ShoppingCart updatedCart = shoppingCarts.ofId(shoppingCart.id()).orElseThrow();
         Assertions.assertThat(updatedCart.isEmpty()).isTrue();
+        Mockito.verify(shoppingCartEventListener, Mockito.times(1))
+                .listen(Mockito.any(ShoppingCartEmptiedEvent.class));
     }
 
     @Test

@@ -2,6 +2,10 @@ package com.algaworks.algashop.ordering.domain.model.shoppingcart.entity;
 
 import com.algaworks.algashop.ordering.domain.event.AbstractEventSourceEntity;
 import com.algaworks.algashop.ordering.domain.model.generic.AggregateRoot;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.event.ShoppingCartCreatedEvent;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.event.ShoppingCartEmptiedEvent;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.event.ShoppingCartItemAddedEvent;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.event.ShoppingCartItemRemovedEvent;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.valueobject.ShoppingCartId;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.valueobject.ShoppingCartItemId;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.exception.ShoppingCartDoesNotContainItemException;
@@ -42,20 +46,34 @@ public class ShoppingCart
     }
 
     public static ShoppingCart startShopping(CustomerId customerId) {
-        return new ShoppingCart(new ShoppingCartId(), null, customerId, Money.ZERO,
+        ShoppingCart shoppingCart = new ShoppingCart(new ShoppingCartId(), null, customerId, Money.ZERO,
                 Quantity.ZERO, OffsetDateTime.now(), new HashSet<>());
+
+        shoppingCart.publishDomainEvent(new ShoppingCartCreatedEvent(
+                shoppingCart.id(),
+                shoppingCart.customerId(),
+                shoppingCart.createdAt
+        ));
+
+        return shoppingCart;
     }
 
     public void empty() {
         items.clear();
         totalAmount = Money.ZERO;
         totalItems = Quantity.ZERO;
+        this.publishDomainEvent(new ShoppingCartEmptiedEvent(
+                id(), customerId(), OffsetDateTime.now()
+        ));
     }
 
     public void removeItem(ShoppingCartItemId shoppingCartItemId) {
         ShoppingCartItem shoppingCartItem = this.findItem(shoppingCartItemId);
         this.items.remove(shoppingCartItem);
         this.recalculateTotals();
+        this.publishDomainEvent(new ShoppingCartItemRemovedEvent(
+                id(), customerId(), shoppingCartItem.productId(), OffsetDateTime.now()
+        ));
     }
 
     public void addItem(Product product, Quantity quantity) {
@@ -77,6 +95,9 @@ public class ShoppingCart
                 .ifPresentOrElse(i -> updateItem(i, product, quantity), () -> insertItem(shoppingCartItem));
 
         this.recalculateTotals();
+        this.publishDomainEvent(new ShoppingCartItemAddedEvent(
+                id(), customerId(), product.id(), OffsetDateTime.now()
+        ));
     }
 
     public ShoppingCartItem findItem(ShoppingCartItemId shoppingCartItemId) {
