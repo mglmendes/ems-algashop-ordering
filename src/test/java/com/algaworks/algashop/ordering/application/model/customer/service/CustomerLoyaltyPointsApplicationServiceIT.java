@@ -19,11 +19,13 @@ import com.algaworks.algashop.ordering.domain.model.order.exceptions.OrderNotFou
 import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.domain.model.product.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
+import com.algaworks.algashop.ordering.infrastructure.listener.customer.CustomerEventListener;
 import io.hypersistence.tsid.TSID;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
@@ -40,6 +42,9 @@ class CustomerLoyaltyPointsApplicationServiceIT {
 
     @Autowired
     private Orders orders;
+
+    @MockitoBean
+    private CustomerEventListener customerEventListener;
     
     @Test
     void shouldAddLoyaltyPointsToCustomerWhenOrderIsValidAndReady() {

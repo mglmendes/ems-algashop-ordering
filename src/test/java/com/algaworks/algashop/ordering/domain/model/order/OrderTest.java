@@ -148,14 +148,6 @@ class OrderTest {
 
     @Test
     public void givenDraftOrder_whenChangeShipping_shouldAllowChange() {
-        Address address = Address.builder()
-                .street("Bourbon Street")
-                .number("10023")
-                .neighborhood("Neighboor")
-                .city("MOnteFort")
-                .state("State")
-                .zipCode(new ZipCode("12356")).build();
-
         Shipping shipping = OrderTestDataBuilder.aShipping();
 
         Order draft = Order.draft(new CustomerId());
@@ -163,6 +155,7 @@ class OrderTest {
         draft.changeShipping(shipping);
 
         Assertions.assertThat(draft.shipping()).isEqualTo(shipping);
+        Assertions.assertThat(draft.totalAmount()).isEqualTo(new Money("10"));
     }
 
     @Test
