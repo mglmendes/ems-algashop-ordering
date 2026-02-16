@@ -4,6 +4,9 @@ import com.algaworks.algashop.ordering.application.model.checkout.disassembler.B
 import com.algaworks.algashop.ordering.application.model.checkout.disassembler.ShippingInputDisassembler;
 import com.algaworks.algashop.ordering.application.model.checkout.input.CheckoutInput;
 import com.algaworks.algashop.ordering.domain.model.commons.ZipCode;
+import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
+import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
+import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
@@ -28,6 +31,10 @@ public class CheckoutApplicationService {
 
     private final ShoppingCarts shoppingCarts;
 
+    private final Orders orders;
+
+    private final Customers customers;
+
     private final CheckoutService checkoutService;
 
     private final BillingInputDisassembler billingInputDisassembler;
@@ -38,13 +45,15 @@ public class CheckoutApplicationService {
 
     private final OriginAddressService originAddressService;
 
-    private final Orders orders;
-
     @Transactional
     public String checkout(CheckoutInput input) {
         Objects.requireNonNull(input);
         ShoppingCart shoppingCart = shoppingCarts.ofId(new ShoppingCartId(input.getShoppingCartId())).orElseThrow(
                 () -> new ShoppingCartNotFoundException(input.getShoppingCartId())
+        );
+
+        Customer customer = customers.ofId(shoppingCart.customerId()).orElseThrow(
+                () -> new CustomerNotFoundException(shoppingCart.customerId().value())
         );
 
         Billing billingInfo = billingInputDisassembler.toDomainModel(input.getBilling());
@@ -55,6 +64,7 @@ public class CheckoutApplicationService {
 
         Order checkoutedOrder = checkoutService.checkout(
                 shoppingCart,
+                customer,
                 billingInfo,
                 shippingInfo,
                 PaymentMethod.valueOf(input.getPaymentMethod())
