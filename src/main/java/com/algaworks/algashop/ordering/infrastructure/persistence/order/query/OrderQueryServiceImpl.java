@@ -115,7 +115,37 @@ public class OrderQueryServiceImpl implements OrderQueryService {
             predicates.add(predicate);
         }
 
+        if (filter.getStatus() != null && !filter.getStatus().isBlank()) {
+            predicates.add(criteriaBuilder.equal(root.get("status"), filter.getStatus().toUpperCase()));
+        }
 
+        if (filter.getOrderId() != null) {
+            long orderIdLongValue;
+            try {
+                OrderId orderId = new OrderId(filter.getOrderId());
+                orderIdLongValue = orderId.value().toLong();
+            } catch (IllegalArgumentException e) {
+                orderIdLongValue = 0L;
+            }
+
+            predicates.add(criteriaBuilder.equal(root.get("id"), orderIdLongValue));
+        }
+
+        if (filter.getPlacedAtFrom() != null) {
+            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("placedAt"), filter.getPlacedAtFrom()));
+        }
+
+        if (filter.getPlacedAtTo() != null) {
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("placedAt"), filter.getPlacedAtTo()));
+        }
+
+        if (filter.getTotalAmountFrom() != null) {
+            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("totalAmount"), filter.getTotalAmountFrom()));
+        }
+
+        if (filter.getTotalAmountTo() != null) {
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("totalAmount"), filter.getTotalAmountTo()));
+        }
 
         return predicates.toArray(new Predicate[]{});
     }
