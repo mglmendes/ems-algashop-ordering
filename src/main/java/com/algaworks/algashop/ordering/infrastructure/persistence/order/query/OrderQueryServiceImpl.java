@@ -1,5 +1,6 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.order.query;
 
+import com.algaworks.algashop.ordering.application.model.order.filter.OrderFilter;
 import com.algaworks.algashop.ordering.application.model.order.output.CustomerMinimalOutput;
 import com.algaworks.algashop.ordering.application.model.order.output.OrderDetailOutput;
 import com.algaworks.algashop.ordering.application.model.order.output.OrderSummaryOutput;
@@ -40,7 +41,7 @@ public class OrderQueryServiceImpl implements OrderQueryService {
     }
 
     @Override
-    public Page<OrderSummaryOutput> filter(PageFilter filter) {
+    public Page<OrderSummaryOutput> filter(OrderFilter filter) {
         long totalQueryResults = countTotalQueryResults(filter);
         
         if (totalQueryResults == 0L){
@@ -50,7 +51,7 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         return filterQuery(filter, totalQueryResults);
     }
 
-    private long countTotalQueryResults(PageFilter filter) {
+    private long countTotalQueryResults(OrderFilter filter) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
         Root<OrderPersistenceEntity> root = criteriaQuery.from(OrderPersistenceEntity.class);
@@ -60,7 +61,7 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         return typedQuery.getSingleResult();
     }
 
-    private Page<OrderSummaryOutput> filterQuery(PageFilter filter, long totalQueryResults) {
+    private Page<OrderSummaryOutput> filterQuery(OrderFilter filter, long totalQueryResults) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<OrderSummaryOutput> criteriaQuery = builder.createQuery(OrderSummaryOutput.class);
         Root<OrderPersistenceEntity> root = criteriaQuery.from(OrderPersistenceEntity.class);
