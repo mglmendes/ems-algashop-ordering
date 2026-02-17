@@ -6,7 +6,6 @@ import com.algaworks.algashop.ordering.application.model.order.output.OrderDetai
 import com.algaworks.algashop.ordering.application.model.order.output.OrderSummaryOutput;
 import com.algaworks.algashop.ordering.application.model.order.query.OrderQueryService;
 import com.algaworks.algashop.ordering.application.utility.Mapper;
-import com.algaworks.algashop.ordering.application.utility.PageFilter;
 import com.algaworks.algashop.ordering.domain.model.order.exceptions.OrderNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.entity.OrderPersistenceEntity;
