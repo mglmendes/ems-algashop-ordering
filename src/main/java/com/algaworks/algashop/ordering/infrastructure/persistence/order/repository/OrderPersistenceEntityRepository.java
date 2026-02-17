@@ -1,13 +1,18 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.order.repository;
 
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.entity.OrderPersistenceEntity;
+import io.micrometer.common.lang.NonNullApi;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+
+@NonNullApi
 public interface OrderPersistenceEntityRepository extends JpaRepository<OrderPersistenceEntity, Long> {
 
     @Query(
@@ -51,4 +56,8 @@ public interface OrderPersistenceEntityRepository extends JpaRepository<OrderPer
     BigDecimal totalSoldForCustomer(
             @Param("customerId") UUID customerId
     );
+
+    @Override
+    @EntityGraph(attributePaths = {"customer", "items"})
+    Optional<OrderPersistenceEntity> findById(Long id);
 }
