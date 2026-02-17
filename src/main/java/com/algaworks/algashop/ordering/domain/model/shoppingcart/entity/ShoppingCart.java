@@ -10,9 +10,9 @@ import com.algaworks.algashop.ordering.domain.model.shoppingcart.valueobject.Sho
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.valueobject.ShoppingCartItemId;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.exception.ShoppingCartDoesNotContainItemException;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.exception.ShoppingCartDoesNotContainProductException;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductId;
 import lombok.Builder;

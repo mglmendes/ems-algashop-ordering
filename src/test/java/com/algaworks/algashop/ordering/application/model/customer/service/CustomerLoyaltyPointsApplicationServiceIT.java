@@ -1,8 +1,8 @@
 package com.algaworks.algashop.ordering.application.model.customer.service;
 
-import com.algaworks.algashop.ordering.domain.model.commons.Email;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Email;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.customer.*;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CannotAddLoyaltyPointsToANonReadyOrder;

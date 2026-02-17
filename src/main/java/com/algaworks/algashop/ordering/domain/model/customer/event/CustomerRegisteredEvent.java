@@ -1,7 +1,7 @@
 package com.algaworks.algashop.ordering.domain.model.customer.event;
 
-import com.algaworks.algashop.ordering.domain.model.commons.Email;
-import com.algaworks.algashop.ordering.domain.model.commons.FullName;
+import com.algaworks.algashop.ordering.domain.model.common.Email;
+import com.algaworks.algashop.ordering.domain.model.common.FullName;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 
 import java.time.OffsetDateTime;

@@ -2,7 +2,7 @@ package com.algaworks.algashop.ordering.domain.model.order.repository;
 
 import com.algaworks.algashop.ordering.domain.model.generic.Repository;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
 

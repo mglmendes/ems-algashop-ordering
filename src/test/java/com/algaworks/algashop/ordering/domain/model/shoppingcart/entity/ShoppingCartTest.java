@@ -4,9 +4,9 @@ import com.algaworks.algashop.ordering.domain.model.shoppingcart.ShoppingCartTes
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.valueobject.ShoppingCartItemId;
 import com.algaworks.algashop.ordering.domain.model.product.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.exception.ShoppingCartDoesNotContainItemException;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

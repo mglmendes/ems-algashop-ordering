@@ -2,7 +2,7 @@ package com.algaworks.algashop.ordering.application.model.checkout.disassembler;
 
 import com.algaworks.algashop.ordering.application.model.checkout.input.ShippingInput;
 import com.algaworks.algashop.ordering.application.model.common.AddressData;
-import com.algaworks.algashop.ordering.domain.model.commons.*;
+import com.algaworks.algashop.ordering.domain.model.common.*;
 import com.algaworks.algashop.ordering.domain.model.order.shipping.ShippingCostService;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Recipient;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Shipping;

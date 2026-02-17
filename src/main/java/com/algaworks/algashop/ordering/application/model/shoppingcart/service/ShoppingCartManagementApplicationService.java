@@ -1,7 +1,7 @@
 package com.algaworks.algashop.ordering.application.model.shoppingcart.service;
 
 import com.algaworks.algashop.ordering.application.model.shoppingcart.input.ShoppingCartItemInput;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.domain.model.product.exception.ProductNotFoundException;

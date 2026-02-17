@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.order.disassembler;
 
-import com.algaworks.algashop.ordering.domain.model.commons.*;
+import com.algaworks.algashop.ordering.domain.model.common.*;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.OrderItem;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.OrderStatus;

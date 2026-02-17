@@ -1,21 +1,16 @@
 package com.algaworks.algashop.ordering.domain.model.order.service;
 
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
-import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.LoyaltyPoints;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
-import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.domain.model.order.specification.CustomerHaveFreeShippingSpecification;
 import com.algaworks.algashop.ordering.domain.model.utility.DomainService;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Shipping;
-import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import lombok.RequiredArgsConstructor;
-
-import java.time.Year;
 
 @DomainService
 @RequiredArgsConstructor

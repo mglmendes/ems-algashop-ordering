@@ -2,7 +2,7 @@ package com.algaworks.algashop.ordering.application.model.checkout.disassembler;
 
 import com.algaworks.algashop.ordering.application.model.common.AddressData;
 import com.algaworks.algashop.ordering.application.model.common.BillingData;
-import com.algaworks.algashop.ordering.domain.model.commons.*;
+import com.algaworks.algashop.ordering.domain.model.common.*;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
 import org.springframework.stereotype.Component;
 

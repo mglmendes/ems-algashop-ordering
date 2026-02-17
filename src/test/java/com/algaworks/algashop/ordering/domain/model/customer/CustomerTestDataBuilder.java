@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.domain.model.customer;
 
-import com.algaworks.algashop.ordering.domain.model.commons.*;
+import com.algaworks.algashop.ordering.domain.model.common.*;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.BirthDate;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.LoyaltyPoints;

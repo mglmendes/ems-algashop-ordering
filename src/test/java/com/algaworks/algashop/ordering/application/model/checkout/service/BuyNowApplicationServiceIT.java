@@ -2,7 +2,7 @@ package com.algaworks.algashop.ordering.application.model.checkout.service;
 
 
 import com.algaworks.algashop.ordering.application.model.checkout.input.BuyNowInput;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
@@ -11,7 +11,6 @@ import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
 import com.algaworks.algashop.ordering.domain.model.product.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.product.service.ProductCatalogService;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
-import org.aspectj.weaver.ast.Or;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.domain.model.order.valueobjects;
 
-import com.algaworks.algashop.ordering.domain.model.commons.*;
+import com.algaworks.algashop.ordering.domain.model.common.*;
 import lombok.Builder;
 
 import java.util.Objects;

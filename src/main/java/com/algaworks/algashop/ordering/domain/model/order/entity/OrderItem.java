@@ -1,9 +1,9 @@
 package com.algaworks.algashop.ordering.domain.model.order.entity;
 
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductName;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderItemId;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductId;

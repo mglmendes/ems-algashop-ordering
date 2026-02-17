@@ -2,7 +2,7 @@ package com.algaworks.algashop.ordering.infrastructure.persistence.order.assembl
 
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.OrderItem;
-import com.algaworks.algashop.ordering.domain.model.commons.Address;
+import com.algaworks.algashop.ordering.domain.model.common.Address;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Recipient;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Shipping;

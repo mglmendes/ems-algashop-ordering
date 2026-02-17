@@ -4,8 +4,8 @@ import com.algaworks.algashop.ordering.infrastructure.persistence.order.disassem
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.entity.OrderPersistenceEntity;

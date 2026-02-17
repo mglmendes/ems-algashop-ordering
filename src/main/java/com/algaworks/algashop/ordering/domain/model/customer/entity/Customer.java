@@ -1,11 +1,10 @@
 package com.algaworks.algashop.ordering.domain.model.customer.entity;
 
 import com.algaworks.algashop.ordering.domain.event.AbstractEventSourceEntity;
-import com.algaworks.algashop.ordering.domain.event.DomainEventSource;
 import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerArchivedEvent;
 import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerRegisteredEvent;
 import com.algaworks.algashop.ordering.domain.model.generic.AggregateRoot;
-import com.algaworks.algashop.ordering.domain.model.commons.*;
+import com.algaworks.algashop.ordering.domain.model.common.*;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerArchivedException;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.BirthDate;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.LoyaltyPoints;

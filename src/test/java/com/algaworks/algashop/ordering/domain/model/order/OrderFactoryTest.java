@@ -6,7 +6,7 @@ import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMe
 import com.algaworks.algashop.ordering.domain.model.order.factory.OrderFactory;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Shipping;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import org.assertj.core.api.Assertions;

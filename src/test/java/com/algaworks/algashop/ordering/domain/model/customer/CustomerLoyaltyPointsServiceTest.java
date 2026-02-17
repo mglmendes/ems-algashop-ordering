@@ -9,7 +9,7 @@ import com.algaworks.algashop.ordering.domain.model.order.entity.enums.OrderStat
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CannotAddLoyaltyPointsToANonReadyOrder;
 import com.algaworks.algashop.ordering.domain.model.order.exceptions.OrderNotBelongsToCustomerException;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.LoyaltyPoints;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

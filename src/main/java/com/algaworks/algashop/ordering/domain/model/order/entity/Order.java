@@ -2,8 +2,8 @@ package com.algaworks.algashop.ordering.domain.model.order.entity;
 
 import com.algaworks.algashop.ordering.domain.event.AbstractEventSourceEntity;
 import com.algaworks.algashop.ordering.domain.model.generic.AggregateRoot;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.model.order.event.OrderCanceledEvent;

@@ -1,8 +1,8 @@
 package com.algaworks.algashop.ordering.infrastructure.rapidex.fake;
 
 import com.algaworks.algashop.ordering.domain.model.order.shipping.OriginAddressService;
-import com.algaworks.algashop.ordering.domain.model.commons.Address;
-import com.algaworks.algashop.ordering.domain.model.commons.ZipCode;
+import com.algaworks.algashop.ordering.domain.model.common.Address;
+import com.algaworks.algashop.ordering.domain.model.common.ZipCode;
 import org.springframework.stereotype.Component;
 
 @Component

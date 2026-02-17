@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.domain.model.product.valueobject;
 
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.product.exception.ProductOutOfStockException;
 import lombok.Builder;
 

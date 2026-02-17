@@ -1,10 +1,9 @@
-package com.algaworks.algashop.ordering.domain.model.commons;
+package com.algaworks.algashop.ordering.domain.model.common;
 
 import java.util.Objects;
 
-public record Document(String value) {
-
-	public Document {
+public record Phone(String value) {
+	public Phone {
 		Objects.requireNonNull(value);
 		if (value.isBlank()) {
 			throw new IllegalArgumentException();

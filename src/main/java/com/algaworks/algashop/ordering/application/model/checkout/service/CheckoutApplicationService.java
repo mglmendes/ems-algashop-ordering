@@ -3,7 +3,7 @@ package com.algaworks.algashop.ordering.application.model.checkout.service;
 import com.algaworks.algashop.ordering.application.model.checkout.disassembler.BillingInputDisassembler;
 import com.algaworks.algashop.ordering.application.model.checkout.disassembler.ShippingInputDisassembler;
 import com.algaworks.algashop.ordering.application.model.checkout.input.CheckoutInput;
-import com.algaworks.algashop.ordering.domain.model.commons.ZipCode;
+import com.algaworks.algashop.ordering.domain.model.common.ZipCode;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;

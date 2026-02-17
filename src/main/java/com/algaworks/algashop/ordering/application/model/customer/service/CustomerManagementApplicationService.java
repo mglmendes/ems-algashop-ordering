@@ -3,7 +3,7 @@ package com.algaworks.algashop.ordering.application.model.customer.service;
 import com.algaworks.algashop.ordering.application.model.common.AddressData;
 import com.algaworks.algashop.ordering.application.model.customer.input.CustomerInput;
 import com.algaworks.algashop.ordering.application.model.customer.input.CustomerUpdateInput;
-import com.algaworks.algashop.ordering.domain.model.commons.*;
+import com.algaworks.algashop.ordering.domain.model.common.*;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerArchivedException;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;

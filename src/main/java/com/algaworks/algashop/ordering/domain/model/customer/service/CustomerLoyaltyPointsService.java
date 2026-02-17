@@ -6,7 +6,7 @@ import com.algaworks.algashop.ordering.domain.model.customer.exception.CannotAdd
 import com.algaworks.algashop.ordering.domain.model.order.exceptions.OrderNotBelongsToCustomerException;
 import com.algaworks.algashop.ordering.domain.model.utility.DomainService;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.LoyaltyPoints;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
 
 import java.util.Objects;
 

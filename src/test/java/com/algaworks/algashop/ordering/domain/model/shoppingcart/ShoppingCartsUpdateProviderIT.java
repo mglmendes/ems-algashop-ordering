@@ -7,9 +7,9 @@ import com.algaworks.algashop.ordering.infrastructure.persistence.customer.provi
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.provider.ShoppingCartUpdateProvider;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.provider.ShoppingCartsPersistenceProvider;
 import com.algaworks.algashop.ordering.domain.model.product.ProductTestDataBuilder;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.customer.assembler.CustomerPersistenceEntityAssembler;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.assembler.ShoppingCartPersistenceEntityAssembler;

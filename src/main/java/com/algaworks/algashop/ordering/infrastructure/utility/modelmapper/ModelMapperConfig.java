@@ -2,7 +2,7 @@ package com.algaworks.algashop.ordering.infrastructure.utility.modelmapper;
 
 import com.algaworks.algashop.ordering.application.model.customer.output.CustomerOutput;
 import com.algaworks.algashop.ordering.application.utility.Mapper;
-import com.algaworks.algashop.ordering.domain.model.commons.FullName;
+import com.algaworks.algashop.ordering.domain.model.common.FullName;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.BirthDate;
 import org.modelmapper.Converter;

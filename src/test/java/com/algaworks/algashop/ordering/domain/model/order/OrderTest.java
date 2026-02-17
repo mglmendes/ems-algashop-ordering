@@ -1,10 +1,10 @@
 package com.algaworks.algashop.ordering.domain.model.order;
 
 import com.algaworks.algashop.ordering.domain.model.product.ProductTestDataBuilder;
-import com.algaworks.algashop.ordering.domain.model.commons.Address;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
-import com.algaworks.algashop.ordering.domain.model.commons.ZipCode;
+import com.algaworks.algashop.ordering.domain.model.common.Address;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.ZipCode;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.model.order.exceptions.OrderCannotBeEditedException;
 import com.algaworks.algashop.ordering.domain.model.order.exceptions.OrderInvalidShippingDeliveryDateException;

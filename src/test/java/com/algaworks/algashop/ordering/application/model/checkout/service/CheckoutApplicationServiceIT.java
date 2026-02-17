@@ -1,14 +1,12 @@
 package com.algaworks.algashop.ordering.application.model.checkout.service;
 
 import com.algaworks.algashop.ordering.application.model.checkout.input.CheckoutInput;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
-import com.algaworks.algashop.ordering.domain.model.order.*;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.OrderStatus;
-import com.algaworks.algashop.ordering.domain.model.order.event.OrderCanceledEvent;
 import com.algaworks.algashop.ordering.domain.model.order.event.OrderPlacedEvent;
 import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.domain.model.order.service.CheckoutService;

@@ -3,7 +3,7 @@ package com.algaworks.algashop.ordering.domain.model.order;
 import com.algaworks.algashop.ordering.domain.model.product.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.order.entity.OrderItem;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

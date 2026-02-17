@@ -1,8 +1,8 @@
 package com.algaworks.algashop.ordering.domain.model.order.valueobjects;
 
-import com.algaworks.algashop.ordering.domain.model.commons.Document;
-import com.algaworks.algashop.ordering.domain.model.commons.FullName;
-import com.algaworks.algashop.ordering.domain.model.commons.Phone;
+import com.algaworks.algashop.ordering.domain.model.common.Document;
+import com.algaworks.algashop.ordering.domain.model.common.FullName;
+import com.algaworks.algashop.ordering.domain.model.common.Phone;
 import lombok.Builder;
 
 import java.util.Objects;

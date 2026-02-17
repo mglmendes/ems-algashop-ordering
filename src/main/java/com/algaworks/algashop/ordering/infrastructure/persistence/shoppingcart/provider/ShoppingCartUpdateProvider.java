@@ -1,7 +1,7 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.provider;
 
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.service.ShoppingCartProductAdjustmentService;
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.repository.ShoppingCartPersistenceEntityRepository;
 import lombok.RequiredArgsConstructor;

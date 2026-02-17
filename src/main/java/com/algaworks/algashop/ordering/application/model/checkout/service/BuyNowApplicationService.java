@@ -4,9 +4,8 @@ import com.algaworks.algashop.ordering.application.model.checkout.disassembler.B
 import com.algaworks.algashop.ordering.application.model.checkout.disassembler.ShippingInputDisassembler;
 import com.algaworks.algashop.ordering.application.model.checkout.input.BuyNowInput;
 import com.algaworks.algashop.ordering.application.model.checkout.input.ShippingInput;
-import com.algaworks.algashop.ordering.domain.model.commons.Address;
-import com.algaworks.algashop.ordering.domain.model.commons.Quantity;
-import com.algaworks.algashop.ordering.domain.model.commons.ZipCode;
+import com.algaworks.algashop.ordering.domain.model.common.Quantity;
+import com.algaworks.algashop.ordering.domain.model.common.ZipCode;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;

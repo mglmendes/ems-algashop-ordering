@@ -1,8 +1,7 @@
 package com.algaworks.algashop.ordering.domain.model.order.service;
 
-import com.algaworks.algashop.ordering.domain.model.commons.Money;
+import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
-import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.domain.model.order.specification.CustomerHaveFreeShippingSpecification;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCart;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCartItem;

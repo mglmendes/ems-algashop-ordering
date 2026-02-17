@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.domain.model.commons;
+package com.algaworks.algashop.ordering.domain.model.common;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
