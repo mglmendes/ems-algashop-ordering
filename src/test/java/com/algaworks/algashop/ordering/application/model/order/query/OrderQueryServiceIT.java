@@ -1,12 +1,14 @@
 package com.algaworks.algashop.ordering.application.model.order.query;
 
 
+import com.algaworks.algashop.ordering.application.model.order.filter.OrderFilter;
 import com.algaworks.algashop.ordering.application.model.order.output.OrderDetailOutput;
 import com.algaworks.algashop.ordering.application.model.order.output.OrderSummaryOutput;
 import com.algaworks.algashop.ordering.application.utility.PageFilter;
 import com.algaworks.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
+import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.domain.model.order.OrderTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.OrderStatus;
@@ -57,10 +59,54 @@ class OrderQueryServiceIT {
         orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.PAID).customerId(customer.id()).build());
         orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.CANCELED).customerId(customer.id()).build());
 
-        Page<OrderSummaryOutput> page = orderQueryService.filter(new PageFilter(3, 0));
+
+        Page<OrderSummaryOutput> page = orderQueryService.filter(new OrderFilter(3, 0));
 
         Assertions.assertThat(page.getTotalPages()).isEqualTo(2);
         Assertions.assertThat(page.getTotalElements()).isEqualTo(5);
         Assertions.assertThat(page.getNumberOfElements()).isEqualTo(3);
+    }
+
+    @Test
+    void shouldFilterByCustomerId() {
+        Customer customer1 = CustomerTestDataBuilder.existingCustomer().build();
+        customers.add(customer1);
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.DRAFT).withItems(false).customerId(customer1.id()).build());
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.PLACED).customerId(customer1.id()).build());
+
+        Customer customer2 = CustomerTestDataBuilder.existingCustomer().id(new CustomerId()).build();
+        customers.add(customer2);
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.READY).customerId(customer2.id()).build());
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.PAID).customerId(customer2.id()).build());
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.CANCELED).customerId(customer2.id()).build());
+
+
+        OrderFilter filter = new OrderFilter();
+        filter.setCustomerId(customer1.id().value());
+        Page<OrderSummaryOutput> page = orderQueryService.filter(filter);
+
+        Assertions.assertThat(page.getTotalPages()).isEqualTo(1);
+        Assertions.assertThat(page.getTotalElements()).isEqualTo(2);
+        Assertions.assertThat(page.getNumberOfElements()).isEqualTo(2);
+    }
+
+    @Test
+    void shouldFilterByDefault() {
+        Customer customer1 = CustomerTestDataBuilder.existingCustomer().build();
+        customers.add(customer1);
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.DRAFT).withItems(false).customerId(customer1.id()).build());
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.PLACED).customerId(customer1.id()).build());
+
+        Customer customer2 = CustomerTestDataBuilder.existingCustomer().id(new CustomerId()).build();
+        customers.add(customer2);
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.READY).customerId(customer2.id()).build());
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.PAID).customerId(customer2.id()).build());
+        orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.CANCELED).customerId(customer2.id()).build());
+
+        OrderFilter filter = new OrderFilter();
+        Page<OrderSummaryOutput> page = orderQueryService.filter(filter);
+        Assertions.assertThat(page.getTotalPages()).isEqualTo(1);
+        Assertions.assertThat(page.getTotalElements()).isEqualTo(5);
+        Assertions.assertThat(page.getNumberOfElements()).isEqualTo(5);
     }
 }

@@ -22,6 +22,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -56,7 +58,11 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
         Root<OrderPersistenceEntity> root = criteriaQuery.from(OrderPersistenceEntity.class);
         Expression<Long> selection = builder.count(root);
+        Predicate[] predicates = toPredicates(builder, root, filter);
+
         criteriaQuery.select(selection);
+        criteriaQuery.where(predicates);
+
         TypedQuery<Long> typedQuery = entityManager.createQuery(criteriaQuery);
         return typedQuery.getSingleResult();
     }
@@ -86,11 +92,31 @@ public class OrderQueryServiceImpl implements OrderQueryService {
                         root.get("paymentMethod"))
         );
 
+        Predicate[] predicates = toPredicates(builder, root, filter);
+        criteriaQuery.where(predicates);
+
         TypedQuery<OrderSummaryOutput> typedQuery = entityManager.createQuery(criteriaQuery);
         typedQuery.setFirstResult(filter.getSize() * filter.getPage());
         typedQuery.setMaxResults(filter.getSize());
 
         PageRequest pageRequest = PageRequest.of(filter.getPage(), filter.getSize());
         return new PageImpl<>(typedQuery.getResultList(), pageRequest, totalQueryResults);
+    }
+
+    private Predicate[] toPredicates(CriteriaBuilder criteriaBuilder,
+                                     Root<OrderPersistenceEntity> root,
+                                     OrderFilter filter) {
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (filter.getCustomerId() != null) {
+            Path<Object> customerIdPath = root.get("customer").get("id");
+            UUID expectedCustomerId = filter.getCustomerId();
+            Predicate predicate = criteriaBuilder.equal(customerIdPath, expectedCustomerId);
+            predicates.add(predicate);
+        }
+
+
+
+        return predicates.toArray(new Predicate[]{});
     }
 }
