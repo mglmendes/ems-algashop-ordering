@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AddressData {
     private String street;
-    private String complement;
     private String number;
+    private String complement;
     private String neighborhood;
     private String city;
     private String state;
