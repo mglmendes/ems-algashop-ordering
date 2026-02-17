@@ -1,0 +1,33 @@
+package com.algaworks.algashop.ordering.application.model.order.output;
+
+import com.algaworks.algashop.ordering.application.model.common.BillingData;
+import com.algaworks.algashop.ordering.application.model.order.data.ShippingData;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class OrderDetailOutput {
+    private String id;
+    private CustomerMinimalOutput customer;
+    private Integer totalItems;
+    private BigDecimal totalAmount;
+    private OffsetDateTime placedAt;
+    private OffsetDateTime readyAt;
+    private OffsetDateTime paidAt;
+    private OffsetDateTime cancelAt;
+    private String status;
+    private String paymentMethod;
+    private ShippingData shipping;
+    private BillingData billing;
+    private List<OrderItemDetailOutput> items = new ArrayList<>();
+}
