@@ -40,10 +40,10 @@ public class OrderFilter extends SortablePageFilter<OrderFilter.SortType> {
     @RequiredArgsConstructor
     @Getter
     public enum SortType {
-        PLACED_AT("placed_at"),
-        PAID_AT("paid_at"),
-        CANCELED_AT("canceled_at"),
-        READY_AT("ready_at"),
+        PLACED_AT("placedAt"),
+        PAID_AT("paidAt"),
+        CANCELED_AT("canceledAt"),
+        READY_AT("readyAt"),
         STATUS("status");
 
         private final String propertyName;

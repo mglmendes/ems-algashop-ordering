@@ -1,5 +1,6 @@
 package com.algaworks.algashop.ordering.application.model.order.output;
 
+import com.algaworks.algashop.ordering.domain.model.order.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
 import io.hypersistence.tsid.TSID;
 import lombok.AllArgsConstructor;
@@ -26,9 +27,10 @@ public class OrderSummaryOutput {
     private String status;
     private String paymentMethod;
 
-    public OrderSummaryOutput(Long id, CustomerMinimalOutput customer, Integer totalItems, BigDecimal totalAmount,
+    public OrderSummaryOutput(Long id, Integer totalItems, BigDecimal totalAmount,
                               OffsetDateTime placedAt, OffsetDateTime readyAt, OffsetDateTime paidAt,
-                              OffsetDateTime cancelAt, String status, String paymentMethod) {
+                              OffsetDateTime cancelAt, String status, String paymentMethod,
+                              CustomerMinimalOutput customer) {
         this.id = new OrderId(id).toString();
         this.customer = customer;
         this.totalItems = totalItems;
