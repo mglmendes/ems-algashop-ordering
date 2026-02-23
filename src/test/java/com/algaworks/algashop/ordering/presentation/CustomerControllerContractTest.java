@@ -3,10 +3,10 @@ package com.algaworks.algashop.ordering.presentation;
 import com.algaworks.algashop.ordering.application.model.customer.input.CustomerInput;
 import com.algaworks.algashop.ordering.application.model.customer.query.CustomerQueryService;
 import com.algaworks.algashop.ordering.application.model.customer.service.CustomerManagementApplicationService;
+import com.algaworks.algashop.ordering.presentation.customer.CustomerController;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -101,5 +101,46 @@ class CustomerControllerContractTest {
                             "address.zipCode", Matchers.is("12321")
                     );
 
+    }
+
+    @Test
+    void createCustomerErrorContract() {
+        String jsonInput = """
+                    {
+                      "firstName": "",
+                      "lastName": "",
+                      "email": "johndoe@email.com",
+                      "document": "12345",
+                      "phone": "1191234564",
+                      "birthDate": "1991-07-05",
+                      "promotionNotificationsAllowed": false,
+                      "address": {
+                        "street": "Bourbon Street",
+                        "number": "2000",
+                        "complement": "apt 122",
+                        "neighborhood": "North Ville",
+                        "city": "Yostfort",
+                        "state": "South Carolina",
+                        "zipCode": "12321"
+                      }
+                    }
+                """;
+
+        RestAssuredMockMvc.given()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .body(jsonInput)
+                .   contentType(ContentType.JSON)
+                .when()
+                .post("/api/v1/customers")
+                .then()
+                .assertThat()
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("status", Matchers.is(HttpStatus.BAD_REQUEST.value()),
+                        "type", Matchers.is("/errors/invalid-fields"),
+                        "title", Matchers.notNullValue(),
+                        "detail", Matchers.notNullValue(),
+                        "instance", Matchers.notNullValue(),
+                        "fields", Matchers.notNullValue());
     }
 }
