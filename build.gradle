@@ -37,6 +37,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.rest-assured:rest-assured'
+	testImplementation 'io.rest-assured:spring-mock-mvc'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testImplementation 'org.assertj:assertj-core:3.27.7'
 	mockitoAgent('org.mockito:mockito-core:5.14.2') {transitive = false}
