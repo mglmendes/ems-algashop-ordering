@@ -24,7 +24,7 @@ public class OrderDetailOutput {
     private OffsetDateTime placedAt;
     private OffsetDateTime readyAt;
     private OffsetDateTime paidAt;
-    private OffsetDateTime cancelAt;
+    private OffsetDateTime canceledAt;
     private String status;
     private String paymentMethod;
     private ShippingData shipping;
