@@ -1,8 +1,6 @@
 package com.algaworks.algashop.ordering.application.model.order.output;
 
-import com.algaworks.algashop.ordering.domain.model.order.entity.enums.OrderStatus;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
-import io.hypersistence.tsid.TSID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,13 +21,13 @@ public class OrderSummaryOutput {
     private OffsetDateTime placedAt;
     private OffsetDateTime readyAt;
     private OffsetDateTime paidAt;
-    private OffsetDateTime cancelAt;
+    private OffsetDateTime canceledAt;
     private String status;
     private String paymentMethod;
 
     public OrderSummaryOutput(Long id, Integer totalItems, BigDecimal totalAmount,
                               OffsetDateTime placedAt, OffsetDateTime readyAt, OffsetDateTime paidAt,
-                              OffsetDateTime cancelAt, String status, String paymentMethod,
+                              OffsetDateTime canceledAt, String status, String paymentMethod,
                               CustomerMinimalOutput customer) {
         this.id = new OrderId(id).toString();
         this.customer = customer;
@@ -38,7 +36,7 @@ public class OrderSummaryOutput {
         this.placedAt = placedAt;
         this.readyAt = readyAt;
         this.paidAt = paidAt;
-        this.cancelAt = cancelAt;
+        this.canceledAt = canceledAt;
         this.status = status;
         this.paymentMethod = paymentMethod;
     }

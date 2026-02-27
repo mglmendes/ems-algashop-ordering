@@ -40,7 +40,7 @@ public class CustomerController {
 
     @GetMapping
     public PageModel<CustomerSummaryOutput> findAll(CustomerFilter customerFilter) {
-        return PageModel.ofPage(customerQueryService.filter(customerFilter));
+        return PageModel.of(customerQueryService.filter(customerFilter));
     }
 
     @GetMapping("/{customerId}")
