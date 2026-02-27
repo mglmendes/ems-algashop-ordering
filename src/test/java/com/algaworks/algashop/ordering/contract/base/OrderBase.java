@@ -1,6 +1,7 @@
 package com.algaworks.algashop.ordering.contract.base;
 
 import com.algaworks.algashop.ordering.application.model.order.query.OrderQueryService;
+import com.algaworks.algashop.ordering.domain.model.order.exceptions.OrderNotFoundException;
 import com.algaworks.algashop.ordering.presentation.order.OrderController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,9 @@ public class OrderBase {
     @MockitoBean
     private OrderQueryService orderQueryService;
 
+    public static final String notFoundOrderId = "91226N0693HDH";
+    public static final String foundOrderId = "01226N0640J7Q";
+
     @BeforeEach
     void setUp() {
         RestAssuredMockMvc.mockMvc(
@@ -32,9 +36,10 @@ public class OrderBase {
 
         RestAssuredMockMvc.enableLoggingOfRequestAndResponseIfValidationFails();
 
-        String id = "01226N0640J7Q";
-        Mockito.when(orderQueryService.findById(id))
-                .thenReturn(OrderDetailOutputTestDataBuilder.placedOrder(id).build());
+        Mockito.when(orderQueryService.findById(foundOrderId))
+                .thenReturn(OrderDetailOutputTestDataBuilder.placedOrder(foundOrderId).build());
+
+        Mockito.when(orderQueryService.findById(notFoundOrderId)).thenThrow(new OrderNotFoundException(foundOrderId));
     }
 
 }
