@@ -1,5 +1,6 @@
 package com.algaworks.algashop.ordering.application.model.shoppingcart.output;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Builder
 @Data
 public class ShoppingCartOutput {
   private UUID id;

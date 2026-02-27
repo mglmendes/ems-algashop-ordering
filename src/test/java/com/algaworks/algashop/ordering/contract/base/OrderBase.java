@@ -8,7 +8,7 @@ import com.algaworks.algashop.ordering.application.model.order.databuilder.Order
 import com.algaworks.algashop.ordering.application.model.order.filter.OrderFilter;
 import com.algaworks.algashop.ordering.application.model.order.query.OrderQueryService;
 import com.algaworks.algashop.ordering.domain.model.order.exceptions.OrderNotFoundException;
-import com.algaworks.algashop.ordering.presentation.order.OrderController;
+import com.algaworks.algashop.ordering.presentation.order.controller.OrderController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;

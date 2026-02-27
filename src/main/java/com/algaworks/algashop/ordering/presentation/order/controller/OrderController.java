@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.presentation.order;
+package com.algaworks.algashop.ordering.presentation.order.controller;
 
 import com.algaworks.algashop.ordering.application.model.checkout.input.BuyNowInput;
 import com.algaworks.algashop.ordering.application.model.checkout.input.CheckoutInput;
