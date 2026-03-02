@@ -1,6 +1,9 @@
 package com.algaworks.algashop.ordering.application.model.checkout.input;
 
 import com.algaworks.algashop.ordering.application.model.common.BillingData;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,10 +16,18 @@ import java.util.UUID;
 @Data
 @Builder
 public class BuyNowInput {
+    @NotNull
+    @Valid
     private ShippingInput shipping;
+    @NotNull
+    @Valid
     private BillingData billing;
+    @NotNull
     private UUID productId;
+    @NotNull
     private UUID customerId;
+    @NotNull
     private Integer quantity;
+    @NotBlank
     private String paymentMethod;
 }
