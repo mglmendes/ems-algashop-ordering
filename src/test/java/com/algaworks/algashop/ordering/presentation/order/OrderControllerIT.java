@@ -10,6 +10,7 @@ import io.restassured.config.JsonConfig;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.config.JsonPathConfig;
 import org.aspectj.lang.annotation.Before;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +84,9 @@ public class OrderControllerIT {
                 .then()
                 .assertThat()
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE)
-                .statusCode(HttpStatus.UNPROCESSABLE_ENTITY.value());
+                .statusCode(HttpStatus.UNPROCESSABLE_ENTITY.value())
+                .body("id", Matchers.not(Matchers.emptyString()),
+                        "customer.id", Matchers.is(validCustomerId.toString()));
 
     }
 }
