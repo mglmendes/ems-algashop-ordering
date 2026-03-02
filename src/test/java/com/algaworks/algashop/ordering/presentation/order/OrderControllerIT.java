@@ -70,4 +70,20 @@ public class OrderControllerIT {
                 .statusCode(HttpStatus.CREATED.value());
 
     }
+
+    @Test
+    public void shouldThrowExceptionWhenCreateOrderUsingProductWithCustomerNotFound() {
+        String jsonBody = AlgaShopResourceUtils.readContent("json/create-order-with-product-invalid-customer.json");
+        RestAssured.given()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .contentType("application/vnd.order-with-product.v1+json")
+                .body(jsonBody)
+                .when()
+                .post("/api/v1/orders")
+                .then()
+                .assertThat()
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                .statusCode(HttpStatus.UNPROCESSABLE_ENTITY.value());
+
+    }
 }

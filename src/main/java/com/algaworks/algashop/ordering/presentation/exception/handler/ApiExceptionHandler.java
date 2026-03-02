@@ -1,8 +1,9 @@
-package com.algaworks.algashop.ordering.presentation.exceptionhandler;
+package com.algaworks.algashop.ordering.presentation.exception.handler;
 
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerEmailAlreadyInUseException;
 import com.algaworks.algashop.ordering.domain.model.generic.DomainEntityNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.generic.DomainException;
+import com.algaworks.algashop.ordering.presentation.exception.UnprocessableEntityException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -54,8 +55,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problemDetail);
     }
 
-    @ExceptionHandler(DomainException.class)
-    public ResponseEntity<ProblemDetail> handleDomainException(DomainException ex) {
+    @ExceptionHandler({DomainException.class, UnprocessableEntityException.class})
+    public ResponseEntity<ProblemDetail> handleDomainException(Exception ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
         problemDetail.setTitle("Unprocessable Entity");
         problemDetail.setDetail(ex.getMessage());

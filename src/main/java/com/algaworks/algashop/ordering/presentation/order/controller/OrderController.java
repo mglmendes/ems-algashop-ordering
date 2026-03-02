@@ -8,6 +8,11 @@ import com.algaworks.algashop.ordering.application.model.order.filter.OrderFilte
 import com.algaworks.algashop.ordering.application.model.order.output.OrderDetailOutput;
 import com.algaworks.algashop.ordering.application.model.order.output.OrderSummaryOutput;
 import com.algaworks.algashop.ordering.application.model.order.query.OrderQueryService;
+import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
+import com.algaworks.algashop.ordering.domain.model.product.exception.ProductNotFoundException;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCart;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.exception.ShoppingCartNotFoundException;
+import com.algaworks.algashop.ordering.presentation.exception.UnprocessableEntityException;
 import com.algaworks.algashop.ordering.presentation.model.PageModel;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,14 +41,24 @@ public class OrderController {
     @PostMapping(consumes = "application/vnd.order-with-product.v1+json")
     @ResponseStatus(HttpStatus.CREATED)
     public OrderDetailOutput createWithProduct(@Valid @RequestBody BuyNowInput input) {
-        String orderId = buyNowApplicationService.buyNow(input);
+        String orderId;
+        try {
+            orderId = buyNowApplicationService.buyNow(input);
+        }  catch (CustomerNotFoundException | ProductNotFoundException e) {
+            throw new UnprocessableEntityException(e.getMessage(), e);
+        }
         return orderQueryService.findById(orderId);
     }
 
     @PostMapping(consumes = "application/vnd.order-with-shopping-cart.v1+json")
     @ResponseStatus(HttpStatus.CREATED)
     public OrderDetailOutput createWithShoppingCart(@Valid @RequestBody CheckoutInput input) {
-        String orderId = checkoutApplicationService.checkout(input);
+        String orderId;
+        try {
+            orderId  = checkoutApplicationService.checkout(input);
+        } catch (ShoppingCartNotFoundException e) {
+            throw new UnprocessableEntityException(e.getMessage(), e);
+        }
         return orderQueryService.findById(orderId);
     }
 }
