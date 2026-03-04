@@ -1,15 +1,12 @@
 package com.algaworks.algashop.ordering.presentation.order;
 
-import com.algaworks.algashop.ordering.application.model.customer.service.CustomerManagementApplicationService;
 import com.algaworks.algashop.ordering.domain.model.customer.CustomerPersistenceEntityTestDataBuilder;
-import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.infrastructure.persistence.customer.repository.CustomerPersistenceEntityRepository;
 import com.algaworks.algashop.ordering.utils.AlgaShopResourceUtils;
 import io.restassured.RestAssured;
 import io.restassured.config.JsonConfig;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.config.JsonPathConfig;
-import org.aspectj.lang.annotation.Before;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -84,9 +81,7 @@ public class OrderControllerIT {
                 .then()
                 .assertThat()
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE)
-                .statusCode(HttpStatus.UNPROCESSABLE_ENTITY.value())
-                .body("id", Matchers.not(Matchers.emptyString()),
-                        "customer.id", Matchers.is(validCustomerId.toString()));
+                .statusCode(HttpStatus.UNPROCESSABLE_ENTITY.value());
 
     }
 }

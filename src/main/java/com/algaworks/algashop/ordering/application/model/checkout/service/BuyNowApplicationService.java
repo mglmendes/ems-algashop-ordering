@@ -10,6 +10,7 @@ import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
+import com.algaworks.algashop.ordering.domain.model.generic.DomainException;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
@@ -25,6 +26,7 @@ import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductI
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.util.Objects;
 
@@ -50,13 +52,13 @@ public class BuyNowApplicationService {
 
         PaymentMethod paymentMethod = PaymentMethod.valueOf(input.getPaymentMethod());
         CustomerId customerId = new CustomerId(input.getCustomerId());
+        ProductId productId = new ProductId(input.getProductId());
         Quantity quantity = new Quantity(input.getQuantity());
 
         Customer customer = customers.ofId(customerId).orElseThrow(
                 () -> new CustomerNotFoundException(customerId.value())
         );
-        Product product = findProduct(new ProductId(input.getProductId()));
-
+        Product product = findProduct(productId);
         var shippingCalculationResult = calculateShippingCost(input.getShipping());
 
         Shipping shipping = shippingInputDisassembler.toDomainModel(input.getShipping(), shippingCalculationResult);
@@ -77,6 +79,23 @@ public class BuyNowApplicationService {
         return order.id().toString();
     }
 
+    private Product findProduct(ProductId productId) {
+        Product product;
+        try {
+            product = productCatalogService.ofId(productId).orElse(null);
+        } catch (Exception e) {
+            if (e instanceof ResourceAccessException) {
+                throw new ProductNotFoundException(productId.value());
+            }
+            throw new DomainException(e.getMessage(), e);
+        }
+
+        if (product == null) {
+            throw new ProductNotFoundException(productId.value());
+        }
+        return product;
+    }
+
     private ShippingCostService.CalculationResult calculateShippingCost(ShippingInput shipping) {
         ZipCode originZipCode = originAddressService.originAddress().zipCode();
         ZipCode destinationZipCode = new ZipCode(shipping.getAddress().getZipCode());
@@ -85,11 +104,5 @@ public class BuyNowApplicationService {
                 originZipCode,
                 destinationZipCode));
 
-    }
-
-    private Product findProduct(ProductId productId) {
-        return productCatalogService.ofId(productId).orElseThrow(
-                () -> new ProductNotFoundException(productId.value())
-        );
     }
 }
