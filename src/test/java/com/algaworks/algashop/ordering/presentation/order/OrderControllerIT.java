@@ -1,5 +1,7 @@
 package com.algaworks.algashop.ordering.presentation.order;
 
+import com.algaworks.algashop.ordering.application.model.checkout.input.BuyNowInput;
+import com.algaworks.algashop.ordering.application.model.checkout.service.BuyNowInputTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.customer.CustomerPersistenceEntityTestDataBuilder;
 import com.algaworks.algashop.ordering.infrastructure.persistence.customer.repository.CustomerPersistenceEntityRepository;
 import com.algaworks.algashop.ordering.utils.AlgaShopResourceUtils;
@@ -34,6 +36,7 @@ public class OrderControllerIT {
     private CustomerPersistenceEntityRepository customerRepository;
 
     private static final UUID validCustomerId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
+    private static final UUID validProductId = UUID.fromString("019c90e8-40fa-7ab0-a458-34f237b97987");
 
     private WireMockServer wireMockServerProductCatalog;
     private WireMockServer wireMockServerRapidex;
@@ -88,6 +91,22 @@ public class OrderControllerIT {
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType("application/vnd.order-with-product.v1+json")
                 .body(jsonBody)
+                .when()
+                .post("/api/v1/orders")
+                .then()
+                .assertThat()
+                .contentType(ContentType.JSON)
+                .statusCode(HttpStatus.CREATED.value());
+
+    }
+
+    @Test
+    public void shouldCreateOrderUsingProduct_DTO() {
+        BuyNowInput buyNowInput = BuyNowInputTestDataBuilder.aBuyNowInput().productId(validProductId).customerId(validCustomerId).build();
+        RestAssured.given()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .contentType("application/vnd.order-with-product.v1+json")
+                .body(buyNowInput)
                 .when()
                 .post("/api/v1/orders")
                 .then()
