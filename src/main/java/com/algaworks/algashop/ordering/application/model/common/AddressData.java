@@ -16,7 +16,6 @@ public class AddressData {
     private String street;
     @NotBlank
     private String number;
-    @NotBlank
     private String complement;
     @NotBlank
     private String neighborhood;

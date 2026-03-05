@@ -14,15 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CustomerUpdateInput {
-    @NotBlank
     private String firstName;
-    @NotBlank
     private String lastName;
-    @NotBlank
     private String phone;
-    @NotNull
     private Boolean promotionNotificationsAllowed;
-    @Valid
-    @NotNull
     private AddressData address;
 }
