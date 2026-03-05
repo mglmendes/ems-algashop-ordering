@@ -9,7 +9,6 @@ import io.restassured.RestAssured;
 import io.restassured.config.JsonConfig;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.config.JsonPathConfig;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -95,6 +94,39 @@ public class OrderControllerIT {
                 .assertThat()
                 .contentType(ContentType.JSON)
                 .statusCode(HttpStatus.CREATED.value());
+
+    }
+
+    @Test
+    public void shouldNotCreateOrderUsingProductWhenProductAPIIsUnavailable() {
+        wireMockServerProductCatalog.stop();
+        String jsonBody = AlgaShopResourceUtils.readContent("json/create-order-with-product.json");
+        RestAssured.given()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .contentType("application/vnd.order-with-product.v1+json")
+                .body(jsonBody)
+                .when()
+                .post("/api/v1/orders")
+                .then()
+                .assertThat()
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                .statusCode(HttpStatus.GATEWAY_TIMEOUT.value());
+
+    }
+
+    @Test
+    public void shouldNotCreateOrderUsingProductWhenProductNotExists() {
+        String jsonBody = AlgaShopResourceUtils.readContent("json/create-order-with-invalid-product.json");
+        RestAssured.given()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .contentType("application/vnd.order-with-product.v1+json")
+                .body(jsonBody)
+                .when()
+                .post("/api/v1/orders")
+                .then()
+                .assertThat()
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE)
+                .statusCode(HttpStatus.BAD_GATEWAY.value());
 
     }
 

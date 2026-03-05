@@ -3,6 +3,8 @@ package com.algaworks.algashop.ordering.presentation.exception.handler;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerEmailAlreadyInUseException;
 import com.algaworks.algashop.ordering.domain.model.generic.DomainEntityNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.generic.DomainException;
+import com.algaworks.algashop.ordering.presentation.exception.BadGatewayException;
+import com.algaworks.algashop.ordering.presentation.exception.GatewayTimeoutException;
 import com.algaworks.algashop.ordering.presentation.exception.UnprocessableEntityException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +55,26 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         problemDetail.setDetail(ex.getMessage());
         problemDetail.setType(URI.create("/errors/not-found"));
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problemDetail);
+    }
+
+    @ExceptionHandler(GatewayTimeoutException.class)
+    public ResponseEntity<ProblemDetail> handleGatewayTimeoutException(GatewayTimeoutException ex) {
+        log.error(ex.getMessage(), ex);
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.GATEWAY_TIMEOUT.value());
+        problemDetail.setTitle("Gateway Timeout");
+        problemDetail.setDetail(ex.getMessage());
+        problemDetail.setType(URI.create("/errors/gatway-timeout"));
+        return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).body(problemDetail);
+    }
+
+    @ExceptionHandler(BadGatewayException.class)
+    public ResponseEntity<ProblemDetail> handleBadGatewayException(BadGatewayException ex) {
+        log.error(ex.getMessage(), ex);
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_GATEWAY.value());
+        problemDetail.setTitle("Bad Gateway");
+        problemDetail.setDetail(ex.getMessage());
+        problemDetail.setType(URI.create("/errors/bad-gateway"));
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(problemDetail);
     }
 
     @ExceptionHandler({DomainException.class, UnprocessableEntityException.class})

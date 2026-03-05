@@ -58,7 +58,9 @@ public class BuyNowApplicationService {
         Customer customer = customers.ofId(customerId).orElseThrow(
                 () -> new CustomerNotFoundException(customerId.value())
         );
-        Product product = findProduct(productId);
+        Product product = productCatalogService.ofId(productId).orElseThrow(
+                () -> new ProductNotFoundException(productId.value())
+        );
         var shippingCalculationResult = calculateShippingCost(input.getShipping());
 
         Shipping shipping = shippingInputDisassembler.toDomainModel(input.getShipping(), shippingCalculationResult);
@@ -77,23 +79,6 @@ public class BuyNowApplicationService {
         orders.add(order);
 
         return order.id().toString();
-    }
-
-    private Product findProduct(ProductId productId) {
-        Product product;
-        try {
-            product = productCatalogService.ofId(productId).orElse(null);
-        } catch (Exception e) {
-            if (e instanceof ResourceAccessException) {
-                throw new ProductNotFoundException(productId.value());
-            }
-            throw new DomainException(e.getMessage(), e);
-        }
-
-        if (product == null) {
-            throw new ProductNotFoundException(productId.value());
-        }
-        return product;
     }
 
     private ShippingCostService.CalculationResult calculateShippingCost(ShippingInput shipping) {
