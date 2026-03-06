@@ -7,6 +7,8 @@ import com.algaworks.algashop.ordering.application.model.customer.output.Custome
 import com.algaworks.algashop.ordering.application.model.customer.output.CustomerSummaryOutput;
 import com.algaworks.algashop.ordering.application.model.customer.query.CustomerQueryService;
 import com.algaworks.algashop.ordering.application.model.customer.service.CustomerManagementApplicationService;
+import com.algaworks.algashop.ordering.application.model.shoppingcart.output.ShoppingCartOutput;
+import com.algaworks.algashop.ordering.application.model.shoppingcart.query.ShoppingCartQueryService;
 import com.algaworks.algashop.ordering.presentation.model.PageModel;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -25,6 +28,7 @@ public class CustomerController {
 
     private final CustomerManagementApplicationService customerApplicationService;
     private final CustomerQueryService customerQueryService;
+    private final ShoppingCartQueryService shoppingCartQueryService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -46,6 +50,11 @@ public class CustomerController {
     @GetMapping("/{customerId}")
     public CustomerOutput findById(@PathVariable("customerId") UUID customerId) {
         return customerQueryService.findById(customerId);
+    }
+
+    @GetMapping("{customerId}/shopping-cart")
+    public ShoppingCartOutput findShoppingCart(@PathVariable("customerId") UUID customerId) {
+        return shoppingCartQueryService.findByCustomerId(customerId);
     }
 
     @PutMapping("/{customerId}")

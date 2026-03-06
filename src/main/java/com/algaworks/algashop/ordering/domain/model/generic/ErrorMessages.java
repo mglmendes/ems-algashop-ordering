@@ -8,7 +8,7 @@ public class ErrorMessages {
 
     }
     public static final String VALIDATION_ERROR_BIRTHDATE_MUST_IN_PAST = "BirthDate must be a past date.";
-    public static final String ERROR_EMAIL_ALREADY_IN_USE = "Email %s already in use";
+    public static final String ERROR_EMAIL_ALREADY_IN_USE = "Customer email already in use";
     public static final String VALIDATION_ERROR_FULLNAME_IS_NULL = "FullName cannot be null.";
     public static final String VALIDATION_ERROR_FULLNAME_IS_BLANK = "FullName cannot be blank.";
 
@@ -18,6 +18,7 @@ public class ErrorMessages {
     public static final String ERROR_CUSTOMER_NOT_FOUND = "Customer with id %s not exists.";
     public static final String ERROR_ORDER_NOT_FOUND = "Order with id %s not exists.";
     public static final String ERROR_SHOPPING_CART_NOT_FOUND = "Shopping cart with id %s not exists.";
+    public static final String ERROR_SHOPPING_CART_NOT_FOUND_FOR_CUSTOMER = "Shopping cart not exists for customer with id %s";
 
     public static final String ERROR_ORDER_STATUS_CANNOT_BE_CHANGED = "Cannot change order %s status from %s to %s";
     public static final String ERROR_ORDER_DOES_NOT_CONTAIN_ODER_ITEM = "Order %s does not contain  item %s";

@@ -5,11 +5,8 @@ import com.algaworks.algashop.ordering.domain.model.generic.ErrorMessages;
 
 public class CustomerEmailAlreadyInUseException extends DomainException {
 
-    public CustomerEmailAlreadyInUseException(String email) {
-        super(String.format(
-                ErrorMessages.ERROR_EMAIL_ALREADY_IN_USE,
-                email
-        ));
+    public CustomerEmailAlreadyInUseException() {
+        super(ErrorMessages.ERROR_EMAIL_ALREADY_IN_USE);
 
     }
 }
