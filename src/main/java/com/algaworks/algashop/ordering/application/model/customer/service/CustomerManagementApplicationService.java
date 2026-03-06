@@ -49,7 +49,7 @@ public class CustomerManagementApplicationService {
         Objects.requireNonNull(rawCustomerId);
 
         Customer customer = customers.ofId(new CustomerId(rawCustomerId)).orElseThrow(
-                () -> new CustomerNotFoundException(rawCustomerId)
+                () -> new CustomerNotFoundException()
         );
 
         customer.changeName(new FullName(input.getFirstName(), input.getLastName()));
@@ -82,11 +82,11 @@ public class CustomerManagementApplicationService {
     public void archive(UUID customerId) {
         Objects.requireNonNull(customerId);
         Customer customer = customers.ofId(new CustomerId(customerId)).orElseThrow(
-                () -> new CustomerNotFoundException(customerId)
+                () -> new CustomerNotFoundException()
         );
 
         if (customer.isArchived()) {
-            throw new CustomerArchivedException(customerId);
+            throw new CustomerArchivedException();
         }
 
         customer.archive();
@@ -98,7 +98,7 @@ public class CustomerManagementApplicationService {
         Objects.requireNonNull(rawCustomerId);
         Objects.requireNonNull(newEmail);
         Customer customer = customers.ofId(new CustomerId(rawCustomerId))
-                .orElseThrow(()-> new CustomerNotFoundException(rawCustomerId));
+                .orElseThrow(()-> new CustomerNotFoundException());
         customerRegistration.changeEmail(customer, new Email(newEmail));
         customers.add(customer);
     }

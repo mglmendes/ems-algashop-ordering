@@ -20,7 +20,7 @@ public class CustomerLoyaltyPointsService {
         Objects.requireNonNull(customer);
         Objects.requireNonNull(order);
         if (!customer.id().equals(order.customerId())) {
-            throw new OrderNotBelongsToCustomerException(customer.id(), order.id());
+            throw new OrderNotBelongsToCustomerException(order.id());
         }
 
         if (!order.isReady()) {

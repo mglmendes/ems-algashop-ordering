@@ -32,7 +32,7 @@ public class ShoppingCartQueryServiceImpl implements ShoppingCartQueryService {
     public ShoppingCartOutput findByCustomerId(UUID customerId) {
         ShoppingCartPersistenceEntity shoppingCartPersistenceEntity =
                 shoppingPersistenceRepository.findByCustomer_Id(customerId).orElseThrow(
-                        () -> new ShoppingCartNotFoundException(customerId.toString())
+                        ShoppingCartNotFoundException::new
                 );
 
         return mapper.convert(shoppingCartPersistenceEntity, ShoppingCartOutput.class);

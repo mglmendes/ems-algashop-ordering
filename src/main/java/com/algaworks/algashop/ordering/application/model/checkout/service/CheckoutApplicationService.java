@@ -53,7 +53,7 @@ public class CheckoutApplicationService {
         );
 
         Customer customer = customers.ofId(shoppingCart.customerId()).orElseThrow(
-                () -> new CustomerNotFoundException(shoppingCart.customerId().value())
+                () -> new CustomerNotFoundException()
         );
 
         Billing billingInfo = billingInputDisassembler.toDomainModel(input.getBilling());

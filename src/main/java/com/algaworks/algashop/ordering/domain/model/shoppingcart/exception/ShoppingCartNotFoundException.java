@@ -14,10 +14,7 @@ public class ShoppingCartNotFoundException extends DomainEntityNotFoundException
        ));
     }
 
-    public ShoppingCartNotFoundException(String customerId) {
-        super(String.format(
-                ErrorMessages.ERROR_SHOPPING_CART_NOT_FOUND_FOR_CUSTOMER,
-                customerId
-        ));
+    public ShoppingCartNotFoundException() {
+        super(ErrorMessages.ERROR_SHOPPING_CART_NOT_FOUND_FOR_CUSTOMER);
     }
 }

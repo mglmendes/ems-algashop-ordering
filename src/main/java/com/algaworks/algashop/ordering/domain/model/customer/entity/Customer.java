@@ -244,7 +244,7 @@ public class Customer
 
     private void verifyIfChangeable() {
         if (Boolean.TRUE.equals(this.isArchived())) {
-            throw new CustomerArchivedException(this.id().value());
+            throw new CustomerArchivedException();
         }
     }
 

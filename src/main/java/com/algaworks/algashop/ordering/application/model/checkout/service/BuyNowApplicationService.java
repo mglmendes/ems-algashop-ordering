@@ -10,7 +10,6 @@ import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
-import com.algaworks.algashop.ordering.domain.model.generic.DomainException;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
@@ -26,7 +25,6 @@ import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductI
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.ResourceAccessException;
 
 import java.util.Objects;
 
@@ -56,7 +54,7 @@ public class BuyNowApplicationService {
         Quantity quantity = new Quantity(input.getQuantity());
 
         Customer customer = customers.ofId(customerId).orElseThrow(
-                () -> new CustomerNotFoundException(customerId.value())
+                () -> new CustomerNotFoundException()
         );
         Product product = productCatalogService.ofId(productId).orElseThrow(
                 () -> new ProductNotFoundException(productId.value())
