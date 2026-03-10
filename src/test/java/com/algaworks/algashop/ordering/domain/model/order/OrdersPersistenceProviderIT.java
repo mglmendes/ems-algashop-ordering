@@ -64,7 +64,7 @@ class OrdersPersistenceProviderIT {
         var entity = entityRepository.findById(orderId).orElseThrow();
 
         Assertions.assertThat(entity.getStatus()).isEqualTo(OrderStatus.PLACED.name());
-        Assertions.assertThat(entity.getCreatedByUSerId()).isNotNull();
+        Assertions.assertThat(entity.getCreatedByUserId()).isNotNull();
         Assertions.assertThat(entity.getLastModifiedAt()).isNotNull();
         Assertions.assertThat(entity.getLastModifiedByUserId()).isNotNull();
 
@@ -74,7 +74,7 @@ class OrdersPersistenceProviderIT {
 
         entity = entityRepository.findById(orderId).orElseThrow();
         Assertions.assertThat(entity.getStatus()).isEqualTo(OrderStatus.PAID.name());
-        Assertions.assertThat(entity.getCreatedByUSerId()).isNotNull();
+        Assertions.assertThat(entity.getCreatedByUserId()).isNotNull();
         Assertions.assertThat(entity.getLastModifiedAt()).isNotNull();
         Assertions.assertThat(entity.getLastModifiedByUserId()).isNotNull();
     }

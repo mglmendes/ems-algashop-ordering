@@ -46,7 +46,7 @@ public class CustomerPersistenceEntity extends AbstractAggregateRoot<CustomerPer
     private AddressEmbeddable address;
 
     @CreatedBy
-    private UUID createdByUSerId;
+    private UUID createdByUserId;
     @LastModifiedDate
     private OffsetDateTime lastModifiedAt;
     @LastModifiedBy
