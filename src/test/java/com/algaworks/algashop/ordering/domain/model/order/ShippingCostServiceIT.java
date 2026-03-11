@@ -41,8 +41,6 @@ class ShippingCostServiceIT {
                 .port(8780)
                 .usingFilesUnderDirectory("src/test/resources/wiremock/rapidex")
                 .extensions(new ResponseTemplateTransformer(true)));
-
-        wireMockRapidex.start();
     }
 
     @Test

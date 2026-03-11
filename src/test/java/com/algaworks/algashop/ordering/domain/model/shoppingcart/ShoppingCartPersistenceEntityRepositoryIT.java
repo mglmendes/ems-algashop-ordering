@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Import;
 import java.util.UUID;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 @Import({SpringDataAuditingConfig.class, HibernateConfiguration.class})
 class ShoppingCartPersistenceEntityRepositoryIT {
 
