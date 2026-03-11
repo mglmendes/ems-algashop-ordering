@@ -23,7 +23,7 @@ import java.util.UUID;
 
 
 @SpringBootTest
-@Sql(scripts = "classpath:sql/clean-database.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
+//@Sql(scripts = "classpath:sql/clean-database.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 //@Sql(scripts = "classpath:sql/clean-database.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @Transactional
 class CustomerQueryServiceImplIT {
