@@ -3,7 +3,6 @@ package com.algaworks.algashop.ordering.presentation.order;
 import com.algaworks.algashop.ordering.application.model.checkout.input.BuyNowInput;
 import com.algaworks.algashop.ordering.application.model.checkout.service.BuyNowInputTestDataBuilder;
 import com.algaworks.algashop.ordering.application.model.order.output.OrderDetailOutput;
-import com.algaworks.algashop.ordering.domain.model.customer.CustomerPersistenceEntityTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.customer.repository.CustomerPersistenceEntityRepository;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.repository.OrderPersistenceEntityRepository;
@@ -25,7 +24,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.UUID;
@@ -36,7 +34,8 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 //@AutoConfigureStubRunner(stubsMode = StubRunnerProperties.StubsMode.LOCAL,
 //        ids = "com.algaworks.algashop:product-catalog:0.0.1-SNAPSHOT:8781")
-@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(scripts = "classpath:db/testdata/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_CLASS)
 public class OrderControllerIT {
 
     @LocalServerPort
@@ -67,8 +66,6 @@ public class OrderControllerIT {
 
         RestAssured.config().jsonConfig(jsonConfig);
 
-        initDatabase();
-
         wireMockServerProductCatalog = new WireMockServer(
                 options().port(8781)
                         .usingFilesUnderDirectory("src/test/resources/wiremock/product-catalog")
@@ -88,10 +85,6 @@ public class OrderControllerIT {
     void tearDown() {
         wireMockServerProductCatalog.stop();
         wireMockServerRapidex.stop();
-    }
-
-    private void initDatabase() {
-        customerRepository.saveAndFlush(CustomerPersistenceEntityTestDataBuilder.aCustomer().id(validCustomerId).build());
     }
 
     @Test
@@ -177,11 +170,6 @@ public class OrderControllerIT {
 
     @Test
     public void shouldCreateOrderUsingShoppingCart() {
-        var shoppingCartPersistence = existingShoppingCart()
-                .id(validShoppingCartId)
-                .customer(customerRepository.getReferenceById(validCustomerId))
-                .build();
-        shoppingCartRepository.save(shoppingCartPersistence);
 
         String json = AlgaShopResourceUtils.readContent("json/create-order-with-shopping-cart.json");
 

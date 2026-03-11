@@ -15,7 +15,8 @@ public class CustomerTestDataBuilder {
     private CustomerTestDataBuilder() {
     }
 
-    public static final CustomerId DEFAULT_CUSTOMER_ID = new CustomerId();
+    public static final CustomerId DEFAULT_CUSTOMER_ID =
+            new CustomerId(UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a"));
 
     public static Customer.BrandNewCustomerBuild brandNewCustomer() {
         return Customer.brandNew()
