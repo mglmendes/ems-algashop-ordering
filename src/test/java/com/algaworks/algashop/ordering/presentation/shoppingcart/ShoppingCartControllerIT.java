@@ -66,6 +66,7 @@ public class ShoppingCartControllerIT {
                 .usingFilesUnderDirectory("src/test/resources/wiremock/product-catalog")
                 .extensions(new ResponseTemplateTransformer(true)));
 
+        wireMockRapidex.start();
         wireMockProductCatalog.start();
     }
 

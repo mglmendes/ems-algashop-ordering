@@ -78,6 +78,7 @@ public class OrderControllerIT {
                         .extensions(new ResponseTemplateTransformer(true))
         );
 
+        wireMockServerRapidex.start();
         wireMockServerProductCatalog.start();
     }
 
