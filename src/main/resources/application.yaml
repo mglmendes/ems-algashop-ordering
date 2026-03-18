@@ -19,8 +19,8 @@ spring:
 algashop:
   integrations:
     rapidex:
-      url: http://localhost:8780
+      url: http://localhost:8787
     product-catalog:
-      url: http://localhost:8780
+      url: http://localhost:8787
     shipping:
       provider: RAPIDEX
