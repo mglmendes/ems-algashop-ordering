@@ -5,6 +5,7 @@ import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.model.order.specification.CustomerHaveFreeShippingSpecification;
+import com.algaworks.algashop.ordering.domain.model.order.valueobjects.CreditCardId;
 import com.algaworks.algashop.ordering.domain.model.utility.DomainService;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
@@ -20,12 +21,12 @@ public class BuyNowService {
 
     public Order buyNow(Product product,
                         Customer customer, Billing billingInfo, Shipping shippingInfo,
-                        Quantity quantity, PaymentMethod paymentMethod) {
+                        Quantity quantity, PaymentMethod paymentMethod, CreditCardId creditCardId) {
         product.checkOutOfStock();
 
         Order order = Order.draft(customer.id());
         order.changeBilling(billingInfo);
-        order.changePaymentMethod(paymentMethod);
+        order.changePaymentMethod(paymentMethod,  creditCardId);
         order.addItem(product, quantity);
 
         if (haveFreeShipping(customer)) {

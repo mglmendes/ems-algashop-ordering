@@ -5,6 +5,7 @@ import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.LoyaltyPoints;
 import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.domain.model.order.specification.CustomerHaveFreeShippingSpecification;
+import com.algaworks.algashop.ordering.domain.model.order.valueobjects.CreditCardId;
 import com.algaworks.algashop.ordering.domain.model.product.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.exception.ShoppingCartCantProceedToCheckoutException;
@@ -62,7 +63,7 @@ class CheckoutServiceTest {
 
         Customer customer = CustomerTestDataBuilder.existingCustomer().build();
 
-        Order order = checkoutService.checkout(shoppingCart, customer, billingInfo, shippingInfo, paymentMethod);
+        Order order = checkoutService.checkout(shoppingCart, customer, billingInfo, shippingInfo, paymentMethod, new CreditCardId());
 
         assertThat(order).isNotNull();
         assertThat(order.id()).isNotNull();
@@ -98,7 +99,7 @@ class CheckoutServiceTest {
 
         Customer customer = CustomerTestDataBuilder.existingCustomer().loyaltyPoints(new LoyaltyPoints(3000)).build();
 
-        Order order = checkoutService.checkout(shoppingCart, customer, billingInfo, shippingInfo, paymentMethod);
+        Order order = checkoutService.checkout(shoppingCart, customer, billingInfo, shippingInfo, paymentMethod, new CreditCardId());
 
         assertThat(order).isNotNull();
         assertThat(order.id()).isNotNull();
@@ -133,7 +134,7 @@ class CheckoutServiceTest {
         Customer customer = CustomerTestDataBuilder.existingCustomer().build();
 
         assertThatExceptionOfType(ShoppingCartCantProceedToCheckoutException.class)
-                .isThrownBy(() -> checkoutService.checkout(shoppingCart, customer, billingInfo, shippingInfo, paymentMethod));
+                .isThrownBy(() -> checkoutService.checkout(shoppingCart, customer, billingInfo, shippingInfo, paymentMethod, new CreditCardId()));
 
         assertThat(shoppingCart.isEmpty()).isFalse();
         assertThat(shoppingCart.items()).hasSize(1);
@@ -148,7 +149,7 @@ class CheckoutServiceTest {
         Customer customer = CustomerTestDataBuilder.existingCustomer().build();
 
         assertThatExceptionOfType(ShoppingCartCantProceedToCheckoutException.class)
-                .isThrownBy(() -> checkoutService.checkout(shoppingCart, customer, billingInfo, shippingInfo, paymentMethod));
+                .isThrownBy(() -> checkoutService.checkout(shoppingCart, customer, billingInfo, shippingInfo, paymentMethod, new CreditCardId()));
 
         assertThat(shoppingCart.isEmpty()).isTrue();
     }
@@ -173,7 +174,7 @@ class CheckoutServiceTest {
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
         Customer customer = CustomerTestDataBuilder.existingCustomer().build();
         assertThatExceptionOfType(ShoppingCartCantProceedToCheckoutException.class)
-                .isThrownBy(() -> checkoutService.checkout(shoppingCart, customer, billingInfo, shippingInfo, paymentMethod));
+                .isThrownBy(() -> checkoutService.checkout(shoppingCart, customer, billingInfo, shippingInfo, paymentMethod, new CreditCardId()));
 
         assertThat(shoppingCart.isEmpty()).isFalse();
 

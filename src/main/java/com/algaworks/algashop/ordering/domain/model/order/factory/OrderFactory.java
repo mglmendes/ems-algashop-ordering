@@ -3,6 +3,7 @@ package com.algaworks.algashop.ordering.domain.model.order.factory;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
+import com.algaworks.algashop.ordering.domain.model.order.valueobjects.CreditCardId;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
 import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Shipping;
@@ -22,7 +23,8 @@ public class OrderFactory {
             Billing billing,
             PaymentMethod paymentMethod,
             Product product,
-            Quantity productQuantity
+            Quantity productQuantity,
+            CreditCardId creditCardId
     ) {
         Objects.requireNonNull(customerId);
         Objects.requireNonNull(shipping);
@@ -34,7 +36,7 @@ public class OrderFactory {
         Order order = Order.draft(customerId);
         order.changeBilling(billing);
         order.changeShipping(shipping);
-        order.changePaymentMethod(paymentMethod);
+        order.changePaymentMethod(paymentMethod, creditCardId);
 
         order.addItem(product, productQuantity);
 

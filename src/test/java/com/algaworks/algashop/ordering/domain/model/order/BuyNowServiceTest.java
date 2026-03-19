@@ -12,6 +12,7 @@ import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.domain.model.order.service.BuyNowService;
 import com.algaworks.algashop.ordering.domain.model.order.specification.CustomerHaveFreeShippingSpecification;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
+import com.algaworks.algashop.ordering.domain.model.order.valueobjects.CreditCardId;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Shipping;
 import com.algaworks.algashop.ordering.domain.model.product.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.product.exception.ProductOutOfStockException;
@@ -57,7 +58,7 @@ class BuyNowServiceTest {
         Quantity quantity = new Quantity(3);
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
-        Order order = buyNowService.buyNow(product, customer, billingInfo, shippingInfo, quantity, paymentMethod);
+        Order order = buyNowService.buyNow(product, customer, billingInfo, shippingInfo, quantity, paymentMethod, new CreditCardId());
 
         assertThat(order).isNotNull();
         assertThat(order.id()).isNotNull();
@@ -89,7 +90,7 @@ class BuyNowServiceTest {
         Quantity quantity = new Quantity(3);
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
-        Order order = buyNowService.buyNow(product, customer, billingInfo, shippingInfo, quantity, paymentMethod);
+        Order order = buyNowService.buyNow(product, customer, billingInfo, shippingInfo, quantity, paymentMethod, new CreditCardId());
 
         assertThat(order).isNotNull();
         assertThat(order.id()).isNotNull();
@@ -118,7 +119,7 @@ class BuyNowServiceTest {
         Quantity quantity = new Quantity(3);
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
-        Order order = buyNowService.buyNow(product, customer, billingInfo, shippingInfo, quantity, paymentMethod);
+        Order order = buyNowService.buyNow(product, customer, billingInfo, shippingInfo, quantity, paymentMethod, new CreditCardId());
 
         assertThat(order).isNotNull();
         assertThat(order.id()).isNotNull();
@@ -148,7 +149,7 @@ class BuyNowServiceTest {
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
         assertThatExceptionOfType(ProductOutOfStockException.class)
-                .isThrownBy(() -> buyNowService.buyNow(product, customer, billingInfo, shippingInfo, quantity, paymentMethod));
+                .isThrownBy(() -> buyNowService.buyNow(product, customer, billingInfo, shippingInfo, quantity, paymentMethod, new CreditCardId()));
     }
 
     @Test
@@ -161,7 +162,7 @@ class BuyNowServiceTest {
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> buyNowService.buyNow(product, customer, billingInfo, shippingInfo, quantity, paymentMethod));
+                .isThrownBy(() -> buyNowService.buyNow(product, customer, billingInfo, shippingInfo, quantity, paymentMethod, new CreditCardId()));
     }
 
 }

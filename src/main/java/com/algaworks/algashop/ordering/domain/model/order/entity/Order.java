@@ -11,12 +11,9 @@ import com.algaworks.algashop.ordering.domain.model.order.event.OrderPaidEvent;
 import com.algaworks.algashop.ordering.domain.model.order.event.OrderPlacedEvent;
 import com.algaworks.algashop.ordering.domain.model.order.event.OrderReadyEvent;
 import com.algaworks.algashop.ordering.domain.model.order.exceptions.*;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Shipping;
+import com.algaworks.algashop.ordering.domain.model.order.valueobjects.*;
 import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderItemId;
 import lombok.Builder;
 import org.springframework.util.CollectionUtils;
 
@@ -53,10 +50,13 @@ public class Order
 
     private Long version;
 
+    private CreditCardId creditCardId;
+
     @Builder(builderClassName = "ExistingOrderBuilder", builderMethodName = "existing")
-    public Order(OrderId id, Long version, CustomerId customerId, Money totalAmount, Quantity totalItems, OffsetDateTime placedAt,
-                 OffsetDateTime paidAt, OffsetDateTime canceledAt, OffsetDateTime readyAt, Billing billing,
-                 Shipping shipping, OrderStatus status, PaymentMethod paymentMethod, Set<OrderItem> items) {
+    public Order(OrderId id, Long version, CustomerId customerId, Money totalAmount, Quantity totalItems,
+                 OffsetDateTime placedAt, OffsetDateTime paidAt, OffsetDateTime canceledAt, OffsetDateTime readyAt,
+                 Billing billing, Shipping shipping, OrderStatus status, PaymentMethod paymentMethod,
+                 Set<OrderItem> items, CreditCardId creditCardId) {
         this.setId(id);
         this.setVersion(version);
         this.setCustomerId(customerId);
@@ -71,6 +71,7 @@ public class Order
         this.setStatus(status);
         this.setPaymentMethod(paymentMethod);
         this.setItems(items);
+        this.setCreditCardId(creditCardId);
     }
 
     public static Order draft(CustomerId customerId) {
@@ -88,7 +89,8 @@ public class Order
                 null,
                 OrderStatus.DRAFT,
                 null,
-                new HashSet<>()
+                new HashSet<>(),
+                null
         );
     }
 
@@ -149,8 +151,14 @@ public class Order
         this.publishDomainEvent(new OrderCanceledEvent(this.id(), this.customerId(), this.canceledAt()));
     }
 
-    public void changePaymentMethod(PaymentMethod paymentMethod) {
+    public void changePaymentMethod(PaymentMethod paymentMethod, CreditCardId creditCardId) {
         verifyIfChangeable();
+
+        if (PaymentMethod.CREDIT_CARD.equals(paymentMethod)) {
+            Objects.requireNonNull(creditCardId);
+            this.setCreditCardId(creditCardId);
+        }
+
         Objects.requireNonNull(paymentMethod);
         this.setPaymentMethod(paymentMethod);
     }
@@ -259,6 +267,10 @@ public class Order
         return Collections.unmodifiableSet(this.items);
     }
 
+    public CreditCardId creditCardId() {
+        return creditCardId;
+    }
+
     private void recalculateTotals() {
         BigDecimal totalItemsAmount = this.items().stream()
                 .map(i -> i.totalAmount().value())
@@ -344,6 +356,10 @@ public class Order
 
     private void setVersion(Long version) {
         this.version = version;
+    }
+
+    private void setCreditCardId(CreditCardId creditCardId) {
+        this.creditCardId = creditCardId;
     }
 
     private void setPlacedAt(OffsetDateTime placedAt) {

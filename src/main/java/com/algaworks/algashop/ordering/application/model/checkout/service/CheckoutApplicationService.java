@@ -7,6 +7,7 @@ import com.algaworks.algashop.ordering.domain.model.common.ZipCode;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
+import com.algaworks.algashop.ordering.domain.model.generic.DomainException;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
@@ -14,6 +15,7 @@ import com.algaworks.algashop.ordering.domain.model.order.service.CheckoutServic
 import com.algaworks.algashop.ordering.domain.model.order.shipping.OriginAddressService;
 import com.algaworks.algashop.ordering.domain.model.order.shipping.ShippingCostService;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
+import com.algaworks.algashop.ordering.domain.model.order.valueobjects.CreditCardId;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Shipping;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCart;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.exception.ShoppingCartNotFoundException;
@@ -62,12 +64,23 @@ public class CheckoutApplicationService {
                 input.getShipping(),
                 calculateShippingCost(input));
 
+        PaymentMethod paymentMethod = PaymentMethod.valueOf(input.getPaymentMethod());
+        CreditCardId creditCardId = null;
+
+        if (PaymentMethod.CREDIT_CARD.equals(paymentMethod)) {
+            if (input.getCreditCardId() == null) {
+                throw new DomainException("Credit card id is required");
+            }
+            creditCardId = new CreditCardId(input.getCreditCardId());
+        }
+
         Order checkoutedOrder = checkoutService.checkout(
                 shoppingCart,
                 customer,
                 billingInfo,
                 shippingInfo,
-                PaymentMethod.valueOf(input.getPaymentMethod())
+                paymentMethod,
+                creditCardId
         );
 
 

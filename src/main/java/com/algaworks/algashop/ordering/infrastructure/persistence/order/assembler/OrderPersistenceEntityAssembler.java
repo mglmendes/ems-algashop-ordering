@@ -38,6 +38,11 @@ public class OrderPersistenceEntityAssembler {
         orderPersistenceEntity.setTotalItems(order.totalItems().value());
         orderPersistenceEntity.setStatus(order.status().name());
         orderPersistenceEntity.setPaymentMethod(order.paymentMethod().name());
+
+        if (order.creditCardId() != null) {
+            orderPersistenceEntity.setCreditCardId(order.creditCardId().id());
+        }
+
         orderPersistenceEntity.setPlacedAt(order.placedAt());
         orderPersistenceEntity.setPaidAt(order.paidAt());
         orderPersistenceEntity.setCanceledAt(order.canceledAt());

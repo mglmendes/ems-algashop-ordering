@@ -3,6 +3,7 @@ package com.algaworks.algashop.ordering.domain.model.order.service;
 import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.order.specification.CustomerHaveFreeShippingSpecification;
+import com.algaworks.algashop.ordering.domain.model.order.valueobjects.CreditCardId;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCart;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCartItem;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
@@ -23,7 +24,7 @@ public class CheckoutService {
     private final CustomerHaveFreeShippingSpecification haveFreeShippingSpec;
 
     public Order checkout(ShoppingCart shoppingCart, Customer customer, Billing billingInfo,
-                          Shipping shippingInfo, PaymentMethod paymentMethod) {
+                          Shipping shippingInfo, PaymentMethod paymentMethod, CreditCardId creditCardId) {
 
         if (shoppingCart.containsUnavailableItems() || shoppingCart.isEmpty()) {
             throw new ShoppingCartCantProceedToCheckoutException();
@@ -42,7 +43,7 @@ public class CheckoutService {
             order.changeShipping(shippingInfo);
         }
 
-        order.changePaymentMethod(paymentMethod);
+        order.changePaymentMethod(paymentMethod, creditCardId);
 
         items.forEach(
                 item -> {

@@ -51,8 +51,8 @@ public class OrderControllerIT {
     private ShoppingCartPersistenceEntityRepository shoppingCartRepository;
 
     private static final UUID validCustomerId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
-    private static final UUID validProductId = UUID.fromString("019c90e8-40fa-7ab0-a458-34f237b97987");
-    private static final UUID validShoppingCartId = UUID.fromString("4f31582a-66e6-4601-a9d3-ff608c2d4461");
+    private static final UUID validProductId = UUID.fromString("019c90e8-40fa-7ab0-a458-34f237b97987");;
+    private static final UUID validCreditCardId = UUID.fromString("4f31582a-66e6-4601-a9d3-ff608c2d4461");
 
     private WireMockServer wireMockServerProductCatalog;
     private WireMockServer wireMockServerRapidex;
@@ -106,8 +106,9 @@ public class OrderControllerIT {
 
     @Test
     public void shouldCreateOrderUsingProduct_DTO() {
-        BuyNowInput buyNowInput = BuyNowInputTestDataBuilder.aBuyNowInput().productId(validProductId).customerId(validCustomerId).build();
-        RestAssured.given()
+        BuyNowInput buyNowInput = BuyNowInputTestDataBuilder.aBuyNowInput().productId(validProductId)
+                .creditCardId(validCreditCardId).customerId(validCustomerId).build();
+        OrderDetailOutput orderDetailOutput = RestAssured.given()
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType("application/vnd.order-with-product.v1+json")
                 .body(buyNowInput)
@@ -116,8 +117,11 @@ public class OrderControllerIT {
                 .then()
                 .assertThat()
                 .contentType(ContentType.JSON)
-                .statusCode(HttpStatus.CREATED.value());
+                .statusCode(HttpStatus.CREATED.value())
+                .extract().body().as(OrderDetailOutput.class);
 
+        Assertions.assertThat(orderDetailOutput).isNotNull();
+        Assertions.assertThat(orderDetailOutput.getCreditCardId()).isEqualTo(validCreditCardId);
     }
 
     @Test

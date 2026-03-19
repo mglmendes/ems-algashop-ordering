@@ -1,5 +1,6 @@
 package com.algaworks.algashop.ordering.domain.model.order;
 
+import com.algaworks.algashop.ordering.domain.model.order.valueobjects.CreditCardId;
 import com.algaworks.algashop.ordering.domain.model.product.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.common.Address;
 import com.algaworks.algashop.ordering.domain.model.common.Money;
@@ -130,7 +131,7 @@ class OrderTest {
     @Test
     public void givenDraftOrder_whenChangePaymentMethod_shouldAllowChange() {
         Order draft = Order.draft(new CustomerId());
-        draft.changePaymentMethod(CREDIT_CARD);
+        draft.changePaymentMethod(CREDIT_CARD, new CreditCardId());
         Assertions.assertThat(draft.paymentMethod()).isEqualTo(CREDIT_CARD);
     }
 

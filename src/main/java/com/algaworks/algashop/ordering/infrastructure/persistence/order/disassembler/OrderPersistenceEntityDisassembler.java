@@ -18,12 +18,20 @@ import com.algaworks.algashop.ordering.infrastructure.persistence.order.entity.O
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
 public class OrderPersistenceEntityDisassembler {
 
     public Order toDomainEntity(OrderPersistenceEntity persistenceEntity) {
+
+        CreditCardId creditCardId = null;
+
+        if (persistenceEntity.getCreditCardId() != null) {
+               creditCardId = new CreditCardId(persistenceEntity.getCreditCardId());
+        }
+
         return Order.existing()
                 .id(new OrderId(persistenceEntity.getId()))
                 .customerId(new CustomerId(persistenceEntity.getCustomerId()))
@@ -32,6 +40,7 @@ public class OrderPersistenceEntityDisassembler {
                 .totalItems(new Quantity(persistenceEntity.getTotalItems()))
                 .status(OrderStatus.valueOf(persistenceEntity.getStatus()))
                 .paymentMethod(PaymentMethod.valueOf(persistenceEntity.getPaymentMethod()))
+                .creditCardId(creditCardId)
                 .placedAt(persistenceEntity.getPlacedAt())
                 .paidAt(persistenceEntity.getPaidAt())
                 .canceledAt(persistenceEntity.getCanceledAt())

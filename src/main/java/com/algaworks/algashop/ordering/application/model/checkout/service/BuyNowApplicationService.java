@@ -10,6 +10,7 @@ import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
+import com.algaworks.algashop.ordering.domain.model.generic.DomainException;
 import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
 import com.algaworks.algashop.ordering.domain.model.order.repository.Orders;
@@ -17,6 +18,7 @@ import com.algaworks.algashop.ordering.domain.model.order.service.BuyNowService;
 import com.algaworks.algashop.ordering.domain.model.order.shipping.OriginAddressService;
 import com.algaworks.algashop.ordering.domain.model.order.shipping.ShippingCostService;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
+import com.algaworks.algashop.ordering.domain.model.order.valueobjects.CreditCardId;
 import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Shipping;
 import com.algaworks.algashop.ordering.domain.model.product.exception.ProductNotFoundException;
 import com.algaworks.algashop.ordering.domain.model.product.service.ProductCatalogService;
@@ -52,9 +54,17 @@ public class BuyNowApplicationService {
         CustomerId customerId = new CustomerId(input.getCustomerId());
         ProductId productId = new ProductId(input.getProductId());
         Quantity quantity = new Quantity(input.getQuantity());
+        CreditCardId creditCardId = null;
+
+        if (PaymentMethod.CREDIT_CARD.equals(paymentMethod)) {
+            if (input.getCreditCardId() == null) {
+                throw new DomainException("Credit card id is required");
+            }
+            creditCardId = new CreditCardId(input.getCreditCardId());
+        }
 
         Customer customer = customers.ofId(customerId).orElseThrow(
-                () -> new CustomerNotFoundException()
+                CustomerNotFoundException::new
         );
         Product product = productCatalogService.ofId(productId).orElseThrow(
                 () -> new ProductNotFoundException(productId.value())
@@ -71,7 +81,8 @@ public class BuyNowApplicationService {
                 billing,
                 shipping,
                 quantity,
-                paymentMethod
+                paymentMethod,
+                creditCardId
         );
 
         orders.add(order);
