@@ -23,6 +23,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.Year;
 import java.util.List;
@@ -30,6 +31,7 @@ import java.util.Optional;
 
 import static com.algaworks.algashop.ordering.domain.model.customer.CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID;
 
+@ActiveProfiles("test")
 @DataJpaTest
 @Import({
         OrdersPersistenceProvider.class,

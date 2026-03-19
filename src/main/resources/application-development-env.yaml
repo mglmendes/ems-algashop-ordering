@@ -1,13 +1,9 @@
 spring:
-  application:
-    name: ordering
   datasource:
     url: jdbc:postgresql://localhost:5432/ordering
     username: postgres
     password: postgres
   jpa:
-    hibernate:
-      ddl-auto: none
     show-sql: true
   flyway:
     enabled: true
@@ -22,5 +18,3 @@ algashop:
       url: http://localhost:8787
     product-catalog:
       url: http://localhost:8787
-    shipping:
-      provider: RAPIDEX
