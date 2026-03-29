@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.application.model.checkout.service;
 
-
+import com.algaworks.algashop.ordering.application.model.AbstractApplicationIT;
 import com.algaworks.algashop.ordering.application.model.checkout.input.BuyNowInput;
 import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
@@ -16,16 +16,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
-@SpringBootTest
-@Transactional
-class BuyNowApplicationServiceIT {
+class BuyNowApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
     private BuyNowApplicationService applicationService;

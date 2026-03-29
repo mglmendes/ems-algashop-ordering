@@ -24,7 +24,7 @@ public class ShoppingCartControllerIT extends AbstractPresentationIT {
 
     @Autowired
     private ShoppingCartPersistenceEntityRepository shoppingCartRepository;
-
+    
     private static final UUID validShoppingCartId = UUID.fromString("4f31582a-66e6-4601-a9d3-ff608c2d4461");
 
     @BeforeEach

@@ -1,6 +1,7 @@
 package com.algaworks.algashop.ordering.application.model.shoppingcart.query;
 
 
+import com.algaworks.algashop.ordering.application.model.AbstractApplicationIT;
 import com.algaworks.algashop.ordering.application.model.shoppingcart.output.ShoppingCartOutput;
 import com.algaworks.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
@@ -11,14 +12,8 @@ import com.algaworks.algashop.ordering.domain.model.shoppingcart.repository.Shop
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
-@ActiveProfiles("test")
-@SpringBootTest
-@Transactional
-class ShoppingCartQueryServiceIT {
+class ShoppingCartQueryServiceIT extends AbstractApplicationIT {
 
     @Autowired
     private ShoppingCartQueryService shoppingCartQueryService;
