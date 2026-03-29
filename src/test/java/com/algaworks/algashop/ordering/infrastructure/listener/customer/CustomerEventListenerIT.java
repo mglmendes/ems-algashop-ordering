@@ -1,6 +1,7 @@
 package com.algaworks.algashop.ordering.infrastructure.listener.customer;
 
 
+import com.algaworks.algashop.ordering.application.model.AbstractApplicationIT;
 import com.algaworks.algashop.ordering.application.model.customer.notifications.CustomerNotificationService;
 import com.algaworks.algashop.ordering.application.model.customer.service.CustomerLoyaltyPointsApplicationService;
 import com.algaworks.algashop.ordering.domain.model.common.Email;
@@ -12,18 +13,14 @@ import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class CustomerEventListenerIT {
+class CustomerEventListenerIT extends AbstractApplicationIT {
 
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;

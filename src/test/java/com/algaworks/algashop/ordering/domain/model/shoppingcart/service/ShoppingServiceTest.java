@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.domain.model.shoppingcart;
+package com.algaworks.algashop.ordering.domain.model.shoppingcart.service;
 
 import com.algaworks.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
@@ -7,9 +7,9 @@ import com.algaworks.algashop.ordering.domain.model.common.Money;
 import com.algaworks.algashop.ordering.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerAlreadyHaveShoppingCartException;
+import com.algaworks.algashop.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCart;
 import com.algaworks.algashop.ordering.domain.model.shoppingcart.repository.ShoppingCarts;
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.service.ShoppingService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith; // Added import
 import org.mockito.InjectMocks; // Added import
