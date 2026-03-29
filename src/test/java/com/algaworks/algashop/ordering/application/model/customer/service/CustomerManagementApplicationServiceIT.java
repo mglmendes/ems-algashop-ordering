@@ -1,5 +1,6 @@
 package com.algaworks.algashop.ordering.application.model.customer.service;
 
+import com.algaworks.algashop.ordering.application.model.AbstractApplicationIT;
 import com.algaworks.algashop.ordering.application.model.customer.input.CustomerInput;
 import com.algaworks.algashop.ordering.application.model.customer.input.CustomerUpdateInput;
 import com.algaworks.algashop.ordering.application.model.customer.notifications.CustomerNotificationService;
@@ -16,28 +17,13 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
-import org.springframework.transaction.annotation.Transactional;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@ActiveProfiles("test")
-@SpringBootTest
-@Transactional
-@Testcontainers
-class CustomerManagementApplicationServiceIT {
 
-    @Container
-    @ServiceConnection
-    private static PostgreSQLContainer postgreSQLContainer =
-            new PostgreSQLContainer<>("postgres:17-alpine").withDatabaseName("ordering_test");
+class CustomerManagementApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
     private CustomerManagementApplicationService applicationService;
