@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.core.application.model.shoppingcart.input;
+package com.algaworks.algashop.ordering.core.ports.in.shoppingcart.input;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
