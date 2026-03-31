@@ -1,10 +1,10 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.customer.disassembler;
 
-import com.algaworks.algashop.ordering.domain.model.common.*;
-import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
-import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.BirthDate;
-import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.LoyaltyPoints;
-import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
+import com.algaworks.algashop.ordering.core.domain.model.common.*;
+import com.algaworks.algashop.ordering.core.domain.model.customer.entity.Customer;
+import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.BirthDate;
+import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.LoyaltyPoints;
+import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 import com.algaworks.algashop.ordering.infrastructure.persistence.customer.entity.CustomerPersistenceEntity;
 import org.springframework.stereotype.Component;

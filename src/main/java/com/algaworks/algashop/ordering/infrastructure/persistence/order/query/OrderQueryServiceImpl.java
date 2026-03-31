@@ -1,13 +1,13 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.order.query;
 
-import com.algaworks.algashop.ordering.application.model.order.filter.OrderFilter;
-import com.algaworks.algashop.ordering.application.model.order.output.CustomerMinimalOutput;
-import com.algaworks.algashop.ordering.application.model.order.output.OrderDetailOutput;
-import com.algaworks.algashop.ordering.application.model.order.output.OrderSummaryOutput;
-import com.algaworks.algashop.ordering.application.model.order.query.OrderQueryService;
-import com.algaworks.algashop.ordering.application.utility.Mapper;
-import com.algaworks.algashop.ordering.domain.model.order.exceptions.OrderNotFoundException;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
+import com.algaworks.algashop.ordering.core.application.model.order.filter.OrderFilter;
+import com.algaworks.algashop.ordering.core.application.model.order.output.CustomerMinimalOutput;
+import com.algaworks.algashop.ordering.core.application.model.order.output.OrderDetailOutput;
+import com.algaworks.algashop.ordering.core.application.model.order.output.OrderSummaryOutput;
+import com.algaworks.algashop.ordering.core.application.model.order.query.OrderQueryService;
+import com.algaworks.algashop.ordering.core.application.utility.Mapper;
+import com.algaworks.algashop.ordering.core.domain.model.order.exceptions.OrderNotFoundException;
+import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.entity.OrderPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.repository.OrderPersistenceEntityRepository;
 import jakarta.persistence.EntityManager;

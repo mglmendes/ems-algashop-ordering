@@ -1,14 +1,14 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.disassembler;
 
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCart;
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCartItem;
-import com.algaworks.algashop.ordering.domain.model.common.Money;
-import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductName;
-import com.algaworks.algashop.ordering.domain.model.common.Quantity;
-import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
-import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductId;
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.valueobject.ShoppingCartId;
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.valueobject.ShoppingCartItemId;
+import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.entity.ShoppingCart;
+import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.entity.ShoppingCartItem;
+import com.algaworks.algashop.ordering.core.domain.model.common.Money;
+import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductName;
+import com.algaworks.algashop.ordering.core.domain.model.common.Quantity;
+import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
+import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductId;
+import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.valueobject.ShoppingCartId;
+import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.valueobject.ShoppingCartItemId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.entity.ShoppingCartItemPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.entity.ShoppingCartPersistenceEntity;
 import org.springframework.stereotype.Component;

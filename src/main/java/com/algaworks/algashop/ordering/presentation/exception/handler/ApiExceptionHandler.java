@@ -1,8 +1,8 @@
 package com.algaworks.algashop.ordering.presentation.exception.handler;
 
-import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerEmailAlreadyInUseException;
-import com.algaworks.algashop.ordering.domain.model.generic.DomainEntityNotFoundException;
-import com.algaworks.algashop.ordering.domain.model.generic.DomainException;
+import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerEmailAlreadyInUseException;
+import com.algaworks.algashop.ordering.core.domain.model.generic.DomainEntityNotFoundException;
+import com.algaworks.algashop.ordering.core.domain.model.generic.DomainException;
 import com.algaworks.algashop.ordering.presentation.exception.BadGatewayException;
 import com.algaworks.algashop.ordering.presentation.exception.GatewayTimeoutException;
 import com.algaworks.algashop.ordering.presentation.exception.UnprocessableEntityException;

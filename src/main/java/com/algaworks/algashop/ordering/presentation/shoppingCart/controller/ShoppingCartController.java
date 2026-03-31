@@ -1,12 +1,12 @@
 package com.algaworks.algashop.ordering.presentation.shoppingCart.controller;
 
 
-import com.algaworks.algashop.ordering.application.model.shoppingcart.input.ShoppingCartItemInput;
-import com.algaworks.algashop.ordering.application.model.shoppingcart.output.ShoppingCartOutput;
-import com.algaworks.algashop.ordering.application.model.shoppingcart.query.ShoppingCartQueryService;
-import com.algaworks.algashop.ordering.application.model.shoppingcart.service.ShoppingCartManagementApplicationService;
-import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
-import com.algaworks.algashop.ordering.domain.model.product.exception.ProductNotFoundException;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.input.ShoppingCartItemInput;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.output.ShoppingCartOutput;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.query.ShoppingCartQueryService;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.service.ShoppingCartManagementApplicationService;
+import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerNotFoundException;
+import com.algaworks.algashop.ordering.core.domain.model.product.exception.ProductNotFoundException;
 import com.algaworks.algashop.ordering.presentation.exception.UnprocessableEntityException;
 import com.algaworks.algashop.ordering.presentation.shoppingCart.input.ShoppingCartInput;
 import com.algaworks.algashop.ordering.presentation.shoppingCart.model.ShoppingCartItemListModel;

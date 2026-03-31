@@ -1,11 +1,11 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.order.assembler;
 
-import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
-import com.algaworks.algashop.ordering.domain.model.order.entity.OrderItem;
-import com.algaworks.algashop.ordering.domain.model.common.Address;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Billing;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Recipient;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.Shipping;
+import com.algaworks.algashop.ordering.core.domain.model.order.entity.Order;
+import com.algaworks.algashop.ordering.core.domain.model.order.entity.OrderItem;
+import com.algaworks.algashop.ordering.core.domain.model.common.Address;
+import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.Billing;
+import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.Recipient;
+import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.Shipping;
 import com.algaworks.algashop.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.embeddable.RecipientEmbeddable;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.embeddable.ShippingEmbeddable;

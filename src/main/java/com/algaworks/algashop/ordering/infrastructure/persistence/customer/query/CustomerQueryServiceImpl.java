@@ -1,11 +1,11 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.customer.query;
 
-import com.algaworks.algashop.ordering.application.model.customer.filter.CustomerFilter;
-import com.algaworks.algashop.ordering.application.model.customer.output.CustomerOutput;
-import com.algaworks.algashop.ordering.application.model.customer.output.CustomerSummaryOutput;
-import com.algaworks.algashop.ordering.application.model.customer.query.CustomerQueryService;
-import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
-import com.algaworks.algashop.ordering.domain.model.customer.jpql.CustomerJPQLQueries;
+import com.algaworks.algashop.ordering.core.application.model.customer.filter.CustomerFilter;
+import com.algaworks.algashop.ordering.core.application.model.customer.output.CustomerOutput;
+import com.algaworks.algashop.ordering.core.application.model.customer.output.CustomerSummaryOutput;
+import com.algaworks.algashop.ordering.core.application.model.customer.query.CustomerQueryService;
+import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerNotFoundException;
+import com.algaworks.algashop.ordering.core.domain.model.customer.jpql.CustomerJPQLQueries;
 import com.algaworks.algashop.ordering.infrastructure.persistence.customer.entity.CustomerPersistenceEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;

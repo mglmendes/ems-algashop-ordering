@@ -1,7 +1,7 @@
 package com.algaworks.algashop.ordering.infrastructure.utility.modelmapper;
 
-import com.algaworks.algashop.ordering.domain.model.common.FullName;
-import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.BirthDate;
+import com.algaworks.algashop.ordering.core.domain.model.common.FullName;
+import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.BirthDate;
 import io.hypersistence.tsid.TSID;
 import lombok.experimental.UtilityClass;
 import org.modelmapper.Converter;

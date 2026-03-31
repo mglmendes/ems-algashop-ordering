@@ -1,9 +1,9 @@
 package com.algaworks.algashop.ordering.contract.base;
 
-import com.algaworks.algashop.ordering.application.model.shoppingcart.databuilder.ShoppingCartOutputTestDataBuilder;
-import com.algaworks.algashop.ordering.application.model.shoppingcart.query.ShoppingCartQueryService;
-import com.algaworks.algashop.ordering.application.model.shoppingcart.service.ShoppingCartManagementApplicationService;
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.exception.ShoppingCartNotFoundException;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.databuilder.ShoppingCartOutputTestDataBuilder;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.query.ShoppingCartQueryService;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.service.ShoppingCartManagementApplicationService;
+import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.exception.ShoppingCartNotFoundException;
 import com.algaworks.algashop.ordering.presentation.shoppingCart.controller.ShoppingCartController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,10 +1,10 @@
 package com.algaworks.algashop.ordering.infrastructure.utility.config;
 
-import com.algaworks.algashop.ordering.application.model.customer.output.CustomerOutput;
-import com.algaworks.algashop.ordering.application.model.order.output.OrderDetailOutput;
-import com.algaworks.algashop.ordering.application.model.order.output.OrderItemDetailOutput;
-import com.algaworks.algashop.ordering.application.utility.Mapper;
-import com.algaworks.algashop.ordering.domain.model.customer.entity.Customer;
+import com.algaworks.algashop.ordering.core.application.model.customer.output.CustomerOutput;
+import com.algaworks.algashop.ordering.core.application.model.order.output.OrderDetailOutput;
+import com.algaworks.algashop.ordering.core.application.model.order.output.OrderItemDetailOutput;
+import com.algaworks.algashop.ordering.core.application.utility.Mapper;
+import com.algaworks.algashop.ordering.core.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.entity.OrderItemPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.entity.OrderPersistenceEntity;
 import org.modelmapper.ModelMapper;

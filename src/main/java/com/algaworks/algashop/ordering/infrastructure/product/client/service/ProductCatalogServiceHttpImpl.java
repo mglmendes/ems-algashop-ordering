@@ -1,11 +1,10 @@
 package com.algaworks.algashop.ordering.infrastructure.product.client.service;
 
-import com.algaworks.algashop.ordering.domain.model.common.Money;
-import com.algaworks.algashop.ordering.domain.model.product.exception.ProductNotFoundException;
-import com.algaworks.algashop.ordering.domain.model.product.service.ProductCatalogService;
-import com.algaworks.algashop.ordering.domain.model.product.valueobject.Product;
-import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductId;
-import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductName;
+import com.algaworks.algashop.ordering.core.domain.model.common.Money;
+import com.algaworks.algashop.ordering.core.domain.model.product.service.ProductCatalogService;
+import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.Product;
+import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductId;
+import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductName;
 import com.algaworks.algashop.ordering.infrastructure.product.client.ProductCatalogAPIClient;
 import com.algaworks.algashop.ordering.infrastructure.product.client.response.ProductResponse;
 import com.algaworks.algashop.ordering.presentation.exception.BadGatewayException;

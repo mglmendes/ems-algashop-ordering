@@ -1,0 +1,18 @@
+package com.algaworks.algashop.ordering.core.domain.model.order.valueobjects;
+
+import com.algaworks.algashop.ordering.core.domain.model.common.*;
+import com.algaworks.algashop.ordering.core.domain.model.common.*;
+import lombok.Builder;
+
+import java.util.Objects;
+
+@Builder
+public record Billing(FullName fullName, Document document, Phone phone, Email email, Address address) {
+	public Billing {
+		Objects.requireNonNull(fullName);
+		Objects.requireNonNull(document);
+		Objects.requireNonNull(email);
+		Objects.requireNonNull(phone);
+		Objects.requireNonNull(address);
+	}
+}

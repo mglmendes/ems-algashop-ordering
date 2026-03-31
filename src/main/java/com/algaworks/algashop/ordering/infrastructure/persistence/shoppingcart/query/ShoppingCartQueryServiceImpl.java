@@ -1,16 +1,14 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.query;
 
-import com.algaworks.algashop.ordering.application.model.shoppingcart.output.ShoppingCartOutput;
-import com.algaworks.algashop.ordering.application.model.shoppingcart.query.ShoppingCartQueryService;
-import com.algaworks.algashop.ordering.application.utility.Mapper;
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.exception.ShoppingCartNotFoundException;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.output.ShoppingCartOutput;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.query.ShoppingCartQueryService;
+import com.algaworks.algashop.ordering.core.application.utility.Mapper;
+import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.exception.ShoppingCartNotFoundException;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.entity.ShoppingCartPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.repository.ShoppingCartPersistenceEntityRepository;
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Component

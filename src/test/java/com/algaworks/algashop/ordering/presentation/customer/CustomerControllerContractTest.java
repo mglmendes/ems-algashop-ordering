@@ -1,16 +1,16 @@
 package com.algaworks.algashop.ordering.presentation.customer;
 
-import com.algaworks.algashop.ordering.application.model.common.AddressData;
-import com.algaworks.algashop.ordering.application.model.customer.filter.CustomerFilter;
-import com.algaworks.algashop.ordering.application.model.customer.input.CustomerInput;
-import com.algaworks.algashop.ordering.application.model.customer.output.CustomerOutput;
-import com.algaworks.algashop.ordering.application.model.customer.output.CustomerSummaryOutput;
-import com.algaworks.algashop.ordering.application.model.customer.query.CustomerQueryService;
-import com.algaworks.algashop.ordering.application.model.customer.service.CustomerManagementApplicationService;
-import com.algaworks.algashop.ordering.application.model.shoppingcart.query.ShoppingCartQueryService;
-import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerEmailAlreadyInUseException;
-import com.algaworks.algashop.ordering.domain.model.customer.exception.CustomerNotFoundException;
-import com.algaworks.algashop.ordering.domain.model.generic.DomainException;
+import com.algaworks.algashop.ordering.core.application.model.common.AddressData;
+import com.algaworks.algashop.ordering.core.application.model.customer.filter.CustomerFilter;
+import com.algaworks.algashop.ordering.core.application.model.customer.input.CustomerInput;
+import com.algaworks.algashop.ordering.core.application.model.customer.output.CustomerOutput;
+import com.algaworks.algashop.ordering.core.application.model.customer.output.CustomerSummaryOutput;
+import com.algaworks.algashop.ordering.core.application.model.customer.query.CustomerQueryService;
+import com.algaworks.algashop.ordering.core.application.model.customer.service.CustomerManagementApplicationService;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.query.ShoppingCartQueryService;
+import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerEmailAlreadyInUseException;
+import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerNotFoundException;
+import com.algaworks.algashop.ordering.core.domain.model.generic.DomainException;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.hamcrest.Matchers;

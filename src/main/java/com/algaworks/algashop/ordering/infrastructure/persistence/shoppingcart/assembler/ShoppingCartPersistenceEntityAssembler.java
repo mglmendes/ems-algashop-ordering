@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.assembler;
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCart;
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCartItem;
+import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.entity.ShoppingCart;
+import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.entity.ShoppingCartItem;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.entity.ShoppingCartItemPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.entity.ShoppingCartPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.customer.repository.CustomerPersistenceEntityRepository;

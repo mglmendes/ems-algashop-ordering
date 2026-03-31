@@ -1,15 +1,15 @@
 package com.algaworks.algashop.ordering.infrastructure.listener.customer;
 
 
-import com.algaworks.algashop.ordering.application.model.AbstractApplicationIT;
-import com.algaworks.algashop.ordering.application.model.customer.notifications.CustomerNotificationService;
-import com.algaworks.algashop.ordering.application.model.customer.service.CustomerLoyaltyPointsApplicationService;
-import com.algaworks.algashop.ordering.domain.model.common.Email;
-import com.algaworks.algashop.ordering.domain.model.common.FullName;
-import com.algaworks.algashop.ordering.domain.model.customer.event.CustomerRegisteredEvent;
-import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
-import com.algaworks.algashop.ordering.domain.model.order.event.OrderReadyEvent;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
+import com.algaworks.algashop.ordering.core.application.model.AbstractApplicationIT;
+import com.algaworks.algashop.ordering.core.application.model.customer.notifications.CustomerNotificationService;
+import com.algaworks.algashop.ordering.core.application.model.customer.service.CustomerLoyaltyPointsApplicationService;
+import com.algaworks.algashop.ordering.core.domain.model.common.Email;
+import com.algaworks.algashop.ordering.core.domain.model.common.FullName;
+import com.algaworks.algashop.ordering.core.domain.model.customer.event.CustomerRegisteredEvent;
+import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
+import com.algaworks.algashop.ordering.core.domain.model.order.event.OrderReadyEvent;
+import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderId;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,9 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.provider;
 
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.entity.ShoppingCart;
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.repository.ShoppingCarts;
-import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
-import com.algaworks.algashop.ordering.domain.model.shoppingcart.valueobject.ShoppingCartId;
+import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.entity.ShoppingCart;
+import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.repository.ShoppingCarts;
+import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
+import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.valueobject.ShoppingCartId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.assembler.ShoppingCartPersistenceEntityAssembler;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.disassembler.ShoppingCartPersistenceEntityDisassembler;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.entity.ShoppingCartPersistenceEntity;

@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.presentation.shoppingCart.model;
 
-import com.algaworks.algashop.ordering.application.model.shoppingcart.output.ShoppingCartItemOutput;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.output.ShoppingCartItemOutput;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

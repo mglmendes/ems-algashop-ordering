@@ -1,14 +1,14 @@
 package com.algaworks.algashop.ordering.presentation.customer;
 
-import com.algaworks.algashop.ordering.application.model.customer.filter.CustomerFilter;
-import com.algaworks.algashop.ordering.application.model.customer.input.CustomerInput;
-import com.algaworks.algashop.ordering.application.model.customer.input.CustomerUpdateInput;
-import com.algaworks.algashop.ordering.application.model.customer.output.CustomerOutput;
-import com.algaworks.algashop.ordering.application.model.customer.output.CustomerSummaryOutput;
-import com.algaworks.algashop.ordering.application.model.customer.query.CustomerQueryService;
-import com.algaworks.algashop.ordering.application.model.customer.service.CustomerManagementApplicationService;
-import com.algaworks.algashop.ordering.application.model.shoppingcart.output.ShoppingCartOutput;
-import com.algaworks.algashop.ordering.application.model.shoppingcart.query.ShoppingCartQueryService;
+import com.algaworks.algashop.ordering.core.application.model.customer.filter.CustomerFilter;
+import com.algaworks.algashop.ordering.core.application.model.customer.input.CustomerInput;
+import com.algaworks.algashop.ordering.core.application.model.customer.input.CustomerUpdateInput;
+import com.algaworks.algashop.ordering.core.application.model.customer.output.CustomerOutput;
+import com.algaworks.algashop.ordering.core.application.model.customer.output.CustomerSummaryOutput;
+import com.algaworks.algashop.ordering.core.application.model.customer.query.CustomerQueryService;
+import com.algaworks.algashop.ordering.core.application.model.customer.service.CustomerManagementApplicationService;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.output.ShoppingCartOutput;
+import com.algaworks.algashop.ordering.core.application.model.shoppingcart.query.ShoppingCartQueryService;
 import com.algaworks.algashop.ordering.presentation.model.PageModel;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController

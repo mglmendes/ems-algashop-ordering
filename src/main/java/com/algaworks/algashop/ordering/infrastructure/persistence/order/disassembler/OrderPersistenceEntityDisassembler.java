@@ -1,14 +1,14 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.order.disassembler;
 
-import com.algaworks.algashop.ordering.domain.model.common.*;
-import com.algaworks.algashop.ordering.domain.model.order.entity.Order;
-import com.algaworks.algashop.ordering.domain.model.order.entity.OrderItem;
-import com.algaworks.algashop.ordering.domain.model.order.entity.enums.OrderStatus;
-import com.algaworks.algashop.ordering.domain.model.order.entity.enums.PaymentMethod;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.*;
-import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductName;
-import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
-import com.algaworks.algashop.ordering.domain.model.product.valueobject.ProductId;
+import com.algaworks.algashop.ordering.core.domain.model.common.*;
+import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.*;
+import com.algaworks.algashop.ordering.core.domain.model.order.entity.Order;
+import com.algaworks.algashop.ordering.core.domain.model.order.entity.OrderItem;
+import com.algaworks.algashop.ordering.core.domain.model.order.entity.enums.OrderStatus;
+import com.algaworks.algashop.ordering.core.domain.model.order.entity.enums.PaymentMethod;
+import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductName;
+import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
+import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.embeddable.RecipientEmbeddable;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.embeddable.ShippingEmbeddable;
@@ -18,7 +18,6 @@ import com.algaworks.algashop.ordering.infrastructure.persistence.order.entity.O
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component

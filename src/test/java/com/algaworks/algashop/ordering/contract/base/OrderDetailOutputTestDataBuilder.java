@@ -1,15 +1,15 @@
 package com.algaworks.algashop.ordering.contract.base;
 
-import com.algaworks.algashop.ordering.application.model.common.AddressData;
-import com.algaworks.algashop.ordering.application.model.common.BillingData;
-import com.algaworks.algashop.ordering.application.model.common.RecipientData;
-import com.algaworks.algashop.ordering.application.model.order.data.ShippingData;
-import com.algaworks.algashop.ordering.application.model.order.output.CustomerMinimalOutput;
-import com.algaworks.algashop.ordering.application.model.order.output.OrderDetailOutput;
-import com.algaworks.algashop.ordering.application.model.order.output.OrderItemDetailOutput;
-import com.algaworks.algashop.ordering.domain.model.customer.valueobjects.CustomerId;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderId;
-import com.algaworks.algashop.ordering.domain.model.order.valueobjects.OrderItemId;
+import com.algaworks.algashop.ordering.core.application.model.common.AddressData;
+import com.algaworks.algashop.ordering.core.application.model.common.BillingData;
+import com.algaworks.algashop.ordering.core.application.model.common.RecipientData;
+import com.algaworks.algashop.ordering.core.application.model.order.data.ShippingData;
+import com.algaworks.algashop.ordering.core.application.model.order.output.CustomerMinimalOutput;
+import com.algaworks.algashop.ordering.core.application.model.order.output.OrderDetailOutput;
+import com.algaworks.algashop.ordering.core.application.model.order.output.OrderItemDetailOutput;
+import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
+import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderId;
+import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderItemId;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
