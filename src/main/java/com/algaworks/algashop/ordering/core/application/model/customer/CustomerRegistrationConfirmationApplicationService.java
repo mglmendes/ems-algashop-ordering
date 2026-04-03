@@ -3,7 +3,7 @@ package com.algaworks.algashop.ordering.core.application.model.customer;
 import com.algaworks.algashop.ordering.core.ports.in.customer.output.CustomerOutput;
 import com.algaworks.algashop.ordering.core.ports.out.customer.notifications.ForNotifyingCustomers;
 import com.algaworks.algashop.ordering.core.ports.out.customer.persistence.ForObtainingCustomers;
-import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.customer.ForConfirmCustomerRegistration;
+import com.algaworks.algashop.ordering.core.ports.in.customer.ForConfirmCustomerRegistration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

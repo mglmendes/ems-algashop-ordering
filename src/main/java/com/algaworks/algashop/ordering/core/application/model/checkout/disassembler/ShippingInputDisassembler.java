@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.core.application.model.checkout.disassembler;
 
-import com.algaworks.algashop.ordering.core.application.model.checkout.input.ShippingInput;
+import com.algaworks.algashop.ordering.core.ports.in.order.input.ShippingInput;
 import com.algaworks.algashop.ordering.core.ports.in.common.AddressData;
 import com.algaworks.algashop.ordering.core.domain.model.common.*;
 import com.algaworks.algashop.ordering.core.domain.model.order.shipping.ShippingCostService;

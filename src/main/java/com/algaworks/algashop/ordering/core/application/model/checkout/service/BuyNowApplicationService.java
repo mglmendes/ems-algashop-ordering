@@ -2,8 +2,8 @@ package com.algaworks.algashop.ordering.core.application.model.checkout.service;
 
 import com.algaworks.algashop.ordering.core.application.model.checkout.disassembler.BillingInputDisassembler;
 import com.algaworks.algashop.ordering.core.application.model.checkout.disassembler.ShippingInputDisassembler;
-import com.algaworks.algashop.ordering.core.application.model.checkout.input.BuyNowInput;
-import com.algaworks.algashop.ordering.core.application.model.checkout.input.ShippingInput;
+import com.algaworks.algashop.ordering.core.ports.in.order.input.BuyNowInput;
+import com.algaworks.algashop.ordering.core.ports.in.order.input.ShippingInput;
 import com.algaworks.algashop.ordering.core.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.core.domain.model.common.ZipCode;
 import com.algaworks.algashop.ordering.core.domain.model.customer.entity.Customer;
@@ -24,6 +24,7 @@ import com.algaworks.algashop.ordering.core.domain.model.product.exception.Produ
 import com.algaworks.algashop.ordering.core.domain.model.product.service.ProductCatalogService;
 import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.Product;
 import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductId;
+import com.algaworks.algashop.ordering.core.ports.in.order.ForBuyingProduct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class BuyNowApplicationService {
+public class BuyNowApplicationService implements ForBuyingProduct {
 
     private final BuyNowService buyNowService;
     private final ProductCatalogService productCatalogService;
@@ -47,6 +48,7 @@ public class BuyNowApplicationService {
     private final BillingInputDisassembler billingInputDisassembler;
 
     @Transactional
+    @Override
     public String buyNow(BuyNowInput input) {
         Objects.requireNonNull(input);
 

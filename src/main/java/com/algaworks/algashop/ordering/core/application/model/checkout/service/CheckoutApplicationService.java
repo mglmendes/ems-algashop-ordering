@@ -2,7 +2,8 @@ package com.algaworks.algashop.ordering.core.application.model.checkout.service;
 
 import com.algaworks.algashop.ordering.core.application.model.checkout.disassembler.BillingInputDisassembler;
 import com.algaworks.algashop.ordering.core.application.model.checkout.disassembler.ShippingInputDisassembler;
-import com.algaworks.algashop.ordering.core.application.model.checkout.input.CheckoutInput;
+import com.algaworks.algashop.ordering.core.ports.in.order.ForBuyingWithShoppingCart;
+import com.algaworks.algashop.ordering.core.ports.in.order.input.CheckoutInput;
 import com.algaworks.algashop.ordering.core.domain.model.common.ZipCode;
 import com.algaworks.algashop.ordering.core.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerNotFoundException;
@@ -29,7 +30,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class CheckoutApplicationService {
+public class CheckoutApplicationService implements ForBuyingWithShoppingCart {
 
     private final ShoppingCarts shoppingCarts;
 
@@ -48,6 +49,7 @@ public class CheckoutApplicationService {
     private final OriginAddressService originAddressService;
 
     @Transactional
+    @Override
     public String checkout(CheckoutInput input) {
         Objects.requireNonNull(input);
         ShoppingCart shoppingCart = shoppingCarts.ofId(new ShoppingCartId(input.getShoppingCartId())).orElseThrow(

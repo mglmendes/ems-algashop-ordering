@@ -1,14 +1,14 @@
 package com.algaworks.algashop.ordering.contract.base;
 
-import com.algaworks.algashop.ordering.core.application.model.checkout.input.BuyNowInput;
-import com.algaworks.algashop.ordering.core.application.model.checkout.input.CheckoutInput;
-import com.algaworks.algashop.ordering.core.application.model.checkout.service.BuyNowApplicationService;
-import com.algaworks.algashop.ordering.core.application.model.checkout.service.CheckoutApplicationService;
+import com.algaworks.algashop.ordering.core.ports.in.order.ForBuyingWithShoppingCart;
+import com.algaworks.algashop.ordering.core.ports.in.order.ForQueryingOrders;
+import com.algaworks.algashop.ordering.core.ports.in.order.input.BuyNowInput;
+import com.algaworks.algashop.ordering.core.ports.in.order.input.CheckoutInput;
+import com.algaworks.algashop.ordering.core.ports.in.order.ForBuyingProduct;
 import com.algaworks.algashop.ordering.core.application.model.order.databuilder.OrderSummaryOutputTestDataBuilder;
-import com.algaworks.algashop.ordering.core.application.model.order.filter.OrderFilter;
-import com.algaworks.algashop.ordering.core.application.model.order.query.OrderQueryService;
+import com.algaworks.algashop.ordering.core.ports.in.order.filter.OrderFilter;
 import com.algaworks.algashop.ordering.core.domain.model.order.exceptions.OrderNotFoundException;
-import com.algaworks.algashop.ordering.presentation.order.controller.OrderController;
+import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.order.OrderController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
@@ -29,13 +29,13 @@ public class OrderBase {
     private WebApplicationContext context;
 
     @MockitoBean
-    private OrderQueryService orderQueryService;
+    private ForQueryingOrders forQueryingOrders;
 
     @MockitoBean
-    private BuyNowApplicationService buyNowApplicationService;
+    private ForBuyingProduct buyNowApplicationService;
 
     @MockitoBean
-    private CheckoutApplicationService checkoutApplicationService;
+    private ForBuyingWithShoppingCart checkoutApplicationService;
 
     public static final String notFoundOrderId = "91226N0693HDH";
     public static final String validOrderId = "01226N0640J7Q";
@@ -56,13 +56,13 @@ public class OrderBase {
         Mockito.when(checkoutApplicationService.checkout(Mockito.any(CheckoutInput.class)))
                 .thenReturn(validOrderId);
 
-        Mockito.when(orderQueryService.findById(validOrderId))
+        Mockito.when(forQueryingOrders.findById(validOrderId))
                 .thenReturn(OrderDetailOutputTestDataBuilder.placedOrder(validOrderId).build());
 
-        Mockito.when(orderQueryService.findById(notFoundOrderId))
+        Mockito.when(forQueryingOrders.findById(notFoundOrderId))
                 .thenThrow(new OrderNotFoundException(notFoundOrderId));
 
-        Mockito.when(orderQueryService.filter(Mockito.any(OrderFilter.class)))
+        Mockito.when(forQueryingOrders.filter(Mockito.any(OrderFilter.class)))
                 .thenReturn(new PageImpl<>(
                         List.of(OrderSummaryOutputTestDataBuilder.placedOrder().id(validOrderId).build())
                 ));

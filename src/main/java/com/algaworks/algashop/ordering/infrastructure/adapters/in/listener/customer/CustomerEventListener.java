@@ -4,7 +4,7 @@ import com.algaworks.algashop.ordering.core.domain.model.customer.event.Customer
 import com.algaworks.algashop.ordering.core.domain.model.customer.event.CustomerRegisteredEvent;
 import com.algaworks.algashop.ordering.core.domain.model.order.event.OrderReadyEvent;
 import com.algaworks.algashop.ordering.core.ports.in.customer.ForAddingLoyaltyPoints;
-import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.customer.ForConfirmCustomerRegistration;
+import com.algaworks.algashop.ordering.core.ports.in.customer.ForConfirmCustomerRegistration;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;

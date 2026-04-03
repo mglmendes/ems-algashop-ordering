@@ -1,7 +1,7 @@
 package com.algaworks.algashop.ordering.core.application.model.order.databuilder;
 
-import com.algaworks.algashop.ordering.core.application.model.order.output.CustomerMinimalOutput;
-import com.algaworks.algashop.ordering.core.application.model.order.output.OrderSummaryOutput;
+import com.algaworks.algashop.ordering.core.ports.in.order.output.CustomerMinimalOutput;
+import com.algaworks.algashop.ordering.core.ports.in.order.output.OrderSummaryOutput;
 import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderId;
 

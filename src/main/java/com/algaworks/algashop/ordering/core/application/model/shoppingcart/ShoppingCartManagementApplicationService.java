@@ -1,8 +1,6 @@
 package com.algaworks.algashop.ordering.core.application.model.shoppingcart;
 
-import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.input.ShoppingCartItemInput;
 import com.algaworks.algashop.ordering.core.domain.model.common.Quantity;
-import com.algaworks.algashop.ordering.core.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.core.domain.model.product.exception.ProductNotFoundException;
 import com.algaworks.algashop.ordering.core.domain.model.product.service.ProductCatalogService;
@@ -15,6 +13,7 @@ import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.service.Sh
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.valueobject.ShoppingCartId;
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.valueobject.ShoppingCartItemId;
 import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.ForManagingShoppingCarts;
+import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.input.ShoppingCartItemInput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +25,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ShoppingCartManagementApplicationService implements ForManagingShoppingCarts {
 
-    private final Customers customers;
     private final ShoppingCarts shoppingCarts;
     private final ProductCatalogService productCatalogService;
     private final ShoppingService shoppingService;

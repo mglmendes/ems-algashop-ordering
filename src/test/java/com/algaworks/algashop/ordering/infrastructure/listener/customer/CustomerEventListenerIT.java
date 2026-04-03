@@ -2,7 +2,6 @@ package com.algaworks.algashop.ordering.infrastructure.listener.customer;
 
 
 import com.algaworks.algashop.ordering.core.application.model.AbstractApplicationIT;
-import com.algaworks.algashop.ordering.core.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.core.ports.in.customer.output.CustomerOutput;
 import com.algaworks.algashop.ordering.core.ports.out.customer.notifications.ForNotifyingCustomers;
 import com.algaworks.algashop.ordering.core.ports.in.customer.ForAddingLoyaltyPoints;
@@ -14,8 +13,6 @@ import com.algaworks.algashop.ordering.core.domain.model.order.event.OrderReadyE
 import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderId;
 import com.algaworks.algashop.ordering.core.ports.out.customer.persistence.ForObtainingCustomers;
 import com.algaworks.algashop.ordering.infrastructure.adapters.in.listener.customer.CustomerEventListener;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.entity.CustomerPersistenceEntity;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.repository.CustomerPersistenceEntityRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
@@ -25,8 +22,6 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.time.OffsetDateTime;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 class CustomerEventListenerIT extends AbstractApplicationIT {

@@ -14,6 +14,7 @@ import com.algaworks.algashop.ordering.core.domain.model.order.exceptions.OrderN
 import com.algaworks.algashop.ordering.core.domain.model.order.exceptions.OrderStatusCannotBeChangedException;
 import com.algaworks.algashop.ordering.core.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderId;
+import com.algaworks.algashop.ordering.core.ports.in.order.ForManagingOrders;
 import com.algaworks.algashop.ordering.infrastructure.adapters.in.listener.order.OrderEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +29,7 @@ import java.util.UUID;
 class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
-    private OrderManagementApplicationService service;
+    private ForManagingOrders service;
 
     @Autowired
     private Orders orders;

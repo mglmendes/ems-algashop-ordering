@@ -1,7 +1,7 @@
 package com.algaworks.algashop.ordering.core.application.model.checkout.service;
 
 import com.algaworks.algashop.ordering.core.application.model.AbstractApplicationIT;
-import com.algaworks.algashop.ordering.core.application.model.checkout.input.BuyNowInput;
+import com.algaworks.algashop.ordering.core.ports.in.order.input.BuyNowInput;
 import com.algaworks.algashop.ordering.core.domain.model.common.Money;
 import com.algaworks.algashop.ordering.core.domain.model.customer.CustomerTestDataBuilder;
 import com.algaworks.algashop.ordering.core.domain.model.customer.repository.Customers;
@@ -11,6 +11,7 @@ import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.Orde
 import com.algaworks.algashop.ordering.core.domain.model.product.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.core.domain.model.product.service.ProductCatalogService;
 import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.Product;
+import com.algaworks.algashop.ordering.core.ports.in.order.ForBuyingProduct;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ import java.util.Optional;
 class BuyNowApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
-    private BuyNowApplicationService applicationService;
+    private ForBuyingProduct applicationService;
 
     @Autowired
     private Orders orders;

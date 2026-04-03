@@ -1,12 +1,12 @@
 package com.algaworks.algashop.ordering.contract.base;
 
 import com.algaworks.algashop.ordering.core.ports.in.common.AddressData;
-import com.algaworks.algashop.ordering.core.application.model.common.BillingData;
-import com.algaworks.algashop.ordering.core.application.model.common.RecipientData;
-import com.algaworks.algashop.ordering.core.application.model.order.data.ShippingData;
-import com.algaworks.algashop.ordering.core.application.model.order.output.CustomerMinimalOutput;
-import com.algaworks.algashop.ordering.core.application.model.order.output.OrderDetailOutput;
-import com.algaworks.algashop.ordering.core.application.model.order.output.OrderItemDetailOutput;
+import com.algaworks.algashop.ordering.core.ports.in.common.BillingData;
+import com.algaworks.algashop.ordering.core.ports.in.common.RecipientData;
+import com.algaworks.algashop.ordering.core.ports.in.order.data.ShippingData;
+import com.algaworks.algashop.ordering.core.ports.in.order.output.CustomerMinimalOutput;
+import com.algaworks.algashop.ordering.core.ports.in.order.output.OrderDetailOutput;
+import com.algaworks.algashop.ordering.core.ports.in.order.output.OrderItemDetailOutput;
 import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderId;
 import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderItemId;

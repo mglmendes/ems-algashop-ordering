@@ -7,9 +7,9 @@ import com.algaworks.algashop.ordering.core.domain.model.customer.entity.Custome
 import com.algaworks.algashop.ordering.core.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.config.HibernateConfiguration;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.assembler.CustomerPersistenceEntityAssembler;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.disassembler.CustomerPersistenceEntityDisassembler;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.provider.CustomersPersistenceProvider;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.customer.assembler.CustomerPersistenceEntityAssembler;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.customer.disassembler.CustomerPersistenceEntityDisassembler;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.customer.provider.CustomersPersistenceProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,8 @@
 package com.algaworks.algashop.ordering.core.application.model.checkout.service;
 
 import com.algaworks.algashop.ordering.core.application.model.AbstractApplicationIT;
-import com.algaworks.algashop.ordering.core.application.model.checkout.input.CheckoutInput;
+import com.algaworks.algashop.ordering.core.ports.in.order.ForBuyingWithShoppingCart;
+import com.algaworks.algashop.ordering.core.ports.in.order.input.CheckoutInput;
 import com.algaworks.algashop.ordering.core.domain.model.common.Money;
 import com.algaworks.algashop.ordering.core.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.core.domain.model.customer.CustomerTestDataBuilder;
@@ -38,7 +39,7 @@ import java.util.UUID;
 class CheckoutApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
-    private CheckoutApplicationService service;
+    private ForBuyingWithShoppingCart service;
 
     @Autowired
     private Orders orders;
