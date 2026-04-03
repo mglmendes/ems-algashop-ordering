@@ -1,12 +1,12 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.entity;
 
 import com.algaworks.algashop.ordering.core.domain.model.utility.IdGenerator;
-import com.algaworks.algashop.ordering.infrastructure.persistence.commons.AddressEmbeddable;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.order.embeddable.BillingEmbeddable;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.order.embeddable.RecipientEmbeddable;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.order.embeddable.ShippingEmbeddable;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.order.entity.OrderItemPersistenceEntity;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.order.entity.OrderPersistenceEntity;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.commons.AddressEmbeddable;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.order.embeddable.BillingEmbeddable;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.order.embeddable.RecipientEmbeddable;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.order.embeddable.ShippingEmbeddable;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.order.entity.OrderItemPersistenceEntity;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.order.entity.OrderPersistenceEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

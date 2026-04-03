@@ -9,7 +9,7 @@ import com.algaworks.algashop.ordering.core.ports.in.customer.output.CustomerSum
 import com.algaworks.algashop.ordering.core.ports.in.customer.ForManagingCustomers;
 import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.ForQueryingShoppingCarts;
 import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.output.ShoppingCartOutput;
-import com.algaworks.algashop.ordering.presentation.model.PageModel;
+import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.model.PageModel;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

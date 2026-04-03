@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.presentation.customer;
 
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.customer.repository.CustomerPersistenceEntityRepository;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.repository.CustomerPersistenceEntityRepository;
 import com.algaworks.algashop.ordering.presentation.AbstractPresentationIT;
 import com.algaworks.algashop.ordering.utils.AlgaShopResourceUtils;
 import io.restassured.RestAssured;

@@ -9,7 +9,7 @@ import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.input.Shopping
 import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.output.ShoppingCartOutput;
 import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.shoppingcart.input.ShoppingCartInput;
 import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.shoppingcart.model.ShoppingCartItemListModel;
-import com.algaworks.algashop.ordering.presentation.exception.UnprocessableEntityException;
+import com.algaworks.algashop.ordering.infrastructure.config.exceptionhandler.UnprocessableEntityException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

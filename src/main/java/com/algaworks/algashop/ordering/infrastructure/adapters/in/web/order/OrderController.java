@@ -11,8 +11,8 @@ import com.algaworks.algashop.ordering.core.ports.in.order.output.OrderSummaryOu
 import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.core.domain.model.product.exception.ProductNotFoundException;
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.exception.ShoppingCartNotFoundException;
-import com.algaworks.algashop.ordering.presentation.exception.UnprocessableEntityException;
-import com.algaworks.algashop.ordering.presentation.model.PageModel;
+import com.algaworks.algashop.ordering.infrastructure.config.exceptionhandler.UnprocessableEntityException;
+import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.model.PageModel;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

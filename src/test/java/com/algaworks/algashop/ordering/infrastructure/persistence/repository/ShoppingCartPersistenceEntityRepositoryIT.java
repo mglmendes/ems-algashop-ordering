@@ -4,10 +4,10 @@ import com.algaworks.algashop.ordering.infrastructure.persistence.entity.Custome
 import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntityTestDataBuilder;
 import com.algaworks.algashop.ordering.infrastructure.persistence.AbstractPersistenceIT;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.customer.entity.CustomerPersistenceEntity;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.customer.repository.CustomerPersistenceEntityRepository;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.shoppingcart.entity.ShoppingCartPersistenceEntity;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.shoppingcart.repository.ShoppingCartPersistenceEntityRepository;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.entity.CustomerPersistenceEntity;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.repository.CustomerPersistenceEntityRepository;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.entity.ShoppingCartPersistenceEntity;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.repository.ShoppingCartPersistenceEntityRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
