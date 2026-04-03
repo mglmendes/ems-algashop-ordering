@@ -1,9 +1,9 @@
 package com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.query;
 
-import com.algaworks.algashop.ordering.core.application.model.shoppingcart.output.ShoppingCartOutput;
-import com.algaworks.algashop.ordering.core.application.model.shoppingcart.query.ShoppingCartQueryService;
+import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.output.ShoppingCartOutput;
 import com.algaworks.algashop.ordering.core.application.utility.Mapper;
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.exception.ShoppingCartNotFoundException;
+import com.algaworks.algashop.ordering.core.ports.out.shoppingcart.ForObtainingShoppingCarts;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.entity.ShoppingCartPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.repository.ShoppingCartPersistenceEntityRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class ShoppingCartQueryServiceImpl implements ShoppingCartQueryService {
+public class ShoppingCartQueryServiceImpl implements ForObtainingShoppingCarts {
 
     private final ShoppingCartPersistenceEntityRepository shoppingPersistenceRepository;
     private final Mapper mapper;

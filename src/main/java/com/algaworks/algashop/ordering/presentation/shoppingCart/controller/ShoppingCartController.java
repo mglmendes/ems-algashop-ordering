@@ -1,12 +1,12 @@
 package com.algaworks.algashop.ordering.presentation.shoppingCart.controller;
 
 
-import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.input.ShoppingCartItemInput;
-import com.algaworks.algashop.ordering.core.application.model.shoppingcart.output.ShoppingCartOutput;
-import com.algaworks.algashop.ordering.core.application.model.shoppingcart.query.ShoppingCartQueryService;
 import com.algaworks.algashop.ordering.core.application.model.shoppingcart.service.ShoppingCartManagementApplicationService;
 import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.core.domain.model.product.exception.ProductNotFoundException;
+import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.ForQueryingShoppingCarts;
+import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.input.ShoppingCartItemInput;
+import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.output.ShoppingCartOutput;
 import com.algaworks.algashop.ordering.presentation.exception.UnprocessableEntityException;
 import com.algaworks.algashop.ordering.presentation.shoppingCart.input.ShoppingCartInput;
 import com.algaworks.algashop.ordering.presentation.shoppingCart.model.ShoppingCartItemListModel;
@@ -23,7 +23,7 @@ import java.util.UUID;
 public class ShoppingCartController {
 
 	private final ShoppingCartManagementApplicationService managementService;
-	private final ShoppingCartQueryService queryService;
+	private final ForQueryingShoppingCarts forQueryingShoppingCarts;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -34,17 +34,17 @@ public class ShoppingCartController {
 		} catch (CustomerNotFoundException e) {
 			throw new UnprocessableEntityException(e.getMessage(), e);
 		}
-		return queryService.findById(shoppingCartId);
+		return forQueryingShoppingCarts.findById(shoppingCartId);
 	}
 
 	@GetMapping("/{shoppingCartId}")
 	public ShoppingCartOutput getById(@PathVariable UUID shoppingCartId) {
-		return queryService.findById(shoppingCartId);
+		return forQueryingShoppingCarts.findById(shoppingCartId);
 	}
 
 	@GetMapping("/{shoppingCartId}/items")
 	public ShoppingCartItemListModel getItems(@PathVariable UUID shoppingCartId) {
-		var items = queryService.findById(shoppingCartId).getItems();
+		var items = forQueryingShoppingCarts.findById(shoppingCartId).getItems();
 		return new ShoppingCartItemListModel(items);
 	}
 

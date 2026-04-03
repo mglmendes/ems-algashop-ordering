@@ -7,10 +7,10 @@ import com.algaworks.algashop.ordering.core.application.model.customer.output.Cu
 import com.algaworks.algashop.ordering.core.application.model.customer.output.CustomerSummaryOutput;
 import com.algaworks.algashop.ordering.core.application.model.customer.query.CustomerQueryService;
 import com.algaworks.algashop.ordering.core.application.model.customer.service.CustomerManagementApplicationService;
-import com.algaworks.algashop.ordering.core.application.model.shoppingcart.query.ShoppingCartQueryService;
 import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerEmailAlreadyInUseException;
 import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.core.domain.model.generic.DomainException;
+import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.ForQueryingShoppingCarts;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.hamcrest.Matchers;
@@ -41,7 +41,7 @@ class CustomerControllerContractTest {
     private CustomerManagementApplicationService customerManagementApplicationService;
 
     @MockitoBean
-    private ShoppingCartQueryService shoppingCartQueryService;
+    private ForQueryingShoppingCarts forQueryingShoppingCarts;
 
     @MockitoBean
     private CustomerQueryService customerQueryService;
