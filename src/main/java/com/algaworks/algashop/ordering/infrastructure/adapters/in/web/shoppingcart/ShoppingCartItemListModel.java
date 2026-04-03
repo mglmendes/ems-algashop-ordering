@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.presentation.shoppingCart.model;
+package com.algaworks.algashop.ordering.infrastructure.adapters.in.web.shoppingcart;
 
 import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.output.ShoppingCartItemOutput;
 import lombok.AllArgsConstructor;
