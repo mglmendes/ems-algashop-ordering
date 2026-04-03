@@ -25,14 +25,9 @@ import com.algaworks.algashop.ordering.core.domain.model.product.service.Product
 import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.Product;
 import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductId;
 import com.algaworks.algashop.ordering.core.ports.in.order.ForBuyingProduct;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
-@Service
-@RequiredArgsConstructor
 public class BuyNowApplicationService implements ForBuyingProduct {
 
     private final BuyNowService buyNowService;
@@ -47,7 +42,22 @@ public class BuyNowApplicationService implements ForBuyingProduct {
     private final ShippingInputDisassembler shippingInputDisassembler;
     private final BillingInputDisassembler billingInputDisassembler;
 
-    @Transactional
+    public BuyNowApplicationService(BuyNowService buyNowService, ProductCatalogService productCatalogService,
+                                    ShippingCostService shippingCostService, OriginAddressService originAddressService,
+                                    Orders orders, Customers customers,
+                                    ShippingInputDisassembler shippingInputDisassembler,
+                                    BillingInputDisassembler billingInputDisassembler) {
+        this.buyNowService = buyNowService;
+        this.productCatalogService = productCatalogService;
+        this.shippingCostService = shippingCostService;
+        this.originAddressService = originAddressService;
+        this.orders = orders;
+        this.customers = customers;
+        this.shippingInputDisassembler = shippingInputDisassembler;
+        this.billingInputDisassembler = billingInputDisassembler;
+    }
+
+    //    @Transactional
     @Override
     public String buyNow(BuyNowInput input) {
         Objects.requireNonNull(input);

@@ -1,6 +1,6 @@
 package com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.entity;
 
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.commons.AddressEmbeddable;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.common.AddressEmbeddable;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;

@@ -2,7 +2,7 @@ package com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.
 
 import com.algaworks.algashop.ordering.core.domain.model.customer.entity.Customer;
 import com.algaworks.algashop.ordering.core.domain.model.common.Address;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.commons.AddressEmbeddable;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.common.AddressEmbeddable;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.entity.CustomerPersistenceEntity;
 import org.springframework.stereotype.Component;
 

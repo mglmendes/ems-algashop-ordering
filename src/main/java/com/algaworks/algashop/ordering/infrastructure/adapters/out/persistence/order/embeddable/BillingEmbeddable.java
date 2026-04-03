@@ -1,6 +1,7 @@
 package com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.order.embeddable;
 
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.commons.AddressEmbeddable;
+
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.common.AddressEmbeddable;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import lombok.AllArgsConstructor;

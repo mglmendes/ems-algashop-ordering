@@ -9,7 +9,8 @@ import com.algaworks.algashop.ordering.core.domain.model.order.entity.enums.Paym
 import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductName;
 import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductId;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.commons.AddressEmbeddable;
+
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.common.AddressEmbeddable;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.order.embeddable.RecipientEmbeddable;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.order.embeddable.ShippingEmbeddable;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.order.embeddable.BillingEmbeddable;
