@@ -20,7 +20,8 @@ import com.algaworks.algashop.ordering.core.domain.model.order.exceptions.OrderN
 import com.algaworks.algashop.ordering.core.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.core.domain.model.product.ProductTestDataBuilder;
 import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.Product;
-import com.algaworks.algashop.ordering.infrastructure.listener.customer.CustomerEventListener;
+import com.algaworks.algashop.ordering.core.ports.in.customer.ForAddingLoyaltyPoints;
+import com.algaworks.algashop.ordering.infrastructure.adapters.in.listener.customer.CustomerEventListener;
 import io.hypersistence.tsid.TSID;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ import java.util.UUID;
 class CustomerLoyaltyPointsApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
-    private CustomerLoyaltyPointsApplicationService loyaltyPointsService;
+    private ForAddingLoyaltyPoints loyaltyPointsService;
 
     @Autowired
     private Customers customers;

@@ -1,7 +1,6 @@
 package com.algaworks.algashop.ordering.core.application.model.shoppingcart.service;
 
 import com.algaworks.algashop.ordering.core.application.model.AbstractApplicationIT;
-import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.input.ShoppingCartItemInput;
 import com.algaworks.algashop.ordering.core.domain.model.common.Quantity;
 import com.algaworks.algashop.ordering.core.domain.model.customer.CustomerTestDataBuilder;
 import com.algaworks.algashop.ordering.core.domain.model.customer.entity.Customer;
@@ -23,7 +22,9 @@ import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.exception.
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.exception.ShoppingCartNotFoundException;
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.repository.ShoppingCarts;
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.valueobject.ShoppingCartId;
-import com.algaworks.algashop.ordering.infrastructure.listener.shoppingcart.ShoppingCartEventListener;
+import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.ForManagingShoppingCarts;
+import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.input.ShoppingCartItemInput;
+import com.algaworks.algashop.ordering.infrastructure.adapters.in.listener.shoppingcart.ShoppingCartEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -37,7 +38,7 @@ import java.util.UUID;
 class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
-    private ShoppingCartManagementApplicationService service;
+    private ForManagingShoppingCarts forManagingShoppingCarts;
 
     @Autowired
     private ShoppingCarts shoppingCarts;
@@ -56,7 +57,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
         Customer customer = CustomerTestDataBuilder.brandNewCustomer().build();
         customers.add(customer);
 
-        UUID newShoppingCartId = service.createNew(customer.id().value());
+        UUID newShoppingCartId = forManagingShoppingCarts.createNew(customer.id().value());
 
         Assertions.assertThat(newShoppingCartId).isNotNull();
         Optional<ShoppingCart> createdCart = shoppingCarts.ofId(new ShoppingCartId(newShoppingCartId));
@@ -73,7 +74,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
         UUID nonExistingCustomerId = UUID.randomUUID();
 
         Assertions.assertThatExceptionOfType(CustomerNotFoundException.class)
-                .isThrownBy(() -> service.createNew(nonExistingCustomerId));
+                .isThrownBy(() -> forManagingShoppingCarts.createNew(nonExistingCustomerId));
     }
 
     @Test
@@ -84,7 +85,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
         shoppingCarts.add(existingCart);
 
         Assertions.assertThatExceptionOfType(CustomerAlreadyHaveShoppingCartException.class)
-                .isThrownBy(() -> service.createNew(customer.id().value()));
+                .isThrownBy(() -> forManagingShoppingCarts.createNew(customer.id().value()));
     }
 
     @Test
@@ -103,7 +104,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
                 .quantity(2)
                 .build();
 
-        service.addItem(input);
+        forManagingShoppingCarts.addItem(input);
 
         ShoppingCart updatedCart = shoppingCarts.ofId(shoppingCart.id()).orElseThrow();
         Assertions.assertThat(updatedCart.items()).hasSize(1);
@@ -127,7 +128,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
                 .build();
 
         Assertions.assertThatExceptionOfType(ShoppingCartNotFoundException.class)
-                .isThrownBy(() -> service.addItem(input));
+                .isThrownBy(() -> forManagingShoppingCarts.addItem(input));
     }
 
     @Test
@@ -146,7 +147,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
                 .build();
 
         Assertions.assertThatExceptionOfType(ProductNotFoundException.class)
-                .isThrownBy(() -> service.addItem(input));
+                .isThrownBy(() -> forManagingShoppingCarts.addItem(input));
     }
 
     @Test
@@ -166,7 +167,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
                 .build();
 
         Assertions.assertThatExceptionOfType(ProductOutOfStockException.class)
-                .isThrownBy(() -> service.addItem(input));
+                .isThrownBy(() -> forManagingShoppingCarts.addItem(input));
     }
 
     @Test
@@ -180,7 +181,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
 
         ShoppingCartItem itemToRemove = shoppingCart.items().iterator().next();
 
-        service.removeItem(shoppingCart.id().value(), itemToRemove.id().value());
+        forManagingShoppingCarts.removeItem(shoppingCart.id().value(), itemToRemove.id().value());
 
         ShoppingCart updatedCart = shoppingCarts.ofId(shoppingCart.id()).orElseThrow();
         Assertions.assertThat(updatedCart.items()).isEmpty();
@@ -194,7 +195,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
         UUID dummyItemId = UUID.randomUUID();
 
         Assertions.assertThatExceptionOfType(ShoppingCartNotFoundException.class)
-                .isThrownBy(() -> service.removeItem(nonExistingCartId, dummyItemId));
+                .isThrownBy(() -> forManagingShoppingCarts.removeItem(nonExistingCartId, dummyItemId));
     }
 
     @Test
@@ -207,7 +208,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
         UUID nonExistingItemId = UUID.randomUUID();
 
         Assertions.assertThatExceptionOfType(ShoppingCartDoesNotContainItemException.class)
-                .isThrownBy(() -> service.removeItem(shoppingCart.id().value(), nonExistingItemId));
+                .isThrownBy(() -> forManagingShoppingCarts.removeItem(shoppingCart.id().value(), nonExistingItemId));
     }
 
     @Test
@@ -218,7 +219,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
         shoppingCart.addItem(ProductTestDataBuilder.aProduct().inStock(true).build(), new Quantity(1));
         shoppingCarts.add(shoppingCart);
 
-        service.empty(shoppingCart.id().value());
+        forManagingShoppingCarts.empty(shoppingCart.id().value());
 
         ShoppingCart updatedCart = shoppingCarts.ofId(shoppingCart.id()).orElseThrow();
         Assertions.assertThat(updatedCart.isEmpty()).isTrue();
@@ -231,7 +232,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
         UUID nonExistingCartId = UUID.randomUUID();
 
         Assertions.assertThatExceptionOfType(ShoppingCartNotFoundException.class)
-                .isThrownBy(() -> service.empty(nonExistingCartId));
+                .isThrownBy(() -> forManagingShoppingCarts.empty(nonExistingCartId));
     }
 
     @Test
@@ -241,7 +242,7 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
         ShoppingCart shoppingCart = ShoppingCart.startShopping(customer.id());
         shoppingCarts.add(shoppingCart);
 
-        service.delete(shoppingCart.id().value());
+        forManagingShoppingCarts.delete(shoppingCart.id().value());
 
         Optional<ShoppingCart> deletedCart = shoppingCarts.ofId(shoppingCart.id());
         Assertions.assertThat(deletedCart).isNotPresent();
@@ -252,6 +253,6 @@ class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
         UUID nonExistingCartId = UUID.randomUUID();
 
         Assertions.assertThatExceptionOfType(ShoppingCartNotFoundException.class)
-                .isThrownBy(() -> service.delete(nonExistingCartId));
+                .isThrownBy(() -> forManagingShoppingCarts.delete(nonExistingCartId));
     }
 }

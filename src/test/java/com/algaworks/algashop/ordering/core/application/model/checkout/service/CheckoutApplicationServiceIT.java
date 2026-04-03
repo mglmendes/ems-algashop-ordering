@@ -21,7 +21,7 @@ import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.entity.Sho
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.exception.ShoppingCartCantProceedToCheckoutException;
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.exception.ShoppingCartNotFoundException;
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.repository.ShoppingCarts;
-import com.algaworks.algashop.ordering.infrastructure.listener.order.OrderEventListener;
+import com.algaworks.algashop.ordering.infrastructure.adapters.in.listener.order.OrderEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

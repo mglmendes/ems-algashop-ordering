@@ -12,7 +12,7 @@ import com.algaworks.algashop.ordering.infrastructure.persistence.order.embeddab
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.embeddable.BillingEmbeddable;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.entity.OrderItemPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.entity.OrderPersistenceEntity;
-import com.algaworks.algashop.ordering.infrastructure.persistence.customer.repository.CustomerPersistenceEntityRepository;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.repository.CustomerPersistenceEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,18 +1,19 @@
 package com.algaworks.algashop.ordering.core.application.model.customer.service;
 
 import com.algaworks.algashop.ordering.core.application.model.AbstractApplicationIT;
-import com.algaworks.algashop.ordering.core.application.model.customer.input.CustomerInput;
-import com.algaworks.algashop.ordering.core.application.model.customer.input.CustomerUpdateInput;
-import com.algaworks.algashop.ordering.core.application.model.customer.notifications.CustomerNotificationService;
-import com.algaworks.algashop.ordering.core.application.model.customer.output.CustomerOutput;
-import com.algaworks.algashop.ordering.core.application.model.customer.query.CustomerQueryService;
 import com.algaworks.algashop.ordering.core.domain.model.customer.event.CustomerArchivedEvent;
 import com.algaworks.algashop.ordering.core.domain.model.customer.event.CustomerRegisteredEvent;
 import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerArchivedException;
 import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerEmailAlreadyInUseException;
 import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerNotFoundException;
 import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
-import com.algaworks.algashop.ordering.infrastructure.listener.customer.CustomerEventListener;
+import com.algaworks.algashop.ordering.core.ports.in.customer.ForManagingCustomers;
+import com.algaworks.algashop.ordering.core.ports.in.customer.ForQueryingCustomers;
+import com.algaworks.algashop.ordering.core.ports.in.customer.input.CustomerInput;
+import com.algaworks.algashop.ordering.core.ports.in.customer.input.CustomerUpdateInput;
+import com.algaworks.algashop.ordering.core.ports.in.customer.output.CustomerOutput;
+import com.algaworks.algashop.ordering.core.ports.out.customer.notifications.ForNotifyingCustomers;
+import com.algaworks.algashop.ordering.infrastructure.adapters.in.listener.customer.CustomerEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -26,16 +27,16 @@ import java.util.UUID;
 class CustomerManagementApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
-    private CustomerManagementApplicationService applicationService;
+    private ForManagingCustomers applicationService;
 
     @MockitoSpyBean
     private CustomerEventListener customerEventListener;
 
     @MockitoSpyBean
-    private CustomerNotificationService customerNotificationService;
+    private ForNotifyingCustomers customerNotificationService;
 
     @Autowired
-    private CustomerQueryService customerQueryService;
+    private ForQueryingCustomers forQueryingCustomers;
 
     @Test
     public void shouldRegisterCustomer() {
@@ -43,7 +44,7 @@ class CustomerManagementApplicationServiceIT extends AbstractApplicationIT {
 
         Assertions.assertThat(customerId).isNotNull();
 
-        CustomerOutput customerOutput = customerQueryService.findById(customerId);
+        CustomerOutput customerOutput = forQueryingCustomers.findById(customerId);
 
         Assertions.assertThat(customerOutput).extracting(
                 CustomerOutput::getId,
@@ -62,7 +63,7 @@ class CustomerManagementApplicationServiceIT extends AbstractApplicationIT {
         Mockito.verify(customerEventListener).listen(Mockito.any(CustomerRegisteredEvent.class));
         Mockito.verify(customerEventListener, Mockito.never()).listen(Mockito.any(CustomerArchivedEvent.class));
         Mockito.verify(customerNotificationService).notifyNewRegistration(
-                Mockito.any(CustomerNotificationService.NotifyNewRegistrationInput.class));
+                Mockito.any(ForNotifyingCustomers.NotifyNewRegistrationInput.class));
     }
 
     @Test
@@ -75,7 +76,7 @@ class CustomerManagementApplicationServiceIT extends AbstractApplicationIT {
 
         applicationService.update(customerId, customerUpdateInput);
 
-        CustomerOutput customerOutput = customerQueryService.findById(customerId);
+        CustomerOutput customerOutput = forQueryingCustomers.findById(customerId);
 
         Assertions.assertThat(customerOutput).extracting(
                 CustomerOutput::getId,
@@ -101,7 +102,7 @@ class CustomerManagementApplicationServiceIT extends AbstractApplicationIT {
 
         applicationService.archive(customerId);
 
-        CustomerOutput archivedCustomer = customerQueryService.findById(customerId);
+        CustomerOutput archivedCustomer = forQueryingCustomers.findById(customerId);
 
         Assertions.assertThat(archivedCustomer)
                 .isNotNull()
@@ -158,7 +159,7 @@ class CustomerManagementApplicationServiceIT extends AbstractApplicationIT {
         UUID customerId = applicationService.create(customerInput);
         applicationService.changeEmail(customerId, expectedEmail);
 
-        CustomerOutput customerOutput = customerQueryService.findById(customerId);
+        CustomerOutput customerOutput = forQueryingCustomers.findById(customerId);
 
         Assertions.assertThat(customerOutput).isNotNull();
         Assertions.assertThat(customerOutput.getEmail())

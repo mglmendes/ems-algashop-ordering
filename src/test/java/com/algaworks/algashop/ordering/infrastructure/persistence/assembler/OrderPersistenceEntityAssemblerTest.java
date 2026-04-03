@@ -6,7 +6,7 @@ import com.algaworks.algashop.ordering.infrastructure.persistence.entity.OrderPe
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.assembler.OrderPersistenceEntityAssembler;
 import com.algaworks.algashop.ordering.core.domain.model.order.entity.Order;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.entity.OrderPersistenceEntity;
-import com.algaworks.algashop.ordering.infrastructure.persistence.customer.repository.CustomerPersistenceEntityRepository;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.repository.CustomerPersistenceEntityRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

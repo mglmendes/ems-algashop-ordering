@@ -1,7 +1,7 @@
 package com.algaworks.algashop.ordering.core.application.model.order.service;
 
 import com.algaworks.algashop.ordering.core.application.model.AbstractApplicationIT;
-import com.algaworks.algashop.ordering.core.application.model.customer.service.CustomerLoyaltyPointsApplicationService;
+import com.algaworks.algashop.ordering.core.ports.in.customer.ForAddingLoyaltyPoints;
 import com.algaworks.algashop.ordering.core.domain.model.customer.CustomerTestDataBuilder;
 import com.algaworks.algashop.ordering.core.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.core.domain.model.order.OrderTestDataBuilder;
@@ -14,7 +14,7 @@ import com.algaworks.algashop.ordering.core.domain.model.order.exceptions.OrderN
 import com.algaworks.algashop.ordering.core.domain.model.order.exceptions.OrderStatusCannotBeChangedException;
 import com.algaworks.algashop.ordering.core.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderId;
-import com.algaworks.algashop.ordering.infrastructure.listener.order.OrderEventListener;
+import com.algaworks.algashop.ordering.infrastructure.adapters.in.listener.order.OrderEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
     private OrderEventListener orderEventListener;
 
     @MockitoSpyBean
-    private CustomerLoyaltyPointsApplicationService customerLoyaltyPointsApplicationService;
+    private ForAddingLoyaltyPoints forAddingLoyaltyPoints;
 
     @BeforeEach
     public void setup() {
@@ -135,7 +135,7 @@ class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
         Assertions.assertThat(updatedOrder.get().readyAt()).isNotNull();
 
         Mockito.verify(orderEventListener).listen(Mockito.any(OrderReadyEvent.class));
-        Mockito.verify(customerLoyaltyPointsApplicationService).addLoyaltyPoints(Mockito.any(UUID.class), Mockito.any(String.class));
+        Mockito.verify(forAddingLoyaltyPoints).addLoyaltyPoints(Mockito.any(UUID.class), Mockito.any(String.class));
     }
 
     @Test

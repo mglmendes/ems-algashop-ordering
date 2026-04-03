@@ -8,9 +8,9 @@ import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.entity.Sho
 import com.algaworks.algashop.ordering.infrastructure.persistence.AbstractPersistenceIT;
 import com.algaworks.algashop.ordering.infrastructure.persistence.config.HibernateConfiguration;
 import com.algaworks.algashop.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
-import com.algaworks.algashop.ordering.infrastructure.persistence.customer.assembler.CustomerPersistenceEntityAssembler;
-import com.algaworks.algashop.ordering.infrastructure.persistence.customer.disassembler.CustomerPersistenceEntityDisassembler;
-import com.algaworks.algashop.ordering.infrastructure.persistence.customer.provider.CustomersPersistenceProvider;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.assembler.CustomerPersistenceEntityAssembler;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.disassembler.CustomerPersistenceEntityDisassembler;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.provider.CustomersPersistenceProvider;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.assembler.ShoppingCartPersistenceEntityAssembler;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.disassembler.ShoppingCartPersistenceEntityDisassembler;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.provider.ShoppingCartsPersistenceProvider;

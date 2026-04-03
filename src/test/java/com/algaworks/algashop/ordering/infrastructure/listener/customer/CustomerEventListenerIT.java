@@ -2,15 +2,22 @@ package com.algaworks.algashop.ordering.infrastructure.listener.customer;
 
 
 import com.algaworks.algashop.ordering.core.application.model.AbstractApplicationIT;
-import com.algaworks.algashop.ordering.core.application.model.customer.notifications.CustomerNotificationService;
-import com.algaworks.algashop.ordering.core.application.model.customer.service.CustomerLoyaltyPointsApplicationService;
+import com.algaworks.algashop.ordering.core.domain.model.customer.repository.Customers;
+import com.algaworks.algashop.ordering.core.ports.in.customer.output.CustomerOutput;
+import com.algaworks.algashop.ordering.core.ports.out.customer.notifications.ForNotifyingCustomers;
+import com.algaworks.algashop.ordering.core.ports.in.customer.ForAddingLoyaltyPoints;
 import com.algaworks.algashop.ordering.core.domain.model.common.Email;
 import com.algaworks.algashop.ordering.core.domain.model.common.FullName;
 import com.algaworks.algashop.ordering.core.domain.model.customer.event.CustomerRegisteredEvent;
 import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.core.domain.model.order.event.OrderReadyEvent;
 import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderId;
+import com.algaworks.algashop.ordering.core.ports.out.customer.persistence.ForObtainingCustomers;
+import com.algaworks.algashop.ordering.infrastructure.adapters.in.listener.customer.CustomerEventListener;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.entity.CustomerPersistenceEntity;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.repository.CustomerPersistenceEntityRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -18,6 +25,8 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 class CustomerEventListenerIT extends AbstractApplicationIT {
@@ -29,10 +38,13 @@ class CustomerEventListenerIT extends AbstractApplicationIT {
     private CustomerEventListener customerEventListener;
 
     @MockitoBean
-    private CustomerNotificationService customerNotificationService;
+    private ForNotifyingCustomers forNotifyingCustomers;
 
     @MockitoBean
-    private CustomerLoyaltyPointsApplicationService customerLoyaltyPointsApplicationService;
+    private ForAddingLoyaltyPoints forAddingLoyaltyPoints;
+
+    @MockitoBean
+    private ForObtainingCustomers forObtainingCustomers;
 
     @Test
     void shouldListenerOrderReadyEvent() {
@@ -45,11 +57,12 @@ class CustomerEventListenerIT extends AbstractApplicationIT {
         );
 
         Mockito.verify(customerEventListener).listen(Mockito.any(OrderReadyEvent.class));
-        Mockito.verify(customerLoyaltyPointsApplicationService).addLoyaltyPoints(Mockito.any(UUID.class), Mockito.any(String.class));
+        Mockito.verify(forAddingLoyaltyPoints).addLoyaltyPoints(Mockito.any(UUID.class), Mockito.any(String.class));
     }
 
     @Test
     public void shouldListenerCustomerRegisteredEvent() {
+        Mockito.when(forObtainingCustomers.findById(ArgumentMatchers.any(UUID.class))).thenReturn(new CustomerOutput());
         applicationEventPublisher.publishEvent(
                 new CustomerRegisteredEvent(
                         new CustomerId(),
@@ -60,6 +73,6 @@ class CustomerEventListenerIT extends AbstractApplicationIT {
         );
 
         Mockito.verify(customerEventListener).listen(Mockito.any(CustomerRegisteredEvent.class));
-        Mockito.verify(customerNotificationService).notifyNewRegistration(Mockito.any(CustomerNotificationService.NotifyNewRegistrationInput.class));
+        Mockito.verify(forNotifyingCustomers).notifyNewRegistration(Mockito.any(ForNotifyingCustomers.NotifyNewRegistrationInput.class));
     }
 }

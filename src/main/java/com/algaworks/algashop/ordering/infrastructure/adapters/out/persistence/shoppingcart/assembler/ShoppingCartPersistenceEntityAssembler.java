@@ -3,7 +3,7 @@ import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.entity.Sho
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.entity.ShoppingCartItem;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.entity.ShoppingCartItemPersistenceEntity;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.entity.ShoppingCartPersistenceEntity;
-import com.algaworks.algashop.ordering.infrastructure.persistence.customer.repository.CustomerPersistenceEntityRepository;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.repository.CustomerPersistenceEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

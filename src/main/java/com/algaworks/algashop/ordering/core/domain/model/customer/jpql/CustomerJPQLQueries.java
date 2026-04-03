@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
 public class CustomerJPQLQueries {
 
     public static final String findByIdAsOutputJPQL = """
-            SELECT new com.algaworks.algashop.ordering.core.application.model.customer.output.CustomerOutput(
+            SELECT new com.algaworks.algashop.ordering.core.ports.in.customer.output.CustomerOutput(
                 c.id,
                 c.firstName,
                 c.lastName,
@@ -19,7 +19,7 @@ public class CustomerJPQLQueries {
                 c.registeredAt,
                 c.archivedAt,
                 c.archived,
-                new com.algaworks.algashop.ordering.core.application.model.common.AddressData(
+                new com.algaworks.algashop.ordering.core.ports.in.common.AddressData(
                     c.address.street,
                     c.address.number,
                     c.address.complement,

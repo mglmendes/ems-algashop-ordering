@@ -10,9 +10,9 @@ import com.algaworks.algashop.ordering.core.domain.model.order.entity.enums.Orde
 import com.algaworks.algashop.ordering.core.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.core.domain.model.order.valueobjects.OrderId;
 import com.algaworks.algashop.ordering.infrastructure.persistence.config.HibernateConfiguration;
-import com.algaworks.algashop.ordering.infrastructure.persistence.customer.assembler.CustomerPersistenceEntityAssembler;
-import com.algaworks.algashop.ordering.infrastructure.persistence.customer.disassembler.CustomerPersistenceEntityDisassembler;
-import com.algaworks.algashop.ordering.infrastructure.persistence.customer.provider.CustomersPersistenceProvider;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.assembler.CustomerPersistenceEntityAssembler;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.disassembler.CustomerPersistenceEntityDisassembler;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.customer.provider.CustomersPersistenceProvider;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.assembler.OrderPersistenceEntityAssembler;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.disassembler.OrderPersistenceEntityDisassembler;
 import com.algaworks.algashop.ordering.infrastructure.persistence.order.provider.OrdersPersistenceProvider;
