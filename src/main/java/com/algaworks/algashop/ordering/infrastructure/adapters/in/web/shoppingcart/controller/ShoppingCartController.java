@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.infrastructure.adapters.in.web.shoppingcart;
+package com.algaworks.algashop.ordering.infrastructure.adapters.in.web.shoppingcart.controller;
 
 
 import com.algaworks.algashop.ordering.core.domain.model.customer.exception.CustomerNotFoundException;
@@ -7,6 +7,8 @@ import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.ForManagingSho
 import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.ForQueryingShoppingCarts;
 import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.input.ShoppingCartItemInput;
 import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.output.ShoppingCartOutput;
+import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.shoppingcart.input.ShoppingCartInput;
+import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.shoppingcart.model.ShoppingCartItemListModel;
 import com.algaworks.algashop.ordering.presentation.exception.UnprocessableEntityException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

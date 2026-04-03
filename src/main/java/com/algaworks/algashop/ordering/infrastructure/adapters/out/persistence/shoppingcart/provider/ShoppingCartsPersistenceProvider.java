@@ -1,13 +1,13 @@
-package com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.provider;
+package com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.provider;
 
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.entity.ShoppingCart;
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.repository.ShoppingCarts;
 import com.algaworks.algashop.ordering.core.domain.model.customer.valueobjects.CustomerId;
 import com.algaworks.algashop.ordering.core.domain.model.shoppingcart.valueobject.ShoppingCartId;
-import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.assembler.ShoppingCartPersistenceEntityAssembler;
-import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.disassembler.ShoppingCartPersistenceEntityDisassembler;
-import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.entity.ShoppingCartPersistenceEntity;
-import com.algaworks.algashop.ordering.infrastructure.persistence.shoppingcart.repository.ShoppingCartPersistenceEntityRepository;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.assembler.ShoppingCartPersistenceEntityAssembler;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.disassembler.ShoppingCartPersistenceEntityDisassembler;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.entity.ShoppingCartPersistenceEntity;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.repository.ShoppingCartPersistenceEntityRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
