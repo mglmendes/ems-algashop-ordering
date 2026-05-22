@@ -1,19 +1,19 @@
 package com.algaworks.algashop.ordering.contract.base;
 
+import com.algaworks.algashop.ordering.core.application.model.order.databuilder.OrderSummaryOutputTestDataBuilder;
+import com.algaworks.algashop.ordering.core.domain.model.order.exceptions.OrderNotFoundException;
+import com.algaworks.algashop.ordering.core.ports.in.order.ForBuyingProduct;
 import com.algaworks.algashop.ordering.core.ports.in.order.ForBuyingWithShoppingCart;
 import com.algaworks.algashop.ordering.core.ports.in.order.ForQueryingOrders;
+import com.algaworks.algashop.ordering.core.ports.in.order.filter.OrderFilter;
 import com.algaworks.algashop.ordering.core.ports.in.order.input.BuyNowInput;
 import com.algaworks.algashop.ordering.core.ports.in.order.input.CheckoutInput;
-import com.algaworks.algashop.ordering.core.ports.in.order.ForBuyingProduct;
-import com.algaworks.algashop.ordering.core.application.model.order.databuilder.OrderSummaryOutputTestDataBuilder;
-import com.algaworks.algashop.ordering.core.ports.in.order.filter.OrderFilter;
-import com.algaworks.algashop.ordering.core.domain.model.order.exceptions.OrderNotFoundException;
 import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.order.OrderController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
