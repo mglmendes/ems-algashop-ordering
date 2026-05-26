@@ -6,6 +6,5 @@ import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.Pro
 import java.util.Optional;
 
 public interface ProductCatalogService {
-
     Optional<Product> ofId(ProductId productId);
 }
