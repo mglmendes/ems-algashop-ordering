@@ -5,10 +5,15 @@ import com.algaworks.algashop.ordering.core.domain.model.common.Money;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.shipping.client.RapiDexAPIClient;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.shipping.dtos.DeliveryCostRequest;
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.shipping.dtos.DeliveryCostResponse;
+import com.algaworks.algashop.ordering.infrastructure.config.exceptionhandler.BadGatewayException;
+import com.algaworks.algashop.ordering.infrastructure.config.exceptionhandler.GatewayTimeoutException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 
+import java.net.SocketTimeoutException;
 import java.time.LocalDate;
 
 @Component
@@ -20,7 +25,17 @@ public class ShippingCostRapiDexImpl implements ShippingCostService {
 
     @Override
     public CalculationResult calculate(CalculationRequest request) {
-        DeliveryCostResponse response = client.calculate(new DeliveryCostRequest(request.origin().value(), request.destination().value()));
+        DeliveryCostResponse response;
+        try {
+            response = client.calculate(new DeliveryCostRequest(request.origin().value(), request.destination().value()));
+        } catch (ResourceAccessException e) {
+            throw new GatewayTimeoutException("RapiDex API Timeout", e);
+        } catch (RestClientException e) {
+            if (e.getCause() instanceof SocketTimeoutException) {
+                throw new GatewayTimeoutException("RapiDex API Timeout", e);
+            }
+            throw new BadGatewayException("RapiDex Bad Gateway", e);
+        }
         LocalDate expectedDeliveryDate = LocalDate.now().plusDays(response.getEstimatedDaysToDeliver());
         return CalculationResult.builder()
                 .cost(new Money(response.getDeliveryCost()))
