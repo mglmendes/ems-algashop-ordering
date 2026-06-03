@@ -1,6 +1,6 @@
-package com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.product.client;
+package com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.client;
 
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.product.client.response.ProductResponse;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.response.ProductResponse;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.service.annotation.GetExchange;

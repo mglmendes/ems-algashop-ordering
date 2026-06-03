@@ -1,4 +1,4 @@
-package com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.product.client.response;
+package com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

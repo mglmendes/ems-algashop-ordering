@@ -1,6 +1,6 @@
-package com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.product.client.config;
+package com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.config;
 
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.product.client.ProductCatalogAPIClient;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.client.ProductCatalogAPIClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

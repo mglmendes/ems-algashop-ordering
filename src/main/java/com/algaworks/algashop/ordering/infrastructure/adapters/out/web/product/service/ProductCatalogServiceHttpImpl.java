@@ -1,12 +1,12 @@
-package com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.product.client.service;
+package com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.service;
 
 import com.algaworks.algashop.ordering.core.domain.model.common.Money;
 import com.algaworks.algashop.ordering.core.domain.model.product.service.ProductCatalogService;
 import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.Product;
 import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductId;
 import com.algaworks.algashop.ordering.core.domain.model.product.valueobject.ProductName;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.product.client.ProductCatalogAPIClient;
-import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.product.client.response.ProductResponse;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.client.ProductCatalogAPIClient;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.product.response.ProductResponse;
 import com.algaworks.algashop.ordering.infrastructure.config.exceptionhandler.BadGatewayException;
 import com.algaworks.algashop.ordering.infrastructure.config.exceptionhandler.GatewayTimeoutException;
 import lombok.RequiredArgsConstructor;
