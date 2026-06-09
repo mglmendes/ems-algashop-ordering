@@ -1,0 +1,99 @@
+package com.algaworks.algashop.ordering.infrastructure.adapters.out.web.shipping.client;
+
+import com.algaworks.algashop.ordering.core.domain.model.order.shipping.ShippingCostService;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.shipping.dtos.DeliveryCostRequest;
+import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.shipping.dtos.DeliveryCostResponse;
+import com.algaworks.algashop.ordering.infrastructure.config.exceptionhandler.BadGatewayException;
+import com.algaworks.algashop.ordering.infrastructure.config.exceptionhandler.GatewayTimeoutException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.circuitbreaker.retry.FrameworkRetryCircuitBreaker;
+import org.springframework.cloud.circuitbreaker.retry.FrameworkRetryConfig;
+import org.springframework.cloud.circuitbreaker.retry.FrameworkRetryConfigBuilder;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
+import org.springframework.cloud.client.circuitbreaker.NoFallbackAvailableException;
+import org.springframework.core.retry.RetryException;
+import org.springframework.resilience.annotation.ConcurrencyLimit;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
+
+import java.net.SocketTimeoutException;
+
+@Component
+@Slf4j
+public class ResilientRapiDexApiClient {
+
+    private final RapiDexAPIClient rapiDexAPIClient;
+    private final FrameworkRetryCircuitBreaker circuitBreaker;
+
+    public ResilientRapiDexApiClient(
+            RapiDexAPIClient rapiDexAPIClient,
+            CircuitBreakerFactory<FrameworkRetryConfig, FrameworkRetryConfigBuilder> circuitBreakerFactory) {
+        this.rapiDexAPIClient = rapiDexAPIClient;
+        this.circuitBreaker = (FrameworkRetryCircuitBreaker) circuitBreakerFactory.create("rapidexCB");
+    }
+
+
+    @ConcurrencyLimit(10)
+    public DeliveryCostResponse calculate(DeliveryCostRequest request) {
+        log.info("RapidexAPI CircuitBreaker state is {}", circuitBreaker.getCircuitBreakerPolicy().getState());
+        try {
+            DeliveryCostResponse response = circuitBreaker.run(() -> doCalculate(request));
+
+            if (response == null) {
+                throw new BadGatewayException.ClientErrorException("Invalid zip code provided");
+            }
+
+            return response;
+        } catch (NoFallbackAvailableException e) {
+            throw unwrapException(e);
+        }
+    }
+
+    private DeliveryCostResponse doCalculate(DeliveryCostRequest request) {
+        try {
+            return rapiDexAPIClient.calculate(request);
+        }
+        catch (HttpClientErrorException e) {
+            if (!(e instanceof HttpClientErrorException.NotFound)) {
+                log.warn("Client Error when loading delivery cost {}", request, e);
+            }
+            return null; // Para o fluxo e não afeta o Circuit Breaker
+        }
+        catch (RestClientException e) {
+            throw translateException(e);
+        }
+    }
+
+    private RuntimeException translateException(RestClientException e) {
+        if (e.getCause() instanceof SocketTimeoutException
+                || e instanceof ResourceAccessException) {
+            return new GatewayTimeoutException("Product Catalog API Timeout", e);
+        }
+
+        if (e instanceof HttpClientErrorException) {
+            return new BadGatewayException.ClientErrorException("Product Catalog API Bad Gateway", e);
+        }
+
+        if (e instanceof HttpServerErrorException) {
+            return new BadGatewayException.InternalServerErrorException("Product Catalog API Bad Gateway", e);
+        }
+
+        return new BadGatewayException("Product Catalog API Bad Gateway", e);
+    }
+
+    private RuntimeException unwrapException(NoFallbackAvailableException e) {
+        if (e.getCause() instanceof RetryException re) {
+            if (re.getCause() instanceof GatewayTimeoutException gte) {
+                return gte;
+            }
+            if (re.getCause() instanceof BadGatewayException bte) {
+                return bte;
+            }
+        }
+        throw e;
+    }
+}
