@@ -5,6 +5,7 @@ import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.shipping.
 import com.algaworks.algashop.ordering.infrastructure.adapters.out.web.shipping.dtos.DeliveryCostResponse;
 import com.algaworks.algashop.ordering.infrastructure.config.exceptionhandler.BadGatewayException;
 import com.algaworks.algashop.ordering.infrastructure.config.exceptionhandler.GatewayTimeoutException;
+import com.algaworks.algashop.ordering.infrastructure.config.resilience.SpringCircuitBreakerConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.circuitbreaker.retry.FrameworkRetryCircuitBreaker;
@@ -22,6 +23,8 @@ import org.springframework.web.client.RestClientException;
 
 import java.net.SocketTimeoutException;
 
+import static com.algaworks.algashop.ordering.infrastructure.config.resilience.SpringCircuitBreakerConfig.RAPIDEX_CB_ID;
+
 @Component
 @Slf4j
 public class ResilientRapiDexApiClient {
@@ -33,7 +36,7 @@ public class ResilientRapiDexApiClient {
             RapiDexAPIClient rapiDexAPIClient,
             CircuitBreakerFactory<FrameworkRetryConfig, FrameworkRetryConfigBuilder> circuitBreakerFactory) {
         this.rapiDexAPIClient = rapiDexAPIClient;
-        this.circuitBreaker = (FrameworkRetryCircuitBreaker) circuitBreakerFactory.create("rapidexCB");
+        this.circuitBreaker = (FrameworkRetryCircuitBreaker) circuitBreakerFactory.create(RAPIDEX_CB_ID);
     }
 
 
