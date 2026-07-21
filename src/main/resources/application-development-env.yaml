@@ -12,8 +12,7 @@ spring:
     password: postgres
     url: jdbc:postgresql://localhost:5432/ordering
   cache:
-#    type: redis
-    type: none
+    type: redis
   data:
     redis:
       host: localhost
