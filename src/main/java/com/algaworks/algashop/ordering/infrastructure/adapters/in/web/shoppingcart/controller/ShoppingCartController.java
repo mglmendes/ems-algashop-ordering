@@ -10,6 +10,7 @@ import com.algaworks.algashop.ordering.core.ports.in.shoppingcart.output.Shoppin
 import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.shoppingcart.input.ShoppingCartInput;
 import com.algaworks.algashop.ordering.infrastructure.adapters.in.web.shoppingcart.model.ShoppingCartItemListModel;
 import com.algaworks.algashop.ordering.infrastructure.config.exceptionhandler.UnprocessableEntityException;
+import com.algaworks.algashop.ordering.infrastructure.config.security.SecurityAnnotations;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class ShoppingCartController {
 	private final ForManagingShoppingCarts forManagingShoppingCarts;
 	private final ForQueryingShoppingCarts forQueryingShoppingCarts;
 
+	@SecurityAnnotations.CanWriteShoppingCarts
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ShoppingCartOutput create(@RequestBody @Valid ShoppingCartInput input) {
