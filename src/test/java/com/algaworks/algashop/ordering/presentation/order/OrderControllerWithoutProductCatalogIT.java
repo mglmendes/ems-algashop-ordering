@@ -50,7 +50,7 @@ public class OrderControllerWithoutProductCatalogIT extends AbstractPresentation
     public void shouldNotCreateOrderUsingProductWhenProductAPIIsUnavailable() {
         wireMockProductCatalog.stop();
         String jsonBody = AlgaShopResourceUtils.readContent("json/create-order-with-product.json");
-        RestAssured.given()
+        givenAuthenticated()
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType("application/vnd.order-with-product.v1+json")
                 .body(jsonBody)

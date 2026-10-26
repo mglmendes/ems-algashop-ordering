@@ -53,7 +53,7 @@ public class OrderControllerIT extends AbstractPresentationIT {
     @Test
     public void shouldCreateOrderUsingProduct() {
         String jsonBody = AlgaShopResourceUtils.readContent("json/create-order-with-product.json");
-        RestAssured.given()
+        givenAuthenticated()
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType("application/vnd.order-with-product.v1+json")
                 .body(jsonBody)
@@ -70,7 +70,7 @@ public class OrderControllerIT extends AbstractPresentationIT {
     public void shouldCreateOrderUsingProduct_DTO() {
         BuyNowInput buyNowInput = BuyNowInputTestDataBuilder.aBuyNowInput().productId(validProductId)
                 .creditCardId(validCreditCardId).customerId(validCustomerId).build();
-        OrderDetailOutput orderDetailOutput = RestAssured.given()
+        OrderDetailOutput orderDetailOutput = givenAuthenticated()
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType("application/vnd.order-with-product.v1+json")
                 .body(buyNowInput)
@@ -90,7 +90,7 @@ public class OrderControllerIT extends AbstractPresentationIT {
     @Test
     public void shouldNotCreateOrderUsingProductWhenProductNotExists() {
         String jsonBody = AlgaShopResourceUtils.readContent("json/create-order-with-invalid-product.json");
-        RestAssured.given()
+        givenAuthenticated()
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType("application/vnd.order-with-product.v1+json")
                 .body(jsonBody)
@@ -106,7 +106,7 @@ public class OrderControllerIT extends AbstractPresentationIT {
     @Test
     public void shouldThrowExceptionWhenCreateOrderUsingProductWithCustomerNotFound() {
         String jsonBody = AlgaShopResourceUtils.readContent("json/create-order-with-product-invalid-customer.json");
-        RestAssured.given()
+        givenAuthenticated()
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType("application/vnd.order-with-product.v1+json")
                 .body(jsonBody)
@@ -124,8 +124,7 @@ public class OrderControllerIT extends AbstractPresentationIT {
 
         String json = AlgaShopResourceUtils.readContent("json/create-order-with-shopping-cart.json");
 
-        OrderDetailOutput orderDetailOutput = RestAssured
-                .given()
+        OrderDetailOutput orderDetailOutput = givenAuthenticated()
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType("application/vnd.order-with-shopping-cart.v1+json")
                 .body(json)

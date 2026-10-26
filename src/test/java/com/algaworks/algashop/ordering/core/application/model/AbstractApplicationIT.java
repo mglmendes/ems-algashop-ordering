@@ -1,5 +1,6 @@
 package com.algaworks.algashop.ordering.core.application.model;
 
+import com.algaworks.algashop.ordering.utils.MockJwtDecoderConfig;
 import com.algaworks.algashop.ordering.utils.TestcontainerPostgreSQLConfig;
 
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Import(TestcontainerPostgreSQLConfig.class)
+@Import({TestcontainerPostgreSQLConfig.class, MockJwtDecoderConfig.class})
 public abstract class AbstractApplicationIT {
 
 }

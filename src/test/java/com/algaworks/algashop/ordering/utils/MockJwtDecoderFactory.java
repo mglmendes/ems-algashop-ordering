@@ -19,7 +19,8 @@ public class MockJwtDecoderFactory {
             "shopping-carts:read",
             "shopping-carts:write",
             "customers:read",
-            "customers:write"
+            "customers:write",
+            "shipping-costs:preview"
     };
 
     public static final String DEFAULT_SUBJECT = "test-user";
