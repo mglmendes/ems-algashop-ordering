@@ -1,8 +1,8 @@
 package com.algaworks.algashop.ordering.infrastructure.adapters.in.web.shipping;
 
-import com.algaworks.algashop.ordering.core.application.model.shipping.ShippingApplicationService;
-import com.algaworks.algashop.ordering.core.application.model.shipping.ShippingCostPreviewInput;
-import com.algaworks.algashop.ordering.core.application.model.shipping.ShippingCostPreviewOutput;
+import com.algaworks.algashop.ordering.core.application.shipping.ShippingApplicationService;
+import com.algaworks.algashop.ordering.core.application.shipping.ShippingCostPreviewInput;
+import com.algaworks.algashop.ordering.core.application.shipping.ShippingCostPreviewOutput;
 import com.algaworks.algashop.ordering.infrastructure.config.security.SecurityAnnotations.CanPreviewShippingCosts;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

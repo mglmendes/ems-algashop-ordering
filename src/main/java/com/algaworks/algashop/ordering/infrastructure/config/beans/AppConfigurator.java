@@ -1,8 +1,8 @@
 package com.algaworks.algashop.ordering.infrastructure.config.beans;
 
-import com.algaworks.algashop.ordering.core.application.model.checkout.disassembler.BillingInputDisassembler;
-import com.algaworks.algashop.ordering.core.application.model.checkout.disassembler.ShippingInputDisassembler;
-import com.algaworks.algashop.ordering.core.application.model.checkout.service.BuyNowApplicationService;
+import com.algaworks.algashop.ordering.core.application.checkout.disassembler.BillingInputDisassembler;
+import com.algaworks.algashop.ordering.core.application.checkout.disassembler.ShippingInputDisassembler;
+import com.algaworks.algashop.ordering.core.application.checkout.BuyNowApplicationService;
 import com.algaworks.algashop.ordering.core.domain.model.customer.repository.Customers;
 import com.algaworks.algashop.ordering.core.domain.model.order.repository.Orders;
 import com.algaworks.algashop.ordering.core.domain.model.order.service.BuyNowService;
