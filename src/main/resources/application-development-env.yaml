@@ -26,6 +26,18 @@ spring:
         jwt:
           issuer-uri: http://algashop-authorization-server:8081
           #jwk-set-uri: http://localhost:8081/oauth2/jwks
+      client:
+        provider:
+          algashop-as:
+            issuer-uri: http://algashop-authorization-server:8081
+        registration:
+          algashop-ordering-service-client:
+            provider: algashop-as
+            client-id: algashop-ordering-serivce-client
+            client-secret: "secret123"
+            authorization-grant-type: client_credentials
+            client-authentication-method: client_secret_basic
+            scope: products:read
 
 algashop:
   integrations:
