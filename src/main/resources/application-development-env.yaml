@@ -33,7 +33,7 @@ spring:
         registration:
           algashop-ordering-service-client:
             provider: algashop-as
-            client-id: algashop-ordering-serivce-client
+            client-id: algashop-ordering-service
             client-secret: "secret123"
             authorization-grant-type: client_credentials
             client-authentication-method: client_secret_basic
@@ -45,3 +45,4 @@ algashop:
       url: http://localhost:8787
     product-catalog:
       url: http://localhost:8083
+      oauth2-client-registration-id: algashop-ordering-service-client
